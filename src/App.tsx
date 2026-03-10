@@ -1,7 +1,12 @@
 import { PointsPage } from './pages/PointsPage'
+import { BasicAuth } from './components/BasicAuth'
 
 function App() {
-  return <PointsPage />
+  return (
+    <BasicAuth>
+      <PointsPage />
+    </BasicAuth>
+  )
 }
 
 export default App
