@@ -14,10 +14,11 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       setAnimationStep(0);
       const timers = [
         setTimeout(() => setAnimationStep(1), 300),
-        setTimeout(() => setAnimationStep(2), 800),
-        setTimeout(() => setAnimationStep(3), 1400),
-        setTimeout(() => setAnimationStep(4), 2000),
-        setTimeout(() => setAnimationStep(5), 2600),
+        setTimeout(() => setAnimationStep(2), 900),
+        setTimeout(() => setAnimationStep(3), 1500),
+        setTimeout(() => setAnimationStep(4), 2100),
+        setTimeout(() => setAnimationStep(5), 2700),
+        setTimeout(() => setAnimationStep(6), 3300),
       ];
       return () => timers.forEach(t => clearTimeout(t));
     }
@@ -112,20 +113,13 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         .animate-fade-in {
           animation: fadeInText 0.8s ease-out forwards;
         }
-        .text-reveal {
-          overflow: hidden;
-          display: inline-block;
-        }
-        .text-reveal-content {
-          animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
       `}</style>
 
       <div
         style={{
           backgroundColor: 'white',
           borderRadius: '16px',
-          maxWidth: '800px',
+          maxWidth: '900px',
           width: '100%',
           maxHeight: '90vh',
           overflowY: 'auto',
@@ -174,48 +168,46 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
             <div style={{ textAlign: 'center', marginBottom: '40px' }} className="animate-slide-up">
               <h1
                 style={{
-                  fontSize: '2rem',
+                  fontSize: '1.8rem',
                   fontWeight: 'bold',
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  marginBottom: '16px',
+                  marginBottom: '20px',
+                  lineHeight: 1.4,
                 }}
               >
-                IRBANK β版 Waiting Listへようこそ
+                IRBANKへ入社していただいた皆様へ
               </h1>
-              <p style={{ fontSize: '1rem', color: '#666', lineHeight: 1.6 }} className="animate-fade-in">
-                また、IRBANKクラウドファンディングにご参加いただき、
+              <p style={{ fontSize: '1rem', color: '#666', lineHeight: 1.8 }} className="animate-fade-in">
+                いつもIRBANKをご利用いただき、そして
+                <br />
+                IRBANKクラウドファンディングにご参加いただき、
                 <br />
                 誠にありがとうございます。
               </p>
             </div>
           )}
 
-          {/* Section: IRBANK History */}
+          {/* Section: IRBANK History & Journey */}
           {animationStep >= 1 && (
             <section style={{ marginBottom: '48px' }} className="animate-slide-left">
-              <h2
-                style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#333',
-                  marginBottom: '16px',
-                  borderLeft: '4px solid #667eea',
-                  paddingLeft: '16px',
-                }}
-              >
-                IRBANKの歴史
-              </h2>
-              <div style={{ color: '#555', lineHeight: 1.8, fontSize: '0.95rem' }}>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
-                  IRBANKは、より多くの人が投資を通じて未来を切り拓ける世界を作るという想いから誕生しました。
+              <div style={{ color: '#555', lineHeight: 1.9, fontSize: '0.95rem' }}>
+                <p style={{ marginBottom: '16px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
+                  <strong>201〇年〇月</strong>、IRBANKは、より多くの人が投資を通じて未来を切り拓ける世界を作るという想いから誕生しました。
                 </p>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
-                  これまで多くのユーザーの皆様と共に歩み、成長してきました。
+                <p style={{ marginBottom: '16px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
+                  この10年間、決して平坦な道ではありませんでした。
                 </p>
-                <p style={{ animation: 'fadeInText 0.8s ease-out 0.6s backwards' }}>
-                  そして今、次のステージへ向けて、IRBANKを1から作り直しています。
+                <p style={{ marginBottom: '16px', animation: 'fadeInText 0.8s ease-out 0.6s backwards' }}>
+                  しかし、<strong>70万人</strong>ものユーザーの皆様に支えられ、私たちはここまで歩み続けることができました。
+                  <br />
+                  心から感謝申し上げます。
+                </p>
+                <p style={{ animation: 'fadeInText 0.8s ease-out 0.8s backwards', marginTop: '24px', fontSize: '1.05rem', fontWeight: '600', color: '#333' }}>
+                  そして今、私たちは「<strong style={{ color: '#667eea' }}>第二の創業</strong>」とも呼べる、過去最大級のアップデートを計画しています。
+                  <br />
+                  次の10年を見据え、IRBANKをさらに進化させるための、全く新しい挑戦です。
                 </p>
               </div>
             </section>
@@ -236,14 +228,12 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
               >
                 今後のIRBANKが目指す先
               </h2>
-              <div style={{ color: '#555', lineHeight: 1.8, fontSize: '0.95rem' }}>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
+              <div style={{ color: '#555', lineHeight: 1.9, fontSize: '0.95rem' }}>
+                <p style={{ marginBottom: '14px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
                   新しいIRBANKは、ただの投資ツールではありません。
                 </p>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
+                <p style={{ marginBottom: '14px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
                   あなたと一緒に成長し、学び、挑戦する場所。
-                  <br />
-                  社員として会社を育てていくような体験を届けます。
                 </p>
                 <p style={{ animation: 'fadeInText 0.8s ease-out 0.6s backwards' }}>
                   投資を通じて、より多くの人が自分らしい未来を実現できる世界を目指します。
@@ -252,7 +242,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
             </section>
           )}
 
-          {/* Section: Early Participants */}
+          {/* Section: You are a Founding Member */}
           {animationStep >= 3 && (
             <section
               style={{
@@ -268,32 +258,109 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                   fontSize: '1.5rem',
                   fontWeight: 'bold',
                   color: '#333',
-                  marginBottom: '16px',
+                  marginBottom: '20px',
                   textAlign: 'center',
                 }}
               >
                 あなたは創業メンバーです
               </h2>
-              <div style={{ color: '#444', lineHeight: 1.8, fontSize: '0.95rem' }}>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
-                  アーリー参加者の皆様は、私たちにとって<strong>創業メンバー</strong>と同じ存在です。
+              <div style={{ color: '#444', lineHeight: 1.9, fontSize: '0.95rem' }}>
+                <p style={{ marginBottom: '14px', animation: 'fadeInText 0.8s ease-out 0.2s backwards' }}>
+                  この挑戦を、私たちだけで進めるつもりはありません。
                 </p>
-                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
-                  IRBANKは、ただのツール提供にとどまりません。
-                  <br />
-                  私たちは、IRBANK側からアロケーションをはじめとした様々な機会を積極的に提供していきます。
+                <p style={{ marginBottom: '14px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
+                  これまでIRBANKを育ててくださり、アーリーでIRBANKに参加していただいたあなたのような方が、<strong>「創業メンバー」</strong>だと、私たちは本気で思っています。
                 </p>
                 <p style={{ animation: 'fadeInText 0.8s ease-out 0.6s backwards' }}>
+                  IRBANKは、ただの投資ツールの提供にとどまりません。
+                </p>
+              </div>
+            </section>
+          )}
+
+          {/* Section: What You Get */}
+          {animationStep >= 4 && (
+            <section style={{ marginBottom: '48px' }} className="animate-slide-left">
+              <h2
+                style={{
+                  fontSize: '1.4rem',
+                  fontWeight: 'bold',
+                  color: '#667eea',
+                  marginBottom: '24px',
+                  textAlign: 'center',
+                }}
+              >
+                【IRBANK参加で得られるもの】
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {[
+                  { title: '役職', desc: 'あなたのプロダクトへの貢献に応じて、特別な「役職」が与えられます。', delay: 0 },
+                  { title: '評価', desc: 'プロダクトを育てる全ての行動がポイントとして評価されます。', delay: 0.15 },
+                  { title: '賞状', desc: 'β版参加者限定の「創業参加功労賞」を授与します。', delay: 0.3 },
+                  { title: '未来', desc: 'そして、その貢献の証であるポイントは、いずれIRBANKによるアロケーション構想を持っています。', delay: 0.45 },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      padding: '20px',
+                      background: 'white',
+                      border: '2px solid #e0e7ff',
+                      borderRadius: '10px',
+                      animation: `slideInRight 0.5s ease-out ${item.delay}s backwards`,
+                    }}
+                  >
+                    <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ fontSize: '0.9rem', color: '#555', lineHeight: 1.7 }}>
+                      {item.desc}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Section: Vision & Call to Action */}
+          {animationStep >= 5 && (
+            <section style={{ marginBottom: '48px' }} className="animate-slide-right">
+              <div style={{ color: '#555', lineHeight: 1.9, fontSize: '0.95rem', textAlign: 'center' }}>
+                <p style={{ marginBottom: '16px', animation: 'fadeInText 0.8s ease-out 0.2s backwards', fontSize: '1rem', fontWeight: '600', color: '#333' }}>
+                  IRBANK運営、ユーザー、の境界を越えてプロダクトを愛し、育てていく。
+                </p>
+                <p style={{ marginBottom: '24px', animation: 'fadeInText 0.8s ease-out 0.4s backwards' }}>
+                  そんな、本質的なユーザー　一体型のプロダクトを、私たちは本気で目指しています。
+                </p>
+                <div style={{
+                  background: 'linear-gradient(135deg, #667eea10 0%, #764ba220 100%)',
+                  padding: '24px',
+                  borderRadius: '12px',
+                  marginBottom: '24px',
+                  animation: 'fadeInText 0.8s ease-out 0.6s backwards'
+                }}>
+                  <p style={{ marginBottom: '12px', color: '#333', fontWeight: '600' }}>
+                    まずは、新しく生まれ変わるIRBANKのβ版を体験し、あなたの声を聞かせてください。
+                  </p>
+                  <p style={{ color: '#667eea', fontWeight: 'bold', fontSize: '1.05rem' }}>
+                    あなたのフィードバックが、未来のIRBANKを創ります。
+                  </p>
+                </div>
+                <p style={{ marginBottom: '12px', animation: 'fadeInText 0.8s ease-out 0.8s backwards' }}>
+                  私たちは、IRBANK側からアロケーションをはじめとした様々な機会を積極的に提供していきます。
+                </p>
+                <p style={{ animation: 'fadeInText 0.8s ease-out 1s backwards', fontWeight: '600', color: '#333' }}>
                   これからIRBANKを一緒に育てていただけること、
                   <br />
-                  そしてIRBANKに「<strong>入社</strong>」していただけたことに、心から感謝しています。
+                  そしてIRBANKに「<strong style={{ color: '#667eea' }}>入社</strong>」していただけたことに、
+                  <br />
+                  心から感謝しています。
                 </p>
               </div>
             </section>
           )}
 
           {/* Section: Team Messages */}
-          {animationStep >= 4 && (
+          {animationStep >= 6 && (
             <section style={{ marginBottom: '48px' }} className="animate-slide-up">
               <h2
                 style={{
@@ -304,7 +371,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                   textAlign: 'center',
                 }}
               >
-                経営陣からのメッセージ
+                経営陣から入社していただいた皆様へのWelcomeメッセージ
               </h2>
 
               {/* Executive Messages */}
@@ -364,17 +431,17 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           )}
 
           {/* Footer CTA */}
-          {animationStep >= 5 && (
+          {animationStep >= 6 && (
             <div style={{ textAlign: 'center', paddingTop: '24px', borderTop: '1px solid #eee' }} className="animate-scale-in">
               <button
                 onClick={onClose}
                 style={{
-                  padding: '14px 40px',
+                  padding: '16px 48px',
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '8px',
-                  fontSize: '1rem',
+                  fontSize: '1.1rem',
                   fontWeight: 'bold',
                   cursor: 'pointer',
                   transition: 'all 0.3s',
