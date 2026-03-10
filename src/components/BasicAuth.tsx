@@ -46,34 +46,11 @@ export function BasicAuth({ children }: BasicAuthProps) {
         borderRadius: '8px',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         width: '100%',
-        maxWidth: '480px',
+        maxWidth: '400px',
       }}>
-        <h2 style={{ marginBottom: '1rem', textAlign: 'center', color: '#333', fontSize: '1.5rem', fontWeight: 'bold' }}>
-          IRBANK ポイントシステム
+        <h2 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#333' }}>
+          認証が必要です
         </h2>
-        <div style={{
-          marginBottom: '1.5rem',
-          padding: '1rem',
-          background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-          borderRadius: '6px',
-          fontSize: '0.9rem',
-          lineHeight: '1.6',
-          color: '#444',
-        }}>
-          <p style={{ margin: '0 0 0.75rem 0' }}>
-            <strong>IRBANKの世界へようこそ</strong>
-          </p>
-          <p style={{ margin: '0 0 0.5rem 0' }}>
-            あなたは<strong>IRBANK社員</strong>として、ゼロから会社を一緒に育てていきます。
-          </p>
-          <p style={{ margin: '0 0 0.5rem 0' }}>
-            活動を通じて<strong>ポイント</strong>を獲得し、<strong>賞状</strong>で表彰され、
-            そして<strong>役職</strong>を手にしていく──
-          </p>
-          <p style={{ margin: '0' }}>
-            まさに一つの会社としての成長を体験できる世界です。
-          </p>
-        </div>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555' }}>
