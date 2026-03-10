@@ -11,6 +11,7 @@ import { useTemplateStore } from '../features/notes/store/templateStore';
 import { useGamificationStore, SEASONS } from '../features/gamification/store/gamificationStore';
 import { TemplateGallery } from '../components/templates/TemplateGallery';
 import { RankChangePopup } from '../components/RankChangePopup';
+import { WelcomePopup } from '../components/WelcomePopup';
 import { NoteTemplate } from '../features/notes/types/template.types';
 import { AnalysisDepth } from '../features/notes/types/note.types';
 import {
@@ -125,6 +126,7 @@ export function PointsPage() {
   const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getLockedBadges } = useGamificationStore();
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [pointSeasonTab, setPointSeasonTab] = useState(1);
   const [taskStatusTab, setTaskStatusTab] = useState<'active' | 'completed' | 'upcoming'>('active');
   const [taskCategoryFilter, setTaskCategoryFilter] = useState<'all' | TaskCategory>('all');
@@ -178,6 +180,16 @@ export function PointsPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-5">
+      {/* ─── Welcomeメッセージボタン ─── */}
+      <div className="mb-4">
+        <button
+          onClick={() => setShowWelcomePopup(true)}
+          className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200 flex items-center gap-2"
+        >
+          <FiBell className="text-lg" />
+          Welcomeメッセージ
+        </button>
+      </div>
 
       {/* ─── 役職デスクヒーローカード ─── */}
       <div
@@ -686,6 +698,9 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
+
+      {/* Welcomeポップアップ */}
+      <WelcomePopup isOpen={showWelcomePopup} onClose={() => setShowWelcomePopup(false)} />
     </div>
   );
 }
