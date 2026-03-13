@@ -710,6 +710,17 @@ export function PointsPage() {
 type CertBadge = { id: string; icon: string; name: string; description: string; badgePoints: number; unlockedAt?: string | null; requirement?: string | null };
 
 function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boolean }) {
+  // バッジポイントに基づいてランクを決定
+  const getRank = (points: number): 's' | 'a' | 'b' | 'c' => {
+    if (points >= 30) return 's';
+    if (points >= 10) return 'a';
+    if (points >= 5) return 'b';
+    return 'c';
+  };
+
+  const rank = getRank(b.badgePoints);
+  const certificateImage = `/certificates/certificate-rank-${rank}.png`;
+
   if (locked) {
     return (
       <div className="relative bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 opacity-40 hover:opacity-60 transition-all cursor-not-allowed overflow-hidden group">
@@ -740,77 +751,44 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
 
   return (
     <div
-      className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] cursor-pointer group"
+      className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] cursor-pointer group aspect-[3/4]"
       style={{
-        background: 'linear-gradient(135deg, #fefce8 0%, #fef3c7 50%, #fed7aa 100%)',
+        backgroundImage: `url(${certificateImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
-      {/* 光沢エフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-60 pointer-events-none" />
-
-      {/* 背景パターン */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 3px 3px, #d97706 1px, transparent 0)', backgroundSize: '30px 30px' }} />
-
-      {/* 外枠：トリプルボーダー */}
-      <div className="absolute inset-0 border-[3px] border-amber-700 rounded-lg pointer-events-none shadow-inner" />
-      <div className="absolute inset-[6px] border-[1.5px] border-yellow-600 rounded-md pointer-events-none" />
-      <div className="absolute inset-[10px] border border-amber-500 rounded-sm pointer-events-none" />
-
-      {/* コーナー装飾 */}
-      <div className="absolute top-1.5 left-1.5 text-amber-700 text-xl leading-none z-10 group-hover:scale-125 transition-transform" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>✦</div>
-      <div className="absolute top-1.5 right-1.5 text-amber-700 text-xl leading-none z-10 group-hover:scale-125 transition-transform" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>✦</div>
-      <div className="absolute bottom-1.5 left-1.5 text-amber-700 text-xl leading-none z-10 group-hover:scale-125 transition-transform" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>✦</div>
-      <div className="absolute bottom-1.5 right-1.5 text-amber-700 text-xl leading-none z-10 group-hover:scale-125 transition-transform" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>✦</div>
-
-      <div className="relative px-4 py-4">
-        {/* ヘッダー */}
-        <div className="text-center mb-3">
-          <div className="text-[11px] font-black text-amber-900 tracking-[0.25em] mb-1.5" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
-            表　彰　状
-          </div>
-          <div className="flex items-center gap-1.5 justify-center">
-            <div className="flex-1 h-[1.5px] bg-gradient-to-r from-transparent via-amber-600 to-amber-600 max-w-[50px]" />
-            <span className="text-amber-600 text-sm">✦</span>
-            <div className="flex-1 h-[1.5px] bg-gradient-to-l from-transparent via-amber-600 to-amber-600 max-w-[50px]" />
-          </div>
-        </div>
+      <div className="relative px-4 py-4 h-full flex flex-col">
 
         {/* アイコン */}
-        <div className="flex justify-center mb-3">
+        <div className="flex justify-center mb-3 mt-8">
           <div className="text-5xl drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{b.icon}</div>
         </div>
 
         {/* 賞状名 */}
         <div className="text-center mb-3">
-          <div className="text-base font-black text-amber-950 leading-tight" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+          <div className="text-base font-black text-gray-800 leading-tight" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
             {b.name}
           </div>
         </div>
 
         {/* 説明文 */}
-        <div className="text-[10px] text-amber-900 text-center leading-relaxed mb-3 px-1" style={{ fontFamily: "'Noto Serif JP', serif" }}>
+        <div className="text-[10px] text-gray-700 text-center leading-relaxed mb-auto px-1" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 2px rgba(255,255,255,0.6)' }}>
           {b.description}
         </div>
 
-        {/* 仕切り線 */}
-        <div className="flex items-center gap-1.5 mb-3">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-500 to-amber-500" />
-          <span className="text-amber-600 text-xs">✦</span>
-          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-amber-500 to-amber-500" />
-        </div>
-
         {/* フッター：日付 + ポイント */}
-        <div className="flex items-end justify-between">
-          <div className="text-[9px] text-amber-800" style={{ fontFamily: "'Noto Serif JP', serif" }}>
-            <div className="text-amber-700/70">授与日</div>
+        <div className="flex items-end justify-between mt-3">
+          <div className="text-[9px] text-gray-700" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
+            <div className="text-gray-600">授与日</div>
             <div className="font-bold mt-0.5">{b.unlockedAt}</div>
           </div>
 
-          <div className="text-right bg-amber-900/10 rounded-md px-2 py-1 border border-amber-800/20">
-            <div className="text-[9px] font-bold text-amber-800">
+          <div className="text-right bg-white/50 backdrop-blur-sm rounded-md px-2 py-1 border border-gray-300/50">
+            <div className="text-[9px] font-bold text-gray-700">
               貢献度
             </div>
-            <div className="text-sm font-black text-amber-900">+{b.badgePoints}</div>
+            <div className="text-sm font-black text-gray-800">+{b.badgePoints}</div>
           </div>
         </div>
       </div>
