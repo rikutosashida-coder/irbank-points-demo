@@ -240,7 +240,7 @@ export function PointsPage() {
                     {profile.ranking === -1 ? '-' : profile.ranking}
                   </span>
                   <span className={`text-sm text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>位</span>
-                  <span className={`text-xs text-white ml-1`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>/ {profile.totalUsers.toLocaleString()}人</span>
+                  <span className={`text-xs text-white ml-1`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>/ -人</span>
                 </div>
               </div>
             </div>
