@@ -211,9 +211,6 @@ export function PointsPage() {
                 </div>
                 <div>
                   <h1 className={`text-base font-bold text-white`} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>{profile.displayName}</h1>
-                  <div className={`text-[11px] mt-0.5 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
-                    {new Date(profile.joinedAt).toLocaleDateString('ja-JP')} 参加
-                  </div>
                 </div>
               </div>
 
