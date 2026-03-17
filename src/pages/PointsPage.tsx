@@ -263,16 +263,8 @@ export function PointsPage() {
           </div>
         </div>
 
-        {/* ─── 役職バー：ラベル + 切り替えボタン ─── */}
-        <div className="relative border-t border-white/20 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-1 sm:gap-2">
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.1em] sm:tracking-[0.18em] uppercase text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
-              {desk.deskLabel}
-            </span>
-            {isPreviewMode && (
-              <span className="text-[8px] sm:text-[9px] bg-amber-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full font-bold shadow-md">プレビュー</span>
-            )}
-          </div>
+        {/* ─── 役職バー：切り替えボタン ─── */}
+        <div className="relative px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-end">
           <div className="flex items-center gap-1">
             <button
               onClick={() => {
