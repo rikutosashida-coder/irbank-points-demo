@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi';
+import { WelcomePopup } from '../components/WelcomePopup';
 
 export function SignupPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,8 +16,29 @@ export function SignupPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Coming Soon機能
-    alert('新規登録機能は準備中です');
+
+    // バリデーション
+    if (formData.password !== formData.confirmPassword) {
+      alert('パスワードが一致しません');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      alert('パスワードは8文字以上で設定してください');
+      return;
+    }
+
+    // 登録処理（デモ）
+    // 実際はここでAPIコールを行う
+    setShowWelcome(true);
+  };
+
+  const handleWelcomeClose = () => {
+    setShowWelcome(false);
+    // Welcomeメッセージを閉じたら、ログインして自動的にメインページへ
+    sessionStorage.setItem('basicAuth', 'authenticated');
+    navigate('/');
+    window.location.reload(); // BasicAuthの状態を更新するため
   };
 
   const handleChange = (field: string, value: string) => {
@@ -23,7 +46,10 @@ export function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
+    <>
+      <WelcomePopup isOpen={showWelcome} onClose={handleWelcomeClose} />
+
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
         {/* 左側：ブランドメッセージ */}
         <div className="hidden lg:block">
@@ -188,7 +214,7 @@ export function SignupPage() {
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
               >
-                新規登録（Coming Soon）
+                新規登録
               </button>
             </form>
 
@@ -207,6 +233,7 @@ export function SignupPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
