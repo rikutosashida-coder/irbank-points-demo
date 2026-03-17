@@ -103,10 +103,7 @@ interface NotificationItem {
   isRead: boolean;
 }
 
-const MOCK_NOTIFICATIONS: NotificationItem[] = [
-  { id: 'n1', type: 'welcome', title: 'Welcomeメッセージ', body: 'IRBANKへようこそ！創業メンバーとして一緒に未来を創りましょう。', date: '2026-04-15', isRead: false },
-  { id: 'n2', type: 'badge', title: '賞状を授与されました', body: '「創業参加功労賞」を授与されました！IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる賞状です。', date: '2026-04-15', isRead: false },
-];
+const MOCK_NOTIFICATIONS: NotificationItem[] = [];
 
 const TYPE_COLOR: Record<NotificationItem['type'], string> = {
   badge: 'bg-amber-50 border-amber-200',
@@ -361,28 +358,34 @@ export function PointsPage() {
           </button>
         </div>
         <div className="divide-y divide-gray-50">
-          {MOCK_NOTIFICATIONS.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => {
-                if (n.type === 'welcome') {
-                  setShowWelcomePopup(true);
-                } else {
-                  navigate('/notifications');
-                }
-              }}
-              className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3"
-            >
-              <div className="flex-shrink-0 mt-1.5">
-                {n.isRead ? <div className="w-2 h-2 rounded-full" /> : <div className="w-2 h-2 rounded-full bg-blue-500" />}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className={`text-xs font-semibold leading-tight mb-0.5 ${n.isRead ? 'text-gray-500' : 'text-gray-900'}`}>{n.title}</div>
-                <div className="text-[11px] text-gray-400 leading-snug line-clamp-1">{n.body}</div>
-              </div>
-              <div className="flex-shrink-0 text-[10px] text-gray-400 mt-0.5">{n.date}</div>
-            </button>
-          ))}
+          {MOCK_NOTIFICATIONS.length > 0 ? (
+            MOCK_NOTIFICATIONS.map((n) => (
+              <button
+                key={n.id}
+                onClick={() => {
+                  if (n.type === 'welcome') {
+                    setShowWelcomePopup(true);
+                  } else {
+                    navigate('/notifications');
+                  }
+                }}
+                className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3"
+              >
+                <div className="flex-shrink-0 mt-1.5">
+                  {n.isRead ? <div className="w-2 h-2 rounded-full" /> : <div className="w-2 h-2 rounded-full bg-blue-500" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className={`text-xs font-semibold leading-tight mb-0.5 ${n.isRead ? 'text-gray-500' : 'text-gray-900'}`}>{n.title}</div>
+                  <div className="text-[11px] text-gray-400 leading-snug line-clamp-1">{n.body}</div>
+                </div>
+                <div className="flex-shrink-0 text-[10px] text-gray-400 mt-0.5">{n.date}</div>
+              </button>
+            ))
+          ) : (
+            <div className="px-4 py-6 text-center">
+              <p className="text-sm text-gray-400">Coming Soon</p>
+            </div>
+          )}
         </div>
       </div>
 
