@@ -110,7 +110,7 @@ const MOCK_TASKS: GamificationTask[] = [
   { id: 't2', title: 'β版参加登録', description: 'IRBANK β版の参加登録を完了する', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 20 },
 
   // Coming Soon タスク - 基本
-  { id: 't3', title: '今日もログインする', description: 'ログインするだけで1pt！毎日続けよう', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 1 },
+  { id: 't3', title: '今日もログインする', description: 'ログインするだけで0.2pt！毎日続けよう', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 0.2 },
   { id: 't4', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 20, pointsReward: 10 },
 
   // Coming Soon タスク - X関連
