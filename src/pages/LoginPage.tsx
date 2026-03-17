@@ -25,7 +25,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === 'points' && password === 'note2026') {
+    if (email === 'demo@irbank.com' && password === 'demo2026') {
       sessionStorage.setItem('basicAuth', 'authenticated');
       onLogin();
     } else {
@@ -234,7 +234,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
           {/* デモ用情報 */}
           <div className="mt-4 text-center">
             <p className="text-xs text-gray-500">
-              デモ用 - ID: points / PW: note2026
+              デモ用 - メール: demo@irbank.com / PW: demo2026
             </p>
           </div>
         </div>
