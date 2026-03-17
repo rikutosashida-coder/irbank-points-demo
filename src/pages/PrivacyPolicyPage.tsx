@@ -125,7 +125,6 @@ export function PrivacyPolicyPage() {
             <div className="bg-gray-50 rounded-lg p-4 mt-4">
               <p className="text-gray-800 font-semibold mb-2">株式会社IRBANK</p>
               <p className="text-gray-700 text-sm">個人情報保護管理責任者</p>
-              <p className="text-gray-700 text-sm mt-2">Eメールアドレス: privacy@irbank.com</p>
             </div>
 
             <div className="mt-12 pt-6 border-t border-gray-200">
