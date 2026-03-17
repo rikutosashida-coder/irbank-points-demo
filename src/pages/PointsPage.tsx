@@ -155,29 +155,29 @@ export function PointsPage() {
   const unreadCount = useMemo(() => MOCK_NOTIFICATIONS.filter(n => !n.isRead).length, []);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-5">
+    <div className="max-w-5xl mx-auto px-3 sm:px-6 py-3 sm:py-5">
       {/* ─── 役職デスクヒーローカード ─── */}
       <div
-        className="relative rounded-2xl overflow-hidden mb-5 bg-gray-900"
-        style={{ backgroundImage: `url(${desk.deskImage})`, backgroundSize: 'cover', backgroundPosition: 'center right' }}
+        className="relative rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-gray-900"
+        style={{ backgroundImage: `url(${desk.deskImage})`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
       >
         {/* テキスト読みやすさ用オーバーレイ（背景も見える程度） */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60 pointer-events-none" />
 
-        <div className="relative p-6">
+        <div className="relative p-4 sm:p-6">
 
-          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-4 sm:gap-6">
             {/* 左：全情報を集約（少し中央寄せ） */}
-            <div className="flex flex-col gap-4 max-w-lg lg:ml-12">
+            <div className="flex flex-col gap-3 sm:gap-4 max-w-lg lg:ml-12">
               {/* アバター＋基本情報 */}
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div className="relative flex-shrink-0">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg bg-white/25 text-white border-2 border-white/40">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold shadow-lg bg-white/25 text-white border-2 border-white/40">
                     {profile.displayName.charAt(0)}
                   </div>
                 </div>
                 <div>
-                  <h1 className={`text-base font-bold text-white`} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>{profile.displayName}</h1>
+                  <h1 className={`text-sm sm:text-base font-bold text-white`} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>{profile.displayName}</h1>
                 </div>
               </div>
 
@@ -187,14 +187,14 @@ export function PointsPage() {
                   <div className={`text-xs uppercase tracking-wider font-bold text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>累計ポイント</div>
                 </div>
                 <div className={`flex items-baseline gap-2`}>
-                  <span className={`text-6xl font-black tabular-nums leading-none text-white`} style={{ textShadow: '0 4px 16px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9)' }}>
+                  <span className={`text-4xl sm:text-5xl lg:text-6xl font-black tabular-nums leading-none text-white`} style={{ textShadow: '0 4px 16px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9)' }}>
                     {profile.totalPoints.toLocaleString()}
                   </span>
-                  <span className={`text-xl font-bold text-white`} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>pt</span>
+                  <span className={`text-lg sm:text-xl font-bold text-white`} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>pt</span>
                 </div>
-                <div className={`flex items-center gap-2 mt-2`}>
+                <div className={`flex flex-wrap items-center gap-1 sm:gap-2 mt-2`}>
                   <span className={`text-xs text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>今シーズン</span>
-                  <span className={"text-base font-bold text-white"} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>+{profile.currentSeasonPoints.toLocaleString()} pt</span>
+                  <span className={"text-sm sm:text-base font-bold text-white"} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>+{profile.currentSeasonPoints.toLocaleString()} pt</span>
                   <span className={`text-xs text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>（{SEASONS[0]?.label ?? '2026 2Q'}）</span>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export function PointsPage() {
               <div>
                 <div className={`text-xs mb-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>ランキング</div>
                 <div className="flex items-baseline gap-1">
-                  <span className={`text-4xl font-black text-white`} style={{ textShadow: '0 3px 12px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,0.9)' }}>
+                  <span className={`text-3xl sm:text-4xl font-black text-white`} style={{ textShadow: '0 3px 12px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,0.9)' }}>
                     {profile.ranking === -1 ? '-' : profile.ranking}
                   </span>
                   <span className={`text-sm text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>位</span>
@@ -213,11 +213,11 @@ export function PointsPage() {
             </div>
 
             {/* 右：空けておく（背景画像が見える） */}
-            <div className="flex-1"></div>
+            <div className="hidden lg:block flex-1"></div>
           </div>
 
           {/* 役職進捗バー */}
-          <div className="mt-5 pt-4 border-t border-white/20 max-w-lg lg:ml-12">
+          <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-white/20 max-w-lg lg:ml-12">
             <div className="bg-black/60 backdrop-blur-sm rounded-lg p-3 border border-white/10">
               <div className="flex items-center justify-between text-[10px] mb-2">
                 <div className={`flex items-center gap-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
@@ -270,13 +270,13 @@ export function PointsPage() {
         </div>
 
         {/* ─── 役職バー：ラベル + 切り替えボタン ─── */}
-        <div className="relative border-t border-white/20 px-5 py-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
+        <div className="relative border-t border-white/20 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.1em] sm:tracking-[0.18em] uppercase text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
               {desk.deskLabel}
             </span>
             {isPreviewMode && (
-              <span className="text-[9px] bg-amber-500 text-white px-2 py-0.5 rounded-full font-bold shadow-md">プレビュー</span>
+              <span className="text-[8px] sm:text-[9px] bg-amber-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full font-bold shadow-md">プレビュー</span>
             )}
           </div>
           <div className="flex items-center gap-1">
@@ -286,12 +286,12 @@ export function PointsPage() {
                 setShowRankChangePopup('demotion');
               }}
               disabled={displayTierIdx === 0}
-              className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-black/40 hover:bg-black/50 text-white border border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-medium rounded-lg bg-black/40 hover:bg-black/50 text-white border border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
               title="降格（前の役職）"
             >
-              <FiChevronDown className="w-3.5 h-3.5" />
-              降格
+              <FiChevronDown className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span className="hidden sm:inline">降格</span>
             </button>
             <button
               onClick={() => {
@@ -299,30 +299,30 @@ export function PointsPage() {
                 setShowRankChangePopup('promotion');
               }}
               disabled={displayTierIdx === TIER_ORDER.length - 1}
-              className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-black/40 hover:bg-black/50 text-white border border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-medium rounded-lg bg-black/40 hover:bg-black/50 text-white border border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
               title="昇格（次の役職）"
             >
-              昇格
-              <FiChevronUp className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">昇格</span>
+              <FiChevronUp className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </button>
           </div>
         </div>
       </div>
 
       {/* ─── お知らせ ─── */}
-      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-5">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-          <div className="flex items-center gap-2">
-            <FiBell className="w-4 h-4 text-gray-500" />
-            <h2 className="text-sm font-bold text-gray-800">お知らせ</h2>
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-4 sm:mb-5">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-gray-100">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <FiBell className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500" />
+            <h2 className="text-xs sm:text-sm font-bold text-gray-800">お知らせ</h2>
             {unreadCount > 0 && (
-              <span className="text-[10px] font-bold text-white bg-red-500 px-1.5 py-0.5 rounded-full">{unreadCount}</span>
+              <span className="text-[9px] sm:text-[10px] font-bold text-white bg-red-500 px-1.5 py-0.5 rounded-full">{unreadCount}</span>
             )}
           </div>
           <button
             onClick={() => navigate('/notifications')}
-            className="flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 font-medium"
+            className="flex items-center gap-1 text-[10px] sm:text-[11px] text-blue-600 hover:text-blue-700 font-medium"
           >
             すべて見る <FiChevronRight className="w-3 h-3" />
           </button>
@@ -338,7 +338,7 @@ export function PointsPage() {
                   navigate('/notifications');
                 }
               }}
-              className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3"
+              className="w-full text-left px-3 sm:px-4 py-2.5 sm:py-3 hover:bg-gray-50 transition-colors flex items-start gap-2 sm:gap-3"
             >
               <div className="flex-shrink-0 mt-1.5">
                 {n.isRead ? <div className="w-2 h-2 rounded-full" /> : <div className="w-2 h-2 rounded-full bg-blue-500" />}
@@ -347,14 +347,14 @@ export function PointsPage() {
                 <div className={`text-xs font-semibold leading-tight mb-0.5 ${n.isRead ? 'text-gray-500' : 'text-gray-900'}`}>{n.title}</div>
                 <div className="text-[11px] text-gray-400 leading-snug line-clamp-1">{n.body}</div>
               </div>
-              <div className="flex-shrink-0 text-[10px] text-gray-400 mt-0.5">{n.date}</div>
+              <div className="flex-shrink-0 text-[9px] sm:text-[10px] text-gray-400 mt-0.5">{n.date}</div>
             </button>
           ))}
         </div>
       </div>
 
       {/* ─── ポイント一覧 + タスク ─── */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-5">
 
         {/* ポイント一覧 */}
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
