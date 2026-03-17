@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { PointsPage } from './pages/PointsPage'
 import { BadgesPage } from './pages/BadgesPage'
 import { ComingSoonPage } from './pages/ComingSoonPage'
+import { SettingsPage } from './pages/SettingsPage'
 import { BasicAuth } from './components/BasicAuth'
 import { Layout } from './components/Layout'
 
@@ -41,7 +42,9 @@ function App() {
 
             {/* Coming Soon ページ - AI機能・その他 */}
             <Route path="/ai" element={<ComingSoonPage />} />
-            <Route path="/settings" element={<ComingSoonPage />} />
+
+            {/* 設定ページ */}
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </Layout>
       </BasicAuth>
