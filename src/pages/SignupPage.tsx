@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMail, FiLock, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiCheck, FiUser } from 'react-icons/fi';
 import { WelcomePopup } from '../components/WelcomePopup';
 
 export function SignupPage() {
@@ -11,6 +11,7 @@ export function SignupPage() {
   const [showWelcome, setShowWelcome] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -20,6 +21,11 @@ export function SignupPage() {
     e.preventDefault();
 
     // バリデーション
+    if (formData.username.length < 3) {
+      alert('ユーザー名は3文字以上で設定してください');
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert('パスワードが一致しません');
       return;
@@ -47,6 +53,8 @@ export function SignupPage() {
 
   const handleWelcomeClose = () => {
     setShowWelcome(false);
+    // ユーザー名を保存
+    localStorage.setItem('username', formData.username);
     // Welcomeメッセージを閉じたら、ログインして自動的にメインページへ
     sessionStorage.setItem('basicAuth', 'authenticated');
     navigate('/');
@@ -134,6 +142,27 @@ export function SignupPage() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
+              {/* ユーザー名 */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  ユーザー名
+                </label>
+                <div className="relative">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <FiUser className="w-5 h-5" />
+                  </div>
+                  <input
+                    type="text"
+                    value={formData.username}
+                    onChange={(e) => handleChange('username', e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="ユーザー名を入力"
+                    required
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">3文字以上で設定してください</p>
+              </div>
+
               {/* メールアドレス */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
