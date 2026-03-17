@@ -16,14 +16,12 @@ export function ComingSoonPage() {
           Coming Soon
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          この機能は現在開発中です
+          この機能は現在未公開です。
         </p>
 
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <p className="text-gray-700 leading-relaxed">
-            新しいIRBANKの機能を鋭意開発中です。<br />
-            より良い投資体験をお届けするため、しばらくお待ちください。<br />
-            β版リリース時にいち早くお知らせいたします。
+            より良い投資体験をお届けするため、しばらくお待ちください。
           </p>
         </div>
       </div>
