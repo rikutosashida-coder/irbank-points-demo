@@ -386,15 +386,15 @@ export function PointsPage() {
         </div>
       </div>
 
-      {/* ─── ポイント概覧 + タスク ─── */}
+      {/* ─── ポイント一覧 + タスク ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
 
-        {/* ポイント概覧 */}
+        {/* ポイント一覧 */}
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <FiTrendingUp className="w-4 h-4 text-blue-500" />
-              <h2 className="text-sm font-bold text-gray-800">ポイント概覧</h2>
+              <h2 className="text-sm font-bold text-gray-800">ポイント一覧</h2>
             </div>
             <div className="flex gap-1">
               {SEASONS.map((s) => (
