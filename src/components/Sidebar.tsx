@@ -11,7 +11,6 @@ interface MenuItem {
   label: string;
   icon: React.ReactNode;
   path: string;
-  comingSoon?: boolean;
 }
 
 interface MenuSection {
@@ -41,7 +40,7 @@ const mypageItems: MenuItem[] = [
   { id: 'dashboard2', label: 'カスタムダッシュボード２', icon: <FiGrid className="w-5 h-5" />, path: '/dashboard2' },
   { id: 'portfolio', label: 'ポートフォリオ', icon: <FiPieChart className="w-5 h-5" />, path: '/portfolio' },
   { id: 'timeline', label: 'タイムライン', icon: <FiClock className="w-5 h-5" />, path: '/timeline' },
-  { id: 'notifications', label: '通知', icon: <FiBell className="w-5 h-5" />, path: '/notifications', comingSoon: true },
+  { id: 'notifications', label: '通知', icon: <FiBell className="w-5 h-5" />, path: '/notifications' },
   { id: 'learning', label: '投資学習', icon: <FiBookOpen className="w-5 h-5" />, path: '/learning' },
   { id: 'community', label: 'コミュニティ', icon: <FiUsers className="w-5 h-5" />, path: '/community' },
 ];
@@ -105,29 +104,20 @@ export function Sidebar() {
               <div className="space-y-1">
                 {section.items.map((item) => {
                   const isActive = location.pathname === item.path;
-                  const isDisabled = item.comingSoon;
                   return (
                     <button
                       key={item.id}
-                      onClick={() => !isDisabled && navigate(item.path)}
-                      disabled={isDisabled}
+                      onClick={() => navigate(item.path)}
                       className={`
                         w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
-                        ${isDisabled
-                          ? 'text-gray-400 cursor-not-allowed opacity-60'
-                          : isActive
-                            ? 'bg-blue-50 text-blue-700'
-                            : 'text-gray-700 hover:bg-gray-100'
+                        ${isActive
+                          ? 'bg-blue-50 text-blue-700'
+                          : 'text-gray-700 hover:bg-gray-100'
                         }
                       `}
                     >
                       {item.icon}
-                      <span className="flex-1 text-left">{item.label}</span>
-                      {isDisabled && (
-                        <span className="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
-                          Coming Soon
-                        </span>
-                      )}
+                      <span>{item.label}</span>
                     </button>
                   );
                 })}
