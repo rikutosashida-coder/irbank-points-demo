@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser, FiBarChart2, FiTrendingUp, FiFileText, FiCalendar, FiHome, FiTool } from 'react-icons/fi';
 import { WelcomePopup } from '../components/WelcomePopup';
 
@@ -246,8 +246,8 @@ export function SignupPage() {
                   required
                 />
                 <label htmlFor="terms" className="text-sm text-gray-600">
-                  <a href="#" className="text-blue-600 hover:text-blue-700">利用規約</a>と
-                  <a href="#" className="text-blue-600 hover:text-blue-700">プライバシーポリシー</a>に同意する
+                  <Link to="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 hover:underline">利用規約</Link>と
+                  <Link to="/privacy-policy" target="_blank" className="text-blue-600 hover:text-blue-700 hover:underline">プライバシーポリシー</Link>に同意する
                 </label>
               </div>
 

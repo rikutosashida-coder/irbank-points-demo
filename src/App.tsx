@@ -5,15 +5,23 @@ import { ComingSoonPage } from './pages/ComingSoonPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { SignupPage } from './pages/SignupPage'
 import { NotificationsPage } from './pages/NotificationsPage'
+import { TermsPage } from './pages/TermsPage'
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
 import { BasicAuth } from './components/BasicAuth'
 import { Layout } from './components/Layout'
 
 function AppContent() {
   const location = useLocation()
-  const isSignupPage = location.pathname === '/signup'
+  const isPublicPage = ['/signup', '/terms', '/privacy-policy'].includes(location.pathname)
 
-  if (isSignupPage) {
-    return <SignupPage />
+  if (isPublicPage) {
+    return (
+      <Routes>
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      </Routes>
+    )
   }
 
   return (
