@@ -14,7 +14,20 @@ function App() {
             <Route path="/" element={<PointsPage />} />
             <Route path="/mypage/badges" element={<BadgesPage />} />
 
-            {/* Coming Soon ページ */}
+            {/* Coming Soon ページ - IRBANK情報 */}
+            <Route path="/top" element={<ComingSoonPage />} />
+            <Route path="/stocks" element={<ComingSoonPage />} />
+            <Route path="/screening" element={<ComingSoonPage />} />
+            <Route path="/screening2" element={<ComingSoonPage />} />
+            <Route path="/comparison" element={<ComingSoonPage />} />
+            <Route path="/investor-search" element={<ComingSoonPage />} />
+            <Route path="/industry-map" element={<ComingSoonPage />} />
+            <Route path="/macro" element={<ComingSoonPage />} />
+            <Route path="/sector-heatmap" element={<ComingSoonPage />} />
+            <Route path="/factor-model" element={<ComingSoonPage />} />
+
+            {/* Coming Soon ページ - マイページ */}
+            <Route path="/new-note" element={<ComingSoonPage />} />
             <Route path="/mypage" element={<ComingSoonPage />} />
             <Route path="/notes" element={<ComingSoonPage />} />
             <Route path="/workspace" element={<ComingSoonPage />} />
@@ -25,6 +38,8 @@ function App() {
             <Route path="/notifications" element={<ComingSoonPage />} />
             <Route path="/learning" element={<ComingSoonPage />} />
             <Route path="/community" element={<ComingSoonPage />} />
+
+            {/* Coming Soon ページ - AI機能・その他 */}
             <Route path="/ai" element={<ComingSoonPage />} />
             <Route path="/settings" element={<ComingSoonPage />} />
           </Routes>

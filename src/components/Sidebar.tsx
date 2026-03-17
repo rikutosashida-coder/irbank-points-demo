@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   FiHome, FiZap, FiFileText, FiLayout, FiGrid, FiPieChart,
   FiClock, FiBell, FiBookOpen, FiUsers, FiCpu, FiSettings,
+  FiList, FiFilter, FiBarChart2, FiSearch, FiMap, FiGlobe, FiTrendingUp, FiPlus,
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -11,20 +12,46 @@ interface MenuItem {
   path: string;
 }
 
-const menuItems: MenuItem[] = [
+interface MenuSection {
+  title: string;
+  items: MenuItem[];
+}
+
+const irbankInfoItems: MenuItem[] = [
+  { id: 'top', label: 'トップ', icon: <FiHome className="w-5 h-5" />, path: '/top' },
+  { id: 'stocks', label: '銘柄一覧', icon: <FiList className="w-5 h-5" />, path: '/stocks' },
+  { id: 'screening', label: 'スクリーニング', icon: <FiFilter className="w-5 h-5" />, path: '/screening' },
+  { id: 'screening2', label: 'スクリーニング2', icon: <FiFilter className="w-5 h-5" />, path: '/screening2' },
+  { id: 'comparison', label: '競合比較', icon: <FiBarChart2 className="w-5 h-5" />, path: '/comparison' },
+  { id: 'investor-search', label: '投資家検索', icon: <FiSearch className="w-5 h-5" />, path: '/investor-search' },
+  { id: 'industry-map', label: '業界マップ', icon: <FiMap className="w-5 h-5" />, path: '/industry-map' },
+  { id: 'macro', label: 'マクロ経済', icon: <FiGlobe className="w-5 h-5" />, path: '/macro' },
+  { id: 'sector-heatmap', label: 'セクターヒートマップ', icon: <FiGrid className="w-5 h-5" />, path: '/sector-heatmap' },
+  { id: 'factor-model', label: 'ファクターモデル', icon: <FiTrendingUp className="w-5 h-5" />, path: '/factor-model' },
+];
+
+const mypageItems: MenuItem[] = [
   { id: 'mypage', label: 'マイページ', icon: <FiHome className="w-5 h-5" />, path: '/mypage' },
   { id: 'points', label: 'ポイント', icon: <FiZap className="w-5 h-5" />, path: '/' },
   { id: 'notes', label: 'ノート', icon: <FiFileText className="w-5 h-5" />, path: '/notes' },
   { id: 'workspace', label: '思考ワークスペース', icon: <FiLayout className="w-5 h-5" />, path: '/workspace' },
   { id: 'dashboard1', label: 'カスタムダッシュボード', icon: <FiGrid className="w-5 h-5" />, path: '/dashboard' },
-  { id: 'dashboard2', label: 'カスタムダッシュボード2', icon: <FiGrid className="w-5 h-5" />, path: '/dashboard2' },
+  { id: 'dashboard2', label: 'カスタムダッシュボード２', icon: <FiGrid className="w-5 h-5" />, path: '/dashboard2' },
   { id: 'portfolio', label: 'ポートフォリオ', icon: <FiPieChart className="w-5 h-5" />, path: '/portfolio' },
   { id: 'timeline', label: 'タイムライン', icon: <FiClock className="w-5 h-5" />, path: '/timeline' },
   { id: 'notifications', label: '通知', icon: <FiBell className="w-5 h-5" />, path: '/notifications' },
   { id: 'learning', label: '投資学習', icon: <FiBookOpen className="w-5 h-5" />, path: '/learning' },
   { id: 'community', label: 'コミュニティ', icon: <FiUsers className="w-5 h-5" />, path: '/community' },
-  { id: 'ai', label: 'AIアシスト', icon: <FiCpu className="w-5 h-5" />, path: '/ai' },
-  { id: 'settings', label: '設定', icon: <FiSettings className="w-5 h-5" />, path: '/settings' },
+];
+
+const aiItems: MenuItem[] = [
+  { id: 'ai', label: 'AIアナリスト', icon: <FiCpu className="w-5 h-5" />, path: '/ai' },
+];
+
+const menuSections: MenuSection[] = [
+  { title: 'IRBANK情報', items: irbankInfoItems },
+  { title: 'マイページ', items: mypageItems },
+  { title: 'AI機能', items: aiItems },
 ];
 
 export function Sidebar() {
@@ -40,26 +67,68 @@ export function Sidebar() {
 
       {/* メニュー */}
       <nav className="flex-1 p-4">
-        <div className="space-y-1">
-          {menuItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <button
-                key={item.id}
-                onClick={() => navigate(item.path)}
-                className={`
-                  w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
-                  ${isActive
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-                  }
-                `}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
+        <div className="space-y-6">
+          {menuSections.map((section, sectionIdx) => (
+            <div key={section.title}>
+              {/* セクションタイトル */}
+              <div className="px-3 mb-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  {section.title}
+                </p>
+              </div>
+
+              {/* 新しいノートボタン（マイページセクションの最初に表示） */}
+              {section.title === 'マイページ' && (
+                <button
+                  onClick={() => navigate('/new-note')}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 mb-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                >
+                  <FiPlus className="w-5 h-5" />
+                  <span>新しいノート</span>
+                </button>
+              )}
+
+              {/* メニュー項目 */}
+              <div className="space-y-1">
+                {section.items.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => navigate(item.path)}
+                      className={`
+                        w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                        ${isActive
+                          ? 'bg-blue-50 text-blue-700'
+                          : 'text-gray-700 hover:bg-gray-100'
+                        }
+                      `}
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+
+          {/* 設定（独立項目） */}
+          <div>
+            <button
+              onClick={() => navigate('/settings')}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                ${location.pathname === '/settings'
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-700 hover:bg-gray-100'
+                }
+              `}
+            >
+              <FiSettings className="w-5 h-5" />
+              <span>設定</span>
+            </button>
+          </div>
         </div>
       </nav>
 
