@@ -377,11 +377,12 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
               {/* Executive Messages */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 {[
-                  { role: 'CEO（最高経営責任者）', name: '指田 陸斗', delay: 0 },
-                  { role: 'CMO（最高マーケティング責任者）', name: '指田 陸斗', delay: 0.15 },
-                  { role: '創業者', name: '指田 陸斗', delay: 0.3 },
-                  { role: 'CTO（最高技術責任者）', name: '指田 陸斗', delay: 0.45 },
-                  { role: 'COO（最高執行責任者）', name: '指田 陸斗', delay: 0.6 },
+                  { role: 'CEO（最高経営責任者）', name: '指田 悠馬', delay: 0 },
+                  { role: '最高顧問', name: '日塔 大輔', delay: 0.15 },
+                  { role: 'CTO（最高技術責任者）', name: '前 一樹', delay: 0.3 },
+                  { role: 'CMO（最高マーケティング責任者）', name: '指田 陸斗', delay: 0.45 },
+                  { role: 'COO（最高執行責任者）', name: '宮島 洋佑', delay: 0.6 },
+                  { role: 'リードエンジニア', name: '山口 泰輝', delay: 0.75 },
                 ].map((exec, index) => (
                   <div
                     key={index}
