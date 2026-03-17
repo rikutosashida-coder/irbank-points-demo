@@ -81,7 +81,13 @@ export function Sidebar() {
               {section.title === 'マイページ' && (
                 <button
                   onClick={() => navigate('/new-note')}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 mb-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                  className={`
+                    w-full flex items-center gap-3 px-3 py-2.5 mb-1 rounded-lg text-sm font-medium transition-colors
+                    ${location.pathname === '/new-note'
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'text-gray-700 hover:bg-gray-100'
+                    }
+                  `}
                 >
                   <FiPlus className="w-5 h-5" />
                   <span>新しいノート</span>
