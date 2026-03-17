@@ -9,7 +9,7 @@ interface LoginPageProps {
 export function LoginPage({ onLogin }: LoginPageProps) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -25,11 +25,11 @@ export function LoginPage({ onLogin }: LoginPageProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'points' && password === 'note2026') {
+    if (email === 'points' && password === 'note2026') {
       sessionStorage.setItem('basicAuth', 'authenticated');
       onLogin();
     } else {
-      setError('IDまたはパスワードが正しくありません');
+      setError('メールアドレスまたはパスワードが正しくありません');
     }
   };
 
@@ -145,21 +145,21 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* ID入力 */}
+              {/* メールアドレス入力 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  ID
+                  メールアドレス
                 </label>
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                     <FiMail className="w-5 h-5" />
                   </div>
                   <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="IDを入力"
+                    placeholder="メールアドレスを入力"
                     required
                   />
                 </div>
