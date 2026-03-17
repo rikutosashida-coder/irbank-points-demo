@@ -217,7 +217,7 @@ export function PointsPage() {
           </div>
 
           {/* 役職進捗バー - スマホ版は右上、デスクトップ版は下部 */}
-          <div className="absolute top-2 right-2 w-48 sm:w-56 lg:static lg:mt-4 lg:pt-3 lg:border-t lg:border-white/20 lg:max-w-lg lg:ml-12 lg:w-auto">
+          <div className="absolute top-20 sm:top-24 right-2 w-48 sm:w-56 lg:static lg:mt-4 lg:pt-3 lg:border-t lg:border-white/20 lg:max-w-lg lg:ml-12 lg:w-auto">
             <div className="bg-black/60 backdrop-blur-sm rounded-lg p-2 lg:p-3 border border-white/10">
               <div className="flex items-center justify-between text-[8px] lg:text-[10px] mb-1 lg:mb-2">
                 <div className={`flex items-center gap-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
