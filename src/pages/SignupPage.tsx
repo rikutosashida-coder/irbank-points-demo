@@ -21,11 +21,6 @@ export function SignupPage() {
     e.preventDefault();
 
     // バリデーション
-    if (formData.username.length < 3) {
-      alert('ユーザー名は3文字以上で設定してください');
-      return;
-    }
-
     if (formData.password !== formData.confirmPassword) {
       alert('パスワードが一致しません');
       return;
@@ -160,7 +155,6 @@ export function SignupPage() {
                     required
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-1">3文字以上で設定してください</p>
               </div>
 
               {/* メールアドレス */}
