@@ -159,7 +159,7 @@ export function PointsPage() {
       {/* ─── 役職デスクヒーローカード ─── */}
       <div
         className="relative rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-gray-900"
-        style={{ backgroundImage: `url(${desk.deskImage})`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+        style={{ backgroundImage: `url(${desk.deskImage})`, backgroundSize: 'cover', backgroundPosition: 'center right', backgroundRepeat: 'no-repeat' }}
       >
         {/* テキスト読みやすさ用オーバーレイ（背景も見える程度） */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60 pointer-events-none" />
