@@ -127,7 +127,7 @@ export function PointsPage() {
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
-  const [pointSeasonTab, setPointSeasonTab] = useState(2); // 2026 2Q
+  const [pointSeasonTab, setPointSeasonTab] = useState(0); // 2026 2Q (現在のシーズン)
   const [taskStatusTab, setTaskStatusTab] = useState<'active' | 'completed' | 'upcoming'>('active');
   const [taskCategoryFilter, setTaskCategoryFilter] = useState<'all' | TaskCategory>('all');
   const [copiedCode, setCopiedCode] = useState(false);
@@ -233,7 +233,7 @@ export function PointsPage() {
                 <div className={`flex items-center gap-2 mt-2`}>
                   <span className={`text-xs text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>今シーズン</span>
                   <span className={"text-base font-bold text-white"} style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.8)' }}>+{profile.currentSeasonPoints.toLocaleString()} pt</span>
-                  <span className={`text-xs text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>（{SEASONS.find(s => s.id === 2)?.label ?? '2026 2Q'}）</span>
+                  <span className={`text-xs text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>（{SEASONS[0]?.label ?? '2026 2Q'}）</span>
                 </div>
               </div>
 

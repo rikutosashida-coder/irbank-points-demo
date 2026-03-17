@@ -99,22 +99,17 @@ const MOCK_PROFILE: UserProfile = {
 };
 
 const MOCK_POINT_HISTORY: PointHistoryItem[] = [
-  // 2026 1Q
-  { id: 'p1', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-02-16', season: 1 },
-  { id: 'p2', category: '友人招待', description: 'ユーザーC を招待（チュートリアル完了）', points: 25, date: '2026-02-13', season: 1 },
-  { id: 'p3', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-02-12', season: 1 },
-  { id: 'p4', category: 'ログイン継続', description: '月20日ログイン達成ボーナス', points: 10, date: '2026-02-10', season: 1 },
-  { id: 'p5', category: '友人招待', description: 'ユーザーB を招待（チュートリアル完了）', points: 25, date: '2026-01-28', season: 1 },
-  { id: 'p6', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-01-25', season: 1 },
-  { id: 'p7', category: 'Discord参加', description: 'Discordコミュニティ参加', points: 10, date: '2026-01-20', season: 1 },
-  { id: 'p8', category: 'X連携', description: 'Xアカウント連携', points: 10, date: '2026-01-15', season: 1 },
-  { id: 'p9', category: 'X公式フォロー', description: 'IRBANK公式Xフォロー', points: 10, date: '2026-01-15', season: 1 },
-  { id: 'p10', category: '情報修正報告', description: '企業情報の誤りを報告', points: 10, date: '2026-01-12', season: 1 },
-  // 2025 4Q（前シーズン）
-  { id: 'p11', category: 'WL登録', description: 'Waiting List登録ボーナス（特別付与分）', points: 280, date: '2025-10-15', season: 0 },
-  { id: 'p12', category: 'WL登録', description: 'Waiting List登録（即時分）', points: 20, date: '2025-10-15', season: 0 },
-  { id: 'p13', category: '友人招待', description: 'ユーザーA を招待（チュートリアル完了）', points: 25, date: '2025-11-10', season: 0 },
-  { id: 'p14', category: 'X指定アカウントフォロー', description: '指定Xアカウントをフォロー', points: 3, date: '2025-11-05', season: 0 },
+  // 2026 2Q（現在のシーズン）
+  { id: 'p1', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-06-16', season: 0 },
+  { id: 'p2', category: '友人招待', description: 'ユーザーC を招待（チュートリアル完了）', points: 25, date: '2026-06-13', season: 0 },
+  { id: 'p3', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-06-12', season: 0 },
+  { id: 'p4', category: 'ログイン継続', description: '月20日ログイン達成ボーナス', points: 10, date: '2026-06-10', season: 0 },
+  { id: 'p5', category: '友人招待', description: 'ユーザーB を招待（チュートリアル完了）', points: 25, date: '2026-05-28', season: 0 },
+  { id: 'p6', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-05-25', season: 0 },
+  { id: 'p7', category: 'Discord参加', description: 'Discordコミュニティ参加', points: 10, date: '2026-05-20', season: 0 },
+  { id: 'p8', category: 'X連携', description: 'Xアカウント連携', points: 10, date: '2026-05-15', season: 0 },
+  { id: 'p9', category: 'X公式フォロー', description: 'IRBANK公式Xフォロー', points: 10, date: '2026-05-15', season: 0 },
+  { id: 'p10', category: 'WL登録', description: 'Waiting List登録ボーナス', points: 207, date: '2026-04-15', season: 0 },
 ];
 
 const MOCK_TASKS: GamificationTask[] = [
@@ -125,31 +120,30 @@ const MOCK_TASKS: GamificationTask[] = [
   { id: 't3', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'active', currentProgress: 12, targetProgress: 20, pointsReward: 10 },
   { id: 't4', title: 'Discord参加＆認証', description: 'Discordコミュニティに参加して認証を完了', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 10 },
   // リファラルタスク
-  { id: 't5', title: '5人の仲間を招待する', description: '招待コードで5人を招待して賞状を獲得！', category: 'referral', status: 'active', currentProgress: 3, targetProgress: 5, pointsReward: 5 },
-  { id: 't6', title: '10人の仲間を招待する', description: '招待コードで10人を招待して上位賞状を獲得！', category: 'referral', status: 'active', currentProgress: 3, targetProgress: 10, pointsReward: 10 },
+  { id: 't5', title: '5人の仲間を招待する', description: '招待コードで5人を招待して賞状を獲得！', category: 'referral', status: 'active', currentProgress: 2, targetProgress: 5, pointsReward: 5 },
+  { id: 't6', title: '10人の仲間を招待する', description: '招待コードで10人を招待して上位賞状を獲得！', category: 'referral', status: 'active', currentProgress: 2, targetProgress: 10, pointsReward: 10 },
   // シーズンタスク
-  { id: 't7', title: '2026 1Q 課長に昇格', description: 'バッジポイント15ptを集めて課長になろう', category: 'season', status: 'completed', currentProgress: 18, targetProgress: 15, pointsReward: 0 },
-  { id: 't8', title: '2026 1Q 部長を目指せ！', description: 'バッジポイント30ptを集めて部長に昇格', category: 'season', status: 'active', currentProgress: 18, targetProgress: 30, pointsReward: 0 },
+  { id: 't7', title: '2026 2Q 係長に昇格', description: 'バッジポイント15ptを集めて係長になろう', category: 'season', status: 'active', currentProgress: 10, targetProgress: 15, pointsReward: 0 },
+  { id: 't8', title: '2026 2Q 課長を目指せ！', description: 'バッジポイント20ptを集めて課長に昇格', category: 'season', status: 'active', currentProgress: 10, targetProgress: 20, pointsReward: 0 },
 ];
 
 const MOCK_REFERRAL: ReferralStats = {
-  referredCount: 3,
-  availableInvites: 8, // 群A: 10件発行、3件使用済み
-  referralPoints: 75,
+  referredCount: 2,
+  availableInvites: 8, // 群A: 10件発行、2件使用済み
+  referralPoints: 50,
   referralCode: 'IRBANK-ALPHA-X7K2',
   referralHistory: [
-    { id: 'r1', uid: 'UID-00123', userName: 'ユーザーA', date: '2025-11-10', pointsEarned: 25, status: 'active' },
-    { id: 'r2', uid: 'UID-00247', userName: 'ユーザーB', date: '2026-01-28', pointsEarned: 25, status: 'active' },
-    { id: 'r3', uid: 'UID-00391', userName: 'ユーザーC', date: '2026-02-13', pointsEarned: 25, status: 'active' },
+    { id: 'r1', uid: 'UID-00247', userName: 'ユーザーB', date: '2026-05-28', pointsEarned: 25, status: 'active' },
+    { id: 'r2', uid: 'UID-00391', userName: 'ユーザーC', date: '2026-06-13', pointsEarned: 25, status: 'active' },
   ],
 };
 
 // ─── シーズン定義 ─────────────────────────────────────
 
 export const SEASONS = [
-  { id: 0, year: 2025, quarter: '4Q' as const, label: '2025 4Q', startDate: '2025-10-01', endDate: '2025-12-31' },
-  { id: 1, year: 2026, quarter: '1Q' as const, label: '2026 1Q', startDate: '2026-01-01', endDate: '2026-03-31' },
-  { id: 2, year: 2026, quarter: '2Q' as const, label: '2026 2Q', startDate: '2026-04-01', endDate: '2026-06-30' },
+  { id: 0, year: 2026, quarter: '2Q' as const, label: '2026 2Q', startDate: '2026-04-01', endDate: '2026-06-30' },
+  { id: 1, year: 2026, quarter: '3Q' as const, label: '2026 3Q', startDate: '2026-07-01', endDate: '2026-09-30' },
+  { id: 2, year: 2026, quarter: '4Q' as const, label: '2026 4Q', startDate: '2026-10-01', endDate: '2026-12-31' },
 ];
 
 // ─── Store ───────────────────────────────────────
