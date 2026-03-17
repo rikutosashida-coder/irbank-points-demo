@@ -140,7 +140,7 @@ export function SignupPage() {
               {/* ユーザー名 */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  ユーザー名
+                  設定するユーザー名を入力
                 </label>
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
