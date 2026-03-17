@@ -3,7 +3,7 @@ import {
   FiHome, FiZap, FiFileText, FiLayout, FiGrid, FiPieChart,
   FiClock, FiBell, FiBookOpen, FiUsers, FiCpu, FiSettings,
   FiList, FiFilter, FiBarChart2, FiSearch, FiMap, FiGlobe, FiTrendingUp, FiPlus,
-  FiLogOut,
+  FiLogOut, FiX,
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -55,7 +55,11 @@ const menuSections: MenuSection[] = [
   { title: 'AI機能', items: aiItems },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export function Sidebar({ onClose }: SidebarProps = {}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -64,11 +68,24 @@ export function Sidebar() {
     window.location.reload();
   };
 
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (onClose) onClose();
+  };
+
   return (
-    <div className="w-64 bg-white border-r border-gray-200 h-screen overflow-y-auto flex flex-col">
+    <div className="w-64 bg-white border-r border-gray-200 h-screen overflow-y-auto flex flex-col shadow-xl lg:shadow-none">
       {/* ヘッダー */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         <h1 className="text-xl font-bold text-blue-600">新IRBANK</h1>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden p-1 hover:bg-gray-100 rounded transition-colors"
+          >
+            <FiX className="w-5 h-5 text-gray-600" />
+          </button>
+        )}
       </div>
 
       {/* メニュー */}
@@ -86,7 +103,7 @@ export function Sidebar() {
               {/* 新しいノートボタン（マイページセクションの最初に表示） */}
               {section.title === 'マイページ' && (
                 <button
-                  onClick={() => navigate('/new-note')}
+                  onClick={() => handleNavigate('/new-note')}
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 mb-1 rounded-lg text-sm font-medium transition-colors
                     ${location.pathname === '/new-note'
@@ -107,7 +124,7 @@ export function Sidebar() {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => navigate(item.path)}
+                      onClick={() => handleNavigate(item.path)}
                       className={`
                         w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                         ${isActive
@@ -128,7 +145,7 @@ export function Sidebar() {
           {/* 設定（独立項目） */}
           <div className="space-y-1">
             <button
-              onClick={() => navigate('/settings')}
+              onClick={() => handleNavigate('/settings')}
               className={`
                 w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                 ${location.pathname === '/settings'
@@ -143,7 +160,10 @@ export function Sidebar() {
 
             {/* ログアウト */}
             <button
-              onClick={handleLogout}
+              onClick={() => {
+                handleLogout();
+                if (onClose) onClose();
+              }}
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
             >
               <FiLogOut className="w-5 h-5" />
