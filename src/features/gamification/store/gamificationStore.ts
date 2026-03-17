@@ -29,7 +29,7 @@ const MOCK_BADGES: Badge[] = [
     category: 'pr',
     badgePoints: 3,
     icon: '📢',
-    unlockedAt: '2026-07-05',
+    unlockedAt: null, // 未獲得に変更
     requirement: '公式SNSを3つ以上フォロー',
     distributionLimit: null,
   },
@@ -40,7 +40,7 @@ const MOCK_BADGES: Badge[] = [
     category: 'referral',
     badgePoints: 5,
     icon: '🤝',
-    unlockedAt: '2026-08-10',
+    unlockedAt: null, // 未獲得に変更
     requirement: '5人を招待する',
     distributionLimit: null,
   },
@@ -83,16 +83,16 @@ const MOCK_BADGES: Badge[] = [
 const totalBadgePoints = MOCK_BADGES
   .filter(b => b.unlockedAt !== null)
   .reduce((sum, b) => sum + b.badgePoints, 0);
-// 解除済み: b1(10) + b2(3) + b3(5) = 18pt → 課長
+// 解除済み: b1(10) = 10pt → 一般社員
 
 const MOCK_PROFILE: UserProfile = {
   displayName: 'ユーザー名',
   tier: getTierFromBadgePoints(totalBadgePoints),
-  totalPoints: 785,       // 通常ポイント（行動累計）
-  currentSeasonPoints: 435, // 今シーズン(2026 1Q)
-  badgePoints: totalBadgePoints, // 18pt
-  currentSeasonBadgePoints: 18,
-  ranking: 201,
+  totalPoints: 300,       // 通常ポイント（行動累計）
+  currentSeasonPoints: 300, // 今シーズン(2026 2Q)
+  badgePoints: totalBadgePoints, // 10pt
+  currentSeasonBadgePoints: 10,
+  ranking: -1, // ランキング外（-位）
   totalUsers: 5555,
   joinedAt: '2026-07-01',
   consecutiveTopSeasons: 0,

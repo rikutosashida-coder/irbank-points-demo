@@ -127,7 +127,7 @@ export function PointsPage() {
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
-  const [pointSeasonTab, setPointSeasonTab] = useState(1);
+  const [pointSeasonTab, setPointSeasonTab] = useState(2); // 2026 2Q
   const [taskStatusTab, setTaskStatusTab] = useState<'active' | 'completed' | 'upcoming'>('active');
   const [taskCategoryFilter, setTaskCategoryFilter] = useState<'all' | TaskCategory>('all');
   const [copiedCode, setCopiedCode] = useState(false);
@@ -241,7 +241,9 @@ export function PointsPage() {
               <div>
                 <div className={`text-xs mb-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>ランキング</div>
                 <div className="flex items-baseline gap-1">
-                  <span className={`text-4xl font-black text-white`} style={{ textShadow: '0 3px 12px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,0.9)' }}>{profile.ranking}</span>
+                  <span className={`text-4xl font-black text-white`} style={{ textShadow: '0 3px 12px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,0.9)' }}>
+                    {profile.ranking === -1 ? '-' : profile.ranking}
+                  </span>
                   <span className={`text-sm text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>位</span>
                   <span className={`text-xs text-white ml-1`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>/ {profile.totalUsers.toLocaleString()}人</span>
                 </div>
