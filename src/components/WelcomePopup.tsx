@@ -192,19 +192,6 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
     {
       content: (
         <div className="space-y-6">
-          <p className="text-lg font-semibold text-gray-800 leading-relaxed">
-            IRBANK運営、ユーザー、の境界を越えてプロダクトを愛し、育てていく。
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            そんな、本質的なユーザーと一体型のプロダクトを、私たちは本気で目指しています。
-          </p>
-        </div>
-      ),
-    },
-    // Page 13
-    {
-      content: (
-        <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
             まずは、新しく生まれ変わるIRBANKのβ版を体験し、あなたの声を聞かせてください。
           </p>
@@ -217,7 +204,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 14
+    // Page 13
     {
       content: (
         <div className="space-y-6 text-center">
@@ -229,7 +216,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 15: Welcomeメッセージ（経営陣）
+    // Page 14: Welcomeメッセージ（経営陣）
     {
       content: (
         <div className="space-y-6">
