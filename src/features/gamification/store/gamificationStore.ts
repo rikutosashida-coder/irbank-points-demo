@@ -100,16 +100,8 @@ const MOCK_PROFILE: UserProfile = {
 
 const MOCK_POINT_HISTORY: PointHistoryItem[] = [
   // 2026 2Q（現在のシーズン）
-  { id: 'p1', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-06-16', season: 0 },
-  { id: 'p2', category: '友人招待', description: 'ユーザーC を招待（チュートリアル完了）', points: 25, date: '2026-06-13', season: 0 },
-  { id: 'p3', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-06-12', season: 0 },
-  { id: 'p4', category: 'ログイン継続', description: '月20日ログイン達成ボーナス', points: 10, date: '2026-06-10', season: 0 },
-  { id: 'p5', category: '友人招待', description: 'ユーザーB を招待（チュートリアル完了）', points: 25, date: '2026-05-28', season: 0 },
-  { id: 'p6', category: 'ログイン', description: 'デイリーログインボーナス', points: 1, date: '2026-05-25', season: 0 },
-  { id: 'p7', category: 'Discord参加', description: 'Discordコミュニティ参加', points: 10, date: '2026-05-20', season: 0 },
-  { id: 'p8', category: 'X連携', description: 'Xアカウント連携', points: 10, date: '2026-05-15', season: 0 },
-  { id: 'p9', category: 'X公式フォロー', description: 'IRBANK公式Xフォロー', points: 10, date: '2026-05-15', season: 0 },
-  { id: 'p10', category: 'WL登録', description: 'Waiting List登録ボーナス', points: 207, date: '2026-04-15', season: 0 },
+  { id: 'p1', category: 'クラウドファンディング参加（特別ボーナス）', description: 'クラウドファンディング参加特別ボーナス', points: 280, date: '2026-04-15', season: 0 },
+  { id: 'p2', category: 'β版参加（特別ボーナス）', description: 'β版参加特別ボーナス', points: 20, date: '2026-04-15', season: 0 },
 ];
 
 const MOCK_TASKS: GamificationTask[] = [
