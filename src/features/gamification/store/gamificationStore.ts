@@ -155,6 +155,7 @@ interface GamificationStore {
   tasks: GamificationTask[];
   referral: ReferralStats;
   isLoaded: boolean;
+  favoriteBadgeIds: string[];
 
   loadGamificationData: () => Promise<void>;
   getPointHistoryBySeason: (season: number) => PointHistoryItem[];
@@ -162,6 +163,8 @@ interface GamificationStore {
   getTasksByCategory: (category: string) => GamificationTask[];
   getUnlockedBadges: () => Badge[];
   getLockedBadges: () => Badge[];
+  getFavoriteBadges: () => Badge[];
+  toggleFavoriteBadge: (badgeId: string) => void;
 }
 
 export const useGamificationStore = create<GamificationStore>((set, get) => ({
@@ -171,6 +174,9 @@ export const useGamificationStore = create<GamificationStore>((set, get) => ({
   tasks: MOCK_TASKS,
   referral: MOCK_REFERRAL,
   isLoaded: false,
+  favoriteBadgeIds: typeof window !== 'undefined'
+    ? JSON.parse(localStorage.getItem('favoriteBadgeIds') || '[]')
+    : [],
 
   loadGamificationData: async () => {
     set({ isLoaded: true });
@@ -195,5 +201,30 @@ export const useGamificationStore = create<GamificationStore>((set, get) => ({
 
   getLockedBadges: () => {
     return get().badges.filter((b) => b.unlockedAt === null);
+  },
+
+  getFavoriteBadges: () => {
+    const { badges, favoriteBadgeIds } = get();
+    return badges.filter((b) => favoriteBadgeIds.includes(b.id) && b.unlockedAt !== null);
+  },
+
+  toggleFavoriteBadge: (badgeId: string) => {
+    const { favoriteBadgeIds } = get();
+    let newFavorites: string[];
+
+    if (favoriteBadgeIds.includes(badgeId)) {
+      // 既にお気に入りなら削除
+      newFavorites = favoriteBadgeIds.filter((id) => id !== badgeId);
+    } else {
+      // お気に入りに追加（最大3枚まで）
+      if (favoriteBadgeIds.length >= 3) {
+        alert('お気に入りは最大3枚までです');
+        return;
+      }
+      newFavorites = [...favoriteBadgeIds, badgeId];
+    }
+
+    set({ favoriteBadgeIds: newFavorites });
+    localStorage.setItem('favoriteBadgeIds', JSON.stringify(newFavorites));
   },
 }));

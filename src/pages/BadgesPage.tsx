@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiLock } from 'react-icons/fi';
+import { FiArrowLeft, FiLock, FiStar } from 'react-icons/fi';
 import { useGamificationStore } from '../features/gamification/store/gamificationStore';
 
 export function BadgesPage() {
   const navigate = useNavigate();
-  const { badges, getUnlockedBadges, getLockedBadges } = useGamificationStore();
+  const { badges, getUnlockedBadges, getLockedBadges, favoriteBadgeIds, toggleFavoriteBadge } = useGamificationStore();
 
   const unlockedBadges = getUnlockedBadges();
   const lockedBadges = getLockedBadges();
@@ -44,7 +44,13 @@ export function BadgesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {unlockedBadges.map((badge) => (
-                <CertificateCard key={badge.id} badge={badge} locked={false} />
+                <CertificateCard
+                  key={badge.id}
+                  badge={badge}
+                  locked={false}
+                  isFavorite={favoriteBadgeIds.includes(badge.id)}
+                  onToggleFavorite={() => toggleFavoriteBadge(badge.id)}
+                />
               ))}
             </div>
           </div>
@@ -81,7 +87,17 @@ type CertBadge = {
   requirement?: string | null;
 };
 
-function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boolean }) {
+function CertificateCard({
+  badge: b,
+  locked,
+  isFavorite = false,
+  onToggleFavorite,
+}: {
+  badge: CertBadge;
+  locked: boolean;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
+}) {
   // バッジポイントに基づいてランクを決定
   const getRank = (points: number): 's' | 'a' | 'b' | 'c' => {
     if (points >= 30) return 's';
@@ -135,13 +151,30 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
 
   return (
     <div
-      className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] cursor-pointer group aspect-[3/4]"
+      className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] group aspect-[3/4]"
       style={{
         backgroundImage: `url(${certificateImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
+      {/* お気に入りボタン */}
+      {!locked && onToggleFavorite && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite();
+          }}
+          className={`absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            isFavorite
+              ? 'bg-amber-400 text-white shadow-lg scale-110'
+              : 'bg-white/80 text-gray-400 hover:bg-white hover:text-amber-400'
+          }`}
+        >
+          <FiStar className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
+        </button>
+      )}
+
       <div className="relative px-4 py-6 h-full flex flex-col">
         {/* アイコン */}
         <div className="flex justify-center mb-3 mt-8">

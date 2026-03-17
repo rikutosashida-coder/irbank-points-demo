@@ -4,7 +4,7 @@ import {
   FiChevronRight, FiChevronUp, FiChevronDown, FiCopy, FiCheck,
   FiUsers, FiShare2, FiTrendingUp,
   FiZap, FiLock, FiDownload, FiX,
-  FiAward, FiBell, FiSettings, FiPlus,
+  FiAward, FiBell, FiSettings, FiPlus, FiStar,
 } from 'react-icons/fi';
 import { useNotesStore } from '../features/notes/store/notesStore';
 import { useTemplateStore } from '../features/notes/store/templateStore';
@@ -121,7 +121,7 @@ export function PointsPage() {
   const navigate = useNavigate();
   const { createNote } = useNotesStore();
   const incrementUsageCount = useTemplateStore(state => state.incrementUsageCount);
-  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges } = useGamificationStore();
+  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getFavoriteBadges } = useGamificationStore();
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
@@ -172,6 +172,7 @@ export function PointsPage() {
   const desk = TIER_DESK[displayTier] ?? TIER_DESK.tier0;
   const isPreviewMode = previewTierIdx !== null && previewTierIdx !== tierIndex;
   const unlockedBadges = getUnlockedBadges();
+  const favoriteBadges = getFavoriteBadges();
   const currentSeason = SEASONS.find(s => s.id === pointSeasonTab);
   const unreadCount = useMemo(() => MOCK_NOTIFICATIONS.filter(n => !n.isRead).length, []);
 
@@ -528,6 +529,20 @@ export function PointsPage() {
           </button>
         </div>
         <div className="p-4">
+
+          {/* お気に入り賞状 */}
+          {favoriteBadges.length > 0 && (
+            <div className="mb-6">
+              <div className="text-[10px] font-bold text-amber-500 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
+                <FiStar className="w-3 h-3 fill-current" /> お気に入りの賞状
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {favoriteBadges.map((b) => (
+                  <CertificateCard key={b.id} badge={b} locked={false} />
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* 取得済み賞状 */}
           {unlockedBadges.length > 0 && (
