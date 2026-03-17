@@ -121,7 +121,7 @@ export function PointsPage() {
   const navigate = useNavigate();
   const { createNote } = useNotesStore();
   const incrementUsageCount = useTemplateStore(state => state.incrementUsageCount);
-  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getLockedBadges } = useGamificationStore();
+  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges } = useGamificationStore();
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
@@ -172,7 +172,6 @@ export function PointsPage() {
   const desk = TIER_DESK[displayTier] ?? TIER_DESK.tier0;
   const isPreviewMode = previewTierIdx !== null && previewTierIdx !== tierIndex;
   const unlockedBadges = getUnlockedBadges();
-  const lockedBadges = getLockedBadges();
   const currentSeason = SEASONS.find(s => s.id === pointSeasonTab);
   const unreadCount = useMemo(() => MOCK_NOTIFICATIONS.filter(n => !n.isRead).length, []);
 
@@ -539,20 +538,6 @@ export function PointsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {unlockedBadges.map((b) => (
                   <CertificateCard key={b.id} badge={b} locked={false} />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* 未取得賞状 */}
-          {lockedBadges.length > 0 && (
-            <div>
-              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
-                <FiLock className="w-3 h-3" /> 未授与の賞状
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {lockedBadges.map((b) => (
-                  <CertificateCard key={b.id} badge={b} locked={true} />
                 ))}
               </div>
             </div>
