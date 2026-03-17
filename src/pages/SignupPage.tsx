@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMail, FiLock, FiUser, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi';
 
 export function SignupPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -87,31 +86,14 @@ export function SignupPage() {
         <div className="w-full">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 lg:p-10">
             <div className="mb-8">
+              <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                クラウドファンディング参加者専用
+              </div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">新規登録</h2>
-              <p className="text-gray-600">創業メンバーとして参加する</p>
+              <p className="text-gray-600">メールアドレスとパスワードで登録</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* ユーザーネーム */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  ユーザーネーム
-                </label>
-                <div className="relative">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                    <FiUser className="w-5 h-5" />
-                  </div>
-                  <input
-                    type="text"
-                    value={formData.username}
-                    onChange={(e) => handleChange('username', e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="ユーザーネームを入力"
-                    required
-                  />
-                </div>
-              </div>
-
               {/* メールアドレス */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
