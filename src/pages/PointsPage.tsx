@@ -210,26 +210,77 @@ export function PointsPage() {
                   <span className={`text-xs text-white ml-1`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>/ -人</span>
                 </div>
               </div>
+
+              {/* 役職進捗バー - スマホ版のみここに表示 */}
+              <div className="lg:hidden">
+                <div className="bg-black/60 backdrop-blur-sm rounded-lg p-2 border border-white/10">
+                  <div className="flex items-center justify-between text-[8px] mb-1">
+                    <div className={`flex items-center gap-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
+                      <FiAward className="w-2.5 h-2.5" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
+                      <span>貢献度</span>
+                      <span className="font-bold ml-1 text-white">
+                        {profile.badgePoints}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="relative h-1.5 rounded-full overflow-hidden mb-1.5 bg-black/40 border border-white/30" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+                    <div
+                      className={`absolute inset-y-0 left-0 rounded-full transition-all duration-700 ${desk.progressBar}`}
+                      style={{ width: `${Math.min(tierProgress, 100)}%` }}
+                    />
+                  </div>
+                  {/* マイルストーン */}
+                  <div className="flex justify-between">
+                    {TIER_ORDER.map((t, i) => {
+                      const cfg = TIER_CONFIG[t];
+                      const isActive = i <= tierIndex;
+                      const isCurrent = t === profile.tier;
+                      return (
+                        <div key={t} className="flex flex-col items-center gap-0.5" title={`${cfg.label}（貢献度 ${cfg.minBadgePoints}〜）`}>
+                          <div className={`w-1.5 h-1.5 rounded-full border-2 transition-all ${
+                            isCurrent
+                              ? 'border-white bg-white scale-125'
+                              : isActive
+                                ? 'border-white/70 bg-white/50'
+                                : 'border-white/40 bg-white/20'
+                          }`} style={{ boxShadow: isCurrent ? '0 0 8px rgba(255,255,255,0.8)' : '0 2px 4px rgba(0,0,0,0.5)' }} />
+                          <span className={`text-[6px] font-medium leading-tight text-center transition-all ${
+                            isCurrent ? 'text-white font-bold' : isActive ? 'text-white' : 'text-white/70'
+                          }`} style={{ textShadow: '0 2px 6px rgba(0,0,0,1), 0 0 12px rgba(0,0,0,0.8)' }}>
+                            {cfg.label === '代表取締役社長' ? '社長' : cfg.label === '会長（幻）' ? '会長' : cfg.label}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* 右：空けておく（背景画像が見える） */}
             <div className="hidden lg:block flex-1"></div>
           </div>
 
-          {/* 役職進捗バー - スマホ版は右上、デスクトップ版は下部 */}
-          <div className="absolute top-5 sm:top-7 right-2 w-48 sm:w-56 lg:static lg:mt-4 lg:pt-3 lg:border-t lg:border-white/20 lg:max-w-lg lg:ml-12 lg:w-auto">
-            <div className="bg-black/60 backdrop-blur-sm rounded-lg p-2 lg:p-3 border border-white/10">
-              <div className="flex items-center justify-between text-[8px] lg:text-[10px] mb-1 lg:mb-2">
+          {/* 役職進捗バー - デスクトップ版のみ下部に表示 */}
+          <div className="hidden lg:block mt-4 pt-3 border-t border-white/20 max-w-lg lg:ml-12">
+            <div className="bg-black/60 backdrop-blur-sm rounded-lg p-3 border border-white/10">
+              <div className="flex items-center justify-between text-[10px] mb-2">
                 <div className={`flex items-center gap-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
-                  <FiAward className="w-2.5 h-2.5 lg:w-3 lg:h-3" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
-                  <span className="hidden lg:inline">役職進捗 — 貢献度</span>
-                  <span className="lg:hidden">貢献度</span>
+                  <FiAward className="w-3 h-3" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
+                  <span>役職進捗 — 貢献度</span>
                   <span className="font-bold ml-1 text-white">
                     {profile.badgePoints}
                   </span>
                 </div>
+                {nextTierConfig && (
+                  <span className="text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
+                    次の役職:
+                    <span className="font-bold ml-1 text-white">{nextTierConfig.label}</span>
+                    <span className="ml-1">（{nextTierConfig.minBadgePoints}〜）</span>
+                  </span>
+                )}
               </div>
-              <div className="relative h-1.5 lg:h-2.5 rounded-full overflow-hidden mb-1.5 lg:mb-2.5 bg-black/40 border border-white/30" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+              <div className="relative h-2.5 rounded-full overflow-hidden mb-2.5 bg-black/40 border border-white/30" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
                 <div
                   className={`absolute inset-y-0 left-0 rounded-full transition-all duration-700 ${desk.progressBar}`}
                   style={{ width: `${Math.min(tierProgress, 100)}%` }}
@@ -243,14 +294,14 @@ export function PointsPage() {
                   const isCurrent = t === profile.tier;
                   return (
                     <div key={t} className="flex flex-col items-center gap-0.5" title={`${cfg.label}（貢献度 ${cfg.minBadgePoints}〜）`}>
-                      <div className={`w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full border-2 transition-all ${
+                      <div className={`w-2 h-2 rounded-full border-2 transition-all ${
                         isCurrent
                           ? 'border-white bg-white scale-125'
                           : isActive
                             ? 'border-white/70 bg-white/50'
                             : 'border-white/40 bg-white/20'
                       }`} style={{ boxShadow: isCurrent ? '0 0 8px rgba(255,255,255,0.8)' : '0 2px 4px rgba(0,0,0,0.5)' }} />
-                      <span className={`text-[6px] lg:text-[8px] font-medium leading-tight text-center transition-all ${
+                      <span className={`text-[8px] font-medium leading-tight text-center transition-all ${
                         isCurrent ? 'text-white font-bold' : isActive ? 'text-white' : 'text-white/70'
                       }`} style={{ textShadow: '0 2px 6px rgba(0,0,0,1), 0 0 12px rgba(0,0,0,0.8)' }}>
                         {cfg.label === '代表取締役社長' ? '社長' : cfg.label === '会長（幻）' ? '会長' : cfg.label}
