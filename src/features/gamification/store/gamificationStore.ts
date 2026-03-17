@@ -205,6 +205,13 @@ export const useGamificationStore = create<GamificationStore>((set, get) => ({
 
   getFavoriteBadges: () => {
     const { badges, favoriteBadgeIds } = get();
+    const unlockedBadges = badges.filter((b) => b.unlockedAt !== null);
+
+    // お気に入りが設定されていない場合、最初に獲得した3枚を自動表示
+    if (favoriteBadgeIds.length === 0) {
+      return unlockedBadges.slice(0, 3);
+    }
+
     return badges.filter((b) => favoriteBadgeIds.includes(b.id) && b.unlockedAt !== null);
   },
 

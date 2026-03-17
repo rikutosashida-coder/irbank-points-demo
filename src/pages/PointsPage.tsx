@@ -531,7 +531,7 @@ export function PointsPage() {
         <div className="p-4">
 
           {/* 授与された賞状（お気に入りのみ表示） */}
-          {favoriteBadges.length > 0 ? (
+          {favoriteBadges.length > 0 && (
             <div className="mb-6">
               <div className="text-[10px] font-bold text-amber-700 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
                 <span>✦</span> 授与された賞状 <span>✦</span>
@@ -541,12 +541,6 @@ export function PointsPage() {
                   <CertificateCard key={b.id} badge={b} locked={false} />
                 ))}
               </div>
-            </div>
-          ) : (
-            <div className="text-center py-8 text-gray-400 text-sm">
-              <FiStar className="w-8 h-8 mx-auto mb-2 opacity-30" />
-              <p>お気に入りの賞状を設定してください</p>
-              <p className="text-xs mt-1">「すべて見る」から最大3枚まで選べます</p>
             </div>
           )}
         </div>
