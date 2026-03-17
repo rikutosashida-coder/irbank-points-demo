@@ -92,17 +92,12 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         {/* 左側：サービス概要 */}
         <div className="hidden lg:block">
           <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h1 className="text-5xl font-bold text-blue-600 mb-4">
-                Service<br />Overview
-              </h1>
-              <p className="text-xl text-gray-800 font-bold mb-3">
-                プロ投資家が使う本格ツール。
-              </p>
-              <p className="text-sm text-gray-700">
-                「財務・株価・開示・イベント」をワンストップで閲覧できる<br />
-                オンライン・データプラットフォームです。
-              </p>
+            <div className="mb-8">
+              <img
+                src="/service-overview-banner.png"
+                alt="Service Overview - プロ投資家が使う本格ツール"
+                className="w-full h-auto rounded-lg"
+              />
             </div>
 
             <div className="space-y-3">
