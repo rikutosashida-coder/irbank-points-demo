@@ -10,28 +10,25 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = [
-    // Page 1: 感謝のメッセージ
+    // Page 1
     {
       content: (
         <div className="text-center space-y-6">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             IRBANKへ入社していただいた皆様へ
           </h1>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            いつもIRBANKをご利用いただき、そしてIRBANKクラウドファンディングにご参加いただき、誠にありがとうございます。
-          </p>
         </div>
       ),
     },
-    // Page 2: IRBANKの誕生
+    // Page 2
     {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            <strong>2013年10月</strong>、IRBANKは「上場企業の財務諸表やIR情報を、誰もが手軽に、確認できる環境をつくりたい」
+            いつもIRBANKをご利用いただき、そしてIRBANKクラウドファンディングにご参加いただき、誠にありがとうございます。
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            そんな、たったひとつの純粋な想いから生まれました。
+            <strong>2013年10月</strong>、IRBANKは「上場企業の財務諸表やIR情報を、誰もが手軽に、確認できる環境をつくりたい」 そんな、たったひとつの純粋な想いから生まれました。
           </p>
           <div className="bg-gray-100 rounded-lg p-8 text-center">
             <p className="text-sm text-gray-500">[当時の何もないサイトの写真]</p>
@@ -39,15 +36,13 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 3: 試行錯誤の日々
+    // Page 3
     {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            試行錯誤を繰り返しながら、ただひたすらコードを書き続けました。
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            当時はAIも存在しなかったので、この頃がいちばんきつかったです。
+            試行錯誤を繰り返しながら、ただひたすらコードを書き続けました。<br />
+            当時はAIも存在しなかったので、この頃がいちばんきつかったですが
           </p>
           <p className="text-lg font-semibold text-gray-800 leading-relaxed">
             「これは絶対、多くの人に使ってもらえる」
@@ -55,18 +50,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           <p className="text-lg text-gray-700 leading-relaxed">
             そんな確信とワクワクがありました。
           </p>
-        </div>
-      ),
-    },
-    // Page 4: リリース後、使われなかった
-    {
-      content: (
-        <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            ところが——リリースしても、全然使われませんでした（笑）
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            「あれ？想定と違うな…」と、今でもはっきり覚えています。
+            ところが、リリースしても、全然使われませんでした<br />
+            この時の悔しさを今でもはっきり覚えています。
           </p>
           <div className="bg-gray-100 rounded-lg p-8 text-center">
             <p className="text-sm text-gray-500">[写真を入れる]</p>
@@ -74,83 +60,59 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 5: それでもやめなかった
+    // Page 4
     {
       content: (
         <div className="space-y-6 text-center">
           <p className="text-2xl font-bold text-gray-800">
             それでも、やめようとは一切思いませんでした。
           </p>
-          <p className="text-xl text-blue-600 font-semibold">
-            なぜなら
-          </p>
         </div>
       ),
     },
-    // Page 6: ひたすらコード構築
+    // Page 5
     {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            そうしてひたすらコードを書き続け、構築し、
+            そうしてひたすらコードを書き続け、構築し、コードを書き続け、構築する。
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            1人、また1人と多くのユーザーに使っていただけるようになり。
+            ひたすら積み上げるにつれ、1人、また1人と多くのユーザーに使っていただけるようになり。
           </p>
         </div>
       ),
     },
-    // Page 7: 月間100万人
+    // Page 6
     {
       content: (
-        <div className="space-y-6 text-center">
-          <p className="text-3xl font-bold text-blue-600">
-            月間100万人
+        <div className="space-y-6">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            今では<strong className="text-3xl text-blue-600">月間100万人</strong>ものユーザーの皆様に支えられています。
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            ものユーザーの皆様に支えられています。
-          </p>
-        </div>
-      ),
-    },
-    // Page 8: 感謝
-    {
-      content: (
-        <div className="space-y-6 text-center">
-          <p className="text-xl font-semibold text-gray-800 leading-relaxed">
-            皆様のおかげで私たちはここまで歩み続けることができました。
-          </p>
-          <p className="text-xl font-semibold text-gray-800">
+            皆様のおかげで<strong>12年間</strong>私たちはここまで歩み続けることができました。<br />
             心から感謝申し上げます。
           </p>
         </div>
       ),
     },
-    // Page 9: 第二の創業
+    // Page 7
     {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            そして今、私たちは<strong className="text-blue-600">「第二の創業」</strong>とも呼べる、過去最大級のアップデートを計画しています。
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
+            そして今、私たちは<strong className="text-blue-600">「第二の創業」</strong>とも呼べる、過去最大級のアップデートを計画しています。<br />
             次の10年を見据え、IRBANKをさらに進化させるための、全く新しい挑戦です。
           </p>
-        </div>
-      ),
-    },
-    // Page 10: 新しいビジョン
-    {
-      content: (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">今後のIRBANKが目指す先</h2>
+          <h2 className="text-2xl font-bold text-gray-800 pt-4">今後のIRBANKが目指す先</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
             新しいIRBANKは、ただの投資ツールではありません。
           </p>
         </div>
       ),
     },
-    // Page 11: 一緒に成長
+    // Page 8
     {
       content: (
         <div className="space-y-6">
@@ -163,7 +125,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 12: あなたは創業メンバー
+    // Page 9
     {
       content: (
         <div className="space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl">
@@ -171,27 +133,27 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           <p className="text-lg text-gray-700 leading-relaxed">
             この挑戦を、私たちだけで進めるつもりはありません。
           </p>
-        </div>
-      ),
-    },
-    // Page 13: アーリー参加者への想い
-    {
-      content: (
-        <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
             これまでIRBANKを育ててくださり、アーリーでIRBANKに参加していただいたあなたのような方が、<strong className="text-blue-600">「創業メンバー」</strong>だと、私たちは本気で思っています。
           </p>
+        </div>
+      ),
+    },
+    // Page 10
+    {
+      content: (
+        <div className="space-y-6 text-center">
           <p className="text-lg text-gray-700 leading-relaxed">
             IRBANKは、ただの投資ツールの提供にとどまりません。
           </p>
         </div>
       ),
     },
-    // Page 14: 4つの特典
+    // Page 11
     {
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-blue-600 text-center">IRBANK参加で得られるもの</h2>
+          <h2 className="text-2xl font-bold text-blue-600 text-center">IRBANKで得られるもの</h2>
           <div className="space-y-4">
             <div className="bg-white border-2 border-blue-100 rounded-lg p-4">
               <div className="font-bold text-blue-600 mb-2">役職</div>
@@ -213,36 +175,53 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 15: クロージング + 経営陣
+    // Page 12
     {
       content: (
         <div className="space-y-6">
-          <div className="space-y-4 text-center mb-8">
-            <p className="text-lg font-semibold text-gray-800">
-              IRBANK運営、ユーザー、の境界を越えてプロダクトを愛し、育てていく。
-            </p>
-            <p className="text-base text-gray-700">
-              そんな、本質的なユーザーと一体型のプロダクトを、私たちは本気で目指しています。
-            </p>
-            <div className="bg-blue-50 rounded-lg p-6">
-              <p className="text-base text-gray-700 mb-3">
-                まずは、新しく生まれ変わるIRBANKのβ版を体験し、あなたの声を聞かせてください。
-              </p>
-              <p className="text-lg font-bold text-blue-600">
-                あなたのフィードバックが、未来のIRBANKを創ります。
-              </p>
-            </div>
-            <p className="text-base text-gray-700">
-              私たちは、IRBANK側からアロケーションをはじめとした様々な機会を積極的に提供していきます。
-            </p>
-            <p className="text-lg font-semibold text-gray-800">
-              これからIRBANKを一緒に育てていただけること、<br />
-              そしてIRBANKに「入社」していただけたことに、<br />
-              心から感謝しています。
-            </p>
-          </div>
+          <p className="text-lg font-semibold text-gray-800 leading-relaxed">
+            IRBANK運営、ユーザー、の境界を越えてプロダクトを愛し、育てていく。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            そんな、本質的なユーザーと一体型のプロダクトを、私たちは本気で目指しています。
+          </p>
+        </div>
+      ),
+    },
+    // Page 13
+    {
+      content: (
+        <div className="space-y-6">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            まずは、新しく生まれ変わるIRBANKのβ版を体験し、あなたの声を聞かせてください。
+          </p>
+          <p className="text-lg font-semibold text-blue-600 leading-relaxed">
+            あなたのフィードバックが、未来のIRBANKを創ります。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            私たちは、IRBANK側からアロケーションをはじめとした様々な機会を積極的に提供していきます。
+          </p>
+        </div>
+      ),
+    },
+    // Page 14
+    {
+      content: (
+        <div className="space-y-6 text-center">
+          <p className="text-xl font-semibold text-gray-800 leading-relaxed">
+            これからIRBANKを一緒に育てていただけること、<br />
+            そしてIRBANKに「入社」していただけたことに、<br />
+            心から感謝しています。
+          </p>
+        </div>
+      ),
+    },
+    // Page 15: Welcomeメッセージ（経営陣）
+    {
+      content: (
+        <div className="space-y-6">
           <div className="border-t pt-6">
-            <h3 className="text-xl font-bold text-center mb-4">経営陣からのWelcomeメッセージ</h3>
+            <h3 className="text-xl font-bold text-center mb-4">Welcomeメッセージ</h3>
             <div className="grid grid-cols-2 gap-3">
               {[
                 { role: 'CEO', name: '指田 悠馬' },
