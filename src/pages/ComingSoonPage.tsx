@@ -1,9 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiClock } from 'react-icons/fi';
+import { FiClock } from 'react-icons/fi';
 
 export function ComingSoonPage() {
-  const navigate = useNavigate();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full text-center">
@@ -22,22 +19,13 @@ export function ComingSoonPage() {
           この機能は現在開発中です
         </p>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+        <div className="bg-white rounded-2xl shadow-xl p-8">
           <p className="text-gray-700 leading-relaxed">
             新しいIRBANKの機能を鋭意開発中です。<br />
             より良い投資体験をお届けするため、しばらくお待ちください。<br />
             β版リリース時にいち早くお知らせいたします。
           </p>
         </div>
-
-        {/* 戻るボタン */}
-        <button
-          onClick={() => navigate('/')}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
-        >
-          <FiArrowLeft className="w-5 h-5" />
-          ポイントページに戻る
-        </button>
       </div>
     </div>
   );
