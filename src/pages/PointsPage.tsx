@@ -105,7 +105,7 @@ interface NotificationItem {
 
 const MOCK_NOTIFICATIONS: NotificationItem[] = [
   { id: 'n1', type: 'welcome', title: 'Welcomeメッセージ', body: 'IRBANKへようこそ！創業メンバーとして一緒に未来を創りましょう。', date: '2026-04-15', isRead: false },
-  { id: 'n2', type: 'badge', title: '賞状を授与されました', body: '「創業参加功労賞」を授与されました！IRBANKのWaiting Listに登録した創業メンバーへ贈られる賞状です。', date: '2026-04-15', isRead: false },
+  { id: 'n2', type: 'badge', title: '賞状を授与されました', body: '「創業参加功労賞」を授与されました！IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる賞状です。', date: '2026-04-15', isRead: false },
 ];
 
 const TYPE_COLOR: Record<NotificationItem['type'], string> = {

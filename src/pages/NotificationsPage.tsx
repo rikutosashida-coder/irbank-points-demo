@@ -27,8 +27,8 @@ const ALL_NOTIFICATIONS: NotificationItem[] = [
     id: 'n2',
     type: 'badge',
     title: '賞状を授与されました',
-    body: '「創業参加功労賞」を授与されました！IRBANKのWaiting Listに登録した創業メンバーへ贈られる賞状です。',
-    detailedBody: '「創業参加功労賞」を授与されました！\n\nこの賞状は、IRBANKのWaiting Listに登録した創業メンバーへ贈られる特別な賞状です。\n\n貢献度: +10pt\n\nあなたは新生IRBANKの第二の創業に参加した、貴重な創業メンバーの一人です。\n\nこれからも一緒にIRBANKを育てていきましょう！',
+    body: '「創業参加功労賞」を授与されました！IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる賞状です。',
+    detailedBody: '「創業参加功労賞」を授与されました！\n\nこの賞状は、IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる特別な賞状です。\n\n貢献度: +10pt\n\nあなたは新生IRBANKの第二の創業に参加した、貴重な創業メンバーの一人です。\n\nこれからも一緒にIRBANKを育てていきましょう！',
     date: '2026-04-15',
     isRead: false
   },

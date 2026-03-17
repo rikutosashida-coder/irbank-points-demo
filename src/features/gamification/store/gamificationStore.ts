@@ -14,12 +14,12 @@ const MOCK_BADGES: Badge[] = [
   {
     id: 'b1',
     name: '創業参加功労賞',
-    description: 'IRBANKのWaiting Listに登録した創業メンバーへ贈られる賞状',
+    description: 'IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる賞状',
     category: 'participation',
     badgePoints: 10,
     icon: '🏛️',
     unlockedAt: '2026-07-01',
-    requirement: 'Waiting Listに登録する',
+    requirement: 'クラウドファンディングに参加する',
     distributionLimit: null,
   },
   {
