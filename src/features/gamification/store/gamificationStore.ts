@@ -105,18 +105,16 @@ const MOCK_POINT_HISTORY: PointHistoryItem[] = [
 ];
 
 const MOCK_TASKS: GamificationTask[] = [
-  // デイリータスク
-  { id: 't1', title: '今日もログインする', description: 'ログインするだけで1pt！毎日続けよう', category: 'daily', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 1 },
-  { id: 't2', title: 'Xをシェアする', description: 'IRBANKを拡散してポイント獲得（任意）', category: 'daily', status: 'active', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  // 継続タスク
-  { id: 't3', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'active', currentProgress: 12, targetProgress: 20, pointsReward: 10 },
-  { id: 't4', title: 'Discord参加＆認証', description: 'Discordコミュニティに参加して認証を完了', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 10 },
-  // リファラルタスク
-  { id: 't5', title: '5人の仲間を招待する', description: '招待コードで5人を招待して賞状を獲得！', category: 'referral', status: 'active', currentProgress: 2, targetProgress: 5, pointsReward: 5 },
-  { id: 't6', title: '10人の仲間を招待する', description: '招待コードで10人を招待して上位賞状を獲得！', category: 'referral', status: 'active', currentProgress: 2, targetProgress: 10, pointsReward: 10 },
-  // シーズンタスク
-  { id: 't7', title: '2026 2Q 係長に昇格', description: 'バッジポイント15ptを集めて係長になろう', category: 'season', status: 'active', currentProgress: 10, targetProgress: 15, pointsReward: 0 },
-  { id: 't8', title: '2026 2Q 課長を目指せ！', description: 'バッジポイント20ptを集めて課長に昇格', category: 'season', status: 'active', currentProgress: 10, targetProgress: 20, pointsReward: 0 },
+  // 完了済みタスク
+  { id: 't1', title: 'クラウドファンディングに参加', description: 'IRBANKのクラウドファンディングに参加して創業メンバーになる', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 280 },
+  { id: 't2', title: 'β版参加登録', description: 'IRBANK β版の参加登録を完了する', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 20 },
+  // Coming Soon タスク
+  { id: 't3', title: '今日もログインする', description: 'ログインするだけで1pt！毎日続けよう', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 1 },
+  { id: 't4', title: 'Xをシェアする', description: 'IRBANKを拡散してポイント獲得（任意）', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
+  { id: 't5', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 20, pointsReward: 10 },
+  { id: 't6', title: 'Discord参加＆認証', description: 'Discordコミュニティに参加して認証を完了', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
+  { id: 't7', title: '5人の仲間を招待する', description: '招待コードで5人を招待して賞状を獲得！', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 5, pointsReward: 5 },
+  { id: 't8', title: '10人の仲間を招待する', description: '招待コードで10人を招待して上位賞状を獲得！', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 10, pointsReward: 10 },
 ];
 
 const MOCK_REFERRAL: ReferralStats = {
