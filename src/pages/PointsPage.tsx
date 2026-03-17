@@ -557,8 +557,7 @@ export function PointsPage() {
           <h2 className="text-sm font-bold text-gray-800">報酬</h2>
         </div>
         <div className="p-6 text-center">
-          <div className="text-gray-300 text-4xl mb-2">🎁</div>
-          <div className="text-xs text-gray-400">Coming Soon...</div>
+          <div className="text-xl font-semibold text-gray-400">Coming Soon...</div>
         </div>
       </div>
 
