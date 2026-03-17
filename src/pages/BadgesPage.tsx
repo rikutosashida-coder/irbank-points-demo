@@ -95,7 +95,7 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
 
   if (locked) {
     return (
-      <div className="relative bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-6 opacity-40 hover:opacity-60 transition-all cursor-not-allowed overflow-hidden group aspect-[3/4]">
+      <div className="relative bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-gray-400 transition-all overflow-hidden group aspect-[3/4]">
         {/* 背景パターン */}
         <div
           className="absolute inset-0 opacity-5"
@@ -115,15 +115,22 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
         <div className="absolute bottom-2 right-2 text-gray-300 text-lg leading-none">✦</div>
 
         <div className="text-center relative h-full flex flex-col justify-center">
-          <div className="text-3xl grayscale opacity-20 my-3 group-hover:scale-110 transition-transform">
-            {b.icon}
+          {/* ？マーク */}
+          <div className="text-6xl text-gray-400 my-4 font-bold">？</div>
+
+          {/* 賞状名を隠す */}
+          <div className="text-lg font-bold text-gray-400 mb-4 tracking-wider" style={{ fontFamily: "'Noto Serif JP', serif" }}>
+            ？？？
           </div>
-          <div className="text-sm font-bold text-gray-400 mb-2" style={{ fontFamily: "'Noto Serif JP', serif" }}>
-            {b.name}
+
+          {/* 達成条件のみ表示 */}
+          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-600 mt-3 bg-white/70 rounded-lg px-3 py-2 border border-gray-300">
+            <FiLock className="w-3.5 h-3.5" />
+            <span className="font-medium">{b.requirement}</span>
           </div>
-          <div className="flex items-center justify-center gap-1 text-[10px] text-gray-400 mt-3 bg-gray-200/50 rounded-full px-2.5 py-1">
-            <FiLock className="w-3 h-3" />
-            <span>{b.requirement}</span>
+
+          <div className="text-[10px] text-gray-400 mt-3">
+            達成し次第解禁
           </div>
         </div>
       </div>
