@@ -221,15 +221,8 @@ export function PointsPage() {
 
               {/* 累積ポイント */}
               <div>
-                <div className={`flex items-center gap-2 mb-1`}>
+                <div className={`mb-1`}>
                   <div className={`text-xs uppercase tracking-wider font-bold text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>累計ポイント</div>
-                  <button
-                    onClick={() => setShowShareModal('total')}
-                    className={`flex items-center gap-1 px-2 py-0.5 border bg-black/40 border-white/60 text-white text-[10px] font-bold rounded-full transition-colors hover:bg-black/50`}
-                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
-                  >
-                    <FiShare2 className="w-3 h-3" /> シェア
-                  </button>
                 </div>
                 <div className={`flex items-baseline gap-2`}>
                   <span className={`text-6xl font-black tabular-nums leading-none text-white`} style={{ textShadow: '0 4px 16px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9)' }}>
@@ -402,12 +395,6 @@ export function PointsPage() {
             <div className="flex items-center gap-2">
               <FiTrendingUp className="w-4 h-4 text-blue-500" />
               <h2 className="text-sm font-bold text-gray-800">ポイント概覧</h2>
-              <button
-                onClick={() => setShowShareModal('season')}
-                className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-600 hover:bg-blue-100 text-xs font-bold rounded-full transition-colors"
-              >
-                <FiShare2 className="w-3.5 h-3.5" /> シェア
-              </button>
             </div>
             <div className="flex gap-1">
               {SEASONS.map((s) => (
