@@ -530,11 +530,11 @@ export function PointsPage() {
         </div>
         <div className="p-4">
 
-          {/* お気に入り賞状 */}
-          {favoriteBadges.length > 0 && (
+          {/* 授与された賞状（お気に入りのみ表示） */}
+          {favoriteBadges.length > 0 ? (
             <div className="mb-6">
-              <div className="text-[10px] font-bold text-amber-500 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
-                <FiStar className="w-3 h-3 fill-current" /> お気に入りの賞状
+              <div className="text-[10px] font-bold text-amber-700 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
+                <span>✦</span> 授与された賞状 <span>✦</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {favoriteBadges.map((b) => (
@@ -542,19 +542,11 @@ export function PointsPage() {
                 ))}
               </div>
             </div>
-          )}
-
-          {/* 取得済み賞状 */}
-          {unlockedBadges.length > 0 && (
-            <div className="mb-6">
-              <div className="text-[10px] font-bold text-amber-700 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
-                <span>✦</span> 授与された賞状 <span>✦</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {unlockedBadges.map((b) => (
-                  <CertificateCard key={b.id} badge={b} locked={false} />
-                ))}
-              </div>
+          ) : (
+            <div className="text-center py-8 text-gray-400 text-sm">
+              <FiStar className="w-8 h-8 mx-auto mb-2 opacity-30" />
+              <p>お気に入りの賞状を設定してください</p>
+              <p className="text-xs mt-1">「すべて見る」から最大3枚まで選べます</p>
             </div>
           )}
         </div>
