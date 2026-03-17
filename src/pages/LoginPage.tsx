@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMail, FiLock, FiEye, FiEyeOff, FiX } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiX, FiBarChart2, FiTrendingUp, FiFileText, FiCalendar, FiHome, FiTool } from 'react-icons/fi';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -89,47 +89,62 @@ export function LoginPage({ onLogin }: LoginPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
-        {/* 左側：ブランドメッセージ */}
+        {/* 左側：サービス概要 */}
         <div className="hidden lg:block">
           <div className="space-y-6">
-            <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-                新IRBANK
+            <div className="text-center mb-8">
+              <h1 className="text-5xl font-bold text-blue-600 mb-4">
+                Service<br />Overview
               </h1>
-              <p className="text-xl text-gray-700 font-medium">
-                あなたと一緒に成長する<br />
-                投資プラットフォーム
+              <p className="text-xl text-gray-800 font-bold mb-3">
+                プロ投資家が使う本格ツール。
+              </p>
+              <p className="text-sm text-gray-700">
+                「財務・株価・開示・イベント」をワンストップで閲覧できる<br />
+                オンライン・データプラットフォームです。
               </p>
             </div>
 
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">📊</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">投資を学べる</h3>
-                  <p className="text-sm text-gray-600">初心者から上級者まで、あなたのペースで投資知識を深められます</p>
+            <div className="space-y-3">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiBarChart2 className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">企業分析</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🎯</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">成長を実感</h3>
-                  <p className="text-sm text-gray-600">活動がポイントとして評価され、役職も上がっていきます</p>
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiTrendingUp className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">マーケット情報</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🤝</span>
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiFileText className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">適時開示情報</span>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">仲間と繋がる</h3>
-                  <p className="text-sm text-gray-600">同じ志を持つ仲間と共に、IRBANKを育てていきましょう</p>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiCalendar className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">決算スケジュール</span>
+                </div>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiHome className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">法人情報</span>
+                </div>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <FiTool className="w-6 h-6 text-blue-600" />
+                  <span className="font-semibold text-gray-800">便利ツール</span>
                 </div>
               </div>
             </div>
