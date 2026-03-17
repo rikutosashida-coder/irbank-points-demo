@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
-import { FiUser, FiShield, FiEdit2, FiX, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiUser, FiShield, FiEdit2, FiX, FiEye, FiEyeOff, FiUpload, FiImage } from 'react-icons/fi';
 
 type Tab = 'account' | 'security';
+
+// プリセット画像（後でユーザーから提供される）
+const PRESET_AVATARS: string[] = [
+  // プリセット画像のパスをここに追加予定
+];
 
 export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('account');
@@ -9,11 +14,15 @@ export function SettingsPage() {
   // ユーザーデータ
   const [username, setUsername] = useState('');
   const [xId, setXId] = useState('');
+  const [profileImage, setProfileImage] = useState<string | null>(null);
 
   // モーダル状態
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [showXIdModal, setShowXIdModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showProfileImageModal, setShowProfileImageModal] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
+  const [imageSelectionTab, setImageSelectionTab] = useState<'preset' | 'upload'>('preset');
 
   // フォーム状態
   const [newUsername, setNewUsername] = useState('');
@@ -29,8 +38,12 @@ export function SettingsPage() {
   useEffect(() => {
     const savedUsername = localStorage.getItem('username') || 'horis_crypto';
     const savedXId = localStorage.getItem('xId') || '@horis_crypto';
+    const savedProfileImage = localStorage.getItem('profileImage');
     setUsername(savedUsername);
     setXId(savedXId);
+    if (savedProfileImage) {
+      setProfileImage(savedProfileImage);
+    }
   }, []);
 
   // ユーザーネーム変更
@@ -75,6 +88,48 @@ export function SettingsPage() {
     setCurrentPassword('');
     setNewPassword('');
     setConfirmPassword('');
+  };
+
+  // プロフィール写真アップロード
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // ファイルサイズチェック（2MB）
+    if (file.size > 2 * 1024 * 1024) {
+      alert('ファイルサイズは2MB以下にしてください');
+      return;
+    }
+
+    // ファイルタイプチェック
+    if (!file.type.startsWith('image/')) {
+      alert('画像ファイルを選択してください');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imageUrl = e.target?.result as string;
+      setProfileImage(imageUrl);
+      localStorage.setItem('profileImage', imageUrl);
+      setShowProfileImageModal(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // プリセット画像選択
+  const handlePresetSelect = (presetUrl: string) => {
+    setSelectedPreset(presetUrl);
+  };
+
+  // プリセット画像を保存
+  const handlePresetSave = () => {
+    if (selectedPreset) {
+      setProfileImage(selectedPreset);
+      localStorage.setItem('profileImage', selectedPreset);
+      setShowProfileImageModal(false);
+      setSelectedPreset(null);
+    }
   };
 
   return (
@@ -130,10 +185,21 @@ export function SettingsPage() {
               {/* プロフィール写真 */}
               <div className="flex items-start gap-6">
                 <div className="relative">
-                  <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-3xl font-bold text-white">H</span>
-                  </div>
-                  <button className="absolute bottom-0 right-0 w-7 h-7 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  {profileImage ? (
+                    <img
+                      src={profileImage}
+                      alt="Profile"
+                      className="w-20 h-20 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-3xl font-bold text-white">H</span>
+                    </div>
+                  )}
+                  <button
+                    onClick={() => setShowProfileImageModal(true)}
+                    className="absolute bottom-0 right-0 w-7 h-7 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+                  >
                     <FiEdit2 className="w-3.5 h-3.5 text-white" />
                   </button>
                 </div>
@@ -408,6 +474,138 @@ export function SettingsPage() {
                 変更
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* プロフィール写真選択モーダル */}
+      {showProfileImageModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full p-6 max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-gray-800">プロフィール写真を選択</h3>
+              <button
+                onClick={() => {
+                  setShowProfileImageModal(false);
+                  setSelectedPreset(null);
+                  setImageSelectionTab('preset');
+                }}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* タブ切り替え */}
+            <div className="flex gap-4 mb-6 border-b border-gray-200">
+              <button
+                onClick={() => setImageSelectionTab('preset')}
+                className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
+                  imageSelectionTab === 'preset'
+                    ? 'text-blue-600'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                <FiImage className="w-4 h-4" />
+                <span>プリセット</span>
+                {imageSelectionTab === 'preset' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                )}
+              </button>
+
+              <button
+                onClick={() => setImageSelectionTab('upload')}
+                className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
+                  imageSelectionTab === 'upload'
+                    ? 'text-blue-600'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                <FiUpload className="w-4 h-4" />
+                <span>アップロード</span>
+                {imageSelectionTab === 'upload' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                )}
+              </button>
+            </div>
+
+            {/* プリセットタブ */}
+            {imageSelectionTab === 'preset' && (
+              <div>
+                {PRESET_AVATARS.length > 0 ? (
+                  <>
+                    <div className="grid grid-cols-4 gap-4 mb-6">
+                      {PRESET_AVATARS.map((presetUrl, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handlePresetSelect(presetUrl)}
+                          className={`aspect-square rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${
+                            selectedPreset === presetUrl
+                              ? 'border-blue-600 ring-2 ring-blue-200'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <img
+                            src={presetUrl}
+                            alt={`プリセット ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => {
+                          setShowProfileImageModal(false);
+                          setSelectedPreset(null);
+                        }}
+                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        キャンセル
+                      </button>
+                      <button
+                        onClick={handlePresetSave}
+                        disabled={!selectedPreset}
+                        className={`flex-1 px-4 py-3 rounded-lg font-semibold transition-all ${
+                          selectedPreset
+                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        }`}
+                      >
+                        保存
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center py-12">
+                    <FiImage className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500 mb-2">プリセット画像はまだ準備されていません</p>
+                    <p className="text-sm text-gray-400">「アップロード」タブから画像をアップロードできます</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* アップロードタブ */}
+            {imageSelectionTab === 'upload' && (
+              <div>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-gray-400 transition-colors">
+                  <FiUpload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-700 font-medium mb-2">画像をアップロード</p>
+                  <p className="text-sm text-gray-500 mb-4">JPG, PNG（最大2MB）</p>
+                  <label className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all cursor-pointer">
+                    ファイルを選択
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
