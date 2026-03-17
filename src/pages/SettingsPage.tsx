@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FiUser, FiShield, FiSettings, FiEdit2 } from 'react-icons/fi';
+import { FiUser, FiShield, FiEdit2 } from 'react-icons/fi';
 
-type Tab = 'account' | 'security' | 'app';
+type Tab = 'account' | 'security';
 
 export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('account');
@@ -43,21 +43,6 @@ export function SettingsPage() {
               <FiShield className="w-4 h-4" />
               <span>セキュリティ</span>
               {activeTab === 'security' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
-              )}
-            </button>
-
-            <button
-              onClick={() => setActiveTab('app')}
-              className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
-                activeTab === 'app'
-                  ? 'text-blue-600'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              <FiSettings className="w-4 h-4" />
-              <span>アプリ設定</span>
-              {activeTab === 'app' && (
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
               )}
             </button>
@@ -103,19 +88,6 @@ export function SettingsPage() {
 
               <div className="border-t border-gray-200" />
 
-              {/* パスワード */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium text-gray-700">パスワード</label>
-                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                    変更する
-                  </button>
-                </div>
-                <div className="text-gray-400">• • • • • • • •</div>
-              </div>
-
-              <div className="border-t border-gray-200" />
-
               {/* XID連携 */}
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -133,23 +105,17 @@ export function SettingsPage() {
         {/* セキュリティタブ */}
         {activeTab === 'security' && (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-            <div className="space-y-6">
+            <div className="space-y-8">
+              {/* パスワード変更 */}
               <div>
-                <h3 className="font-medium text-gray-800 mb-2">パスワード変更</h3>
-                <p className="text-sm text-gray-500 mb-4">ログインパスワードを変更します</p>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                  Coming Soon
-                </button>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium text-gray-700">パスワード</label>
+                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                    変更する
+                  </button>
+                </div>
+                <div className="text-gray-400">• • • • • • • •</div>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* アプリ設定タブ */}
-        {activeTab === 'app' && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-            <div className="text-center py-12">
-              <p className="text-gray-500">アプリ設定は準備中です</p>
             </div>
           </div>
         )}
