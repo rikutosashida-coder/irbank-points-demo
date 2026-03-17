@@ -78,7 +78,7 @@ export function NotificationsPage() {
             <div className="flex items-start justify-between mb-6">
               <div className="flex-1">
                 <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 border ${TYPE_COLOR[selectedNotification.type]}`}>
-                  {selectedNotification.type === 'badge' && 'バッジ'}
+                  {selectedNotification.type === 'badge' && '賞状'}
                   {selectedNotification.type === 'tier' && '役職'}
                   {selectedNotification.type === 'referral' && '紹介'}
                   {selectedNotification.type === 'season' && 'シーズン'}
