@@ -216,31 +216,6 @@ export function PointsPage() {
                   <div className={`text-[11px] mt-0.5 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
                     {new Date(profile.joinedAt).toLocaleDateString('ja-JP')} 参加
                   </div>
-                  {/* 取得済み賞状チップ */}
-                  <div className="flex items-center gap-1.5 mt-2 flex-wrap">
-                    {unlockedBadges.slice(0, 5).map((b) => (
-                      <div
-                        key={b.id}
-                        title={`${b.name}（貢献度 +${b.badgePoints}）`}
-                        className={`group relative cursor-pointer transition-all hover:scale-110`}
-                      >
-                        {/* バッジ本体 */}
-                        <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-white to-gray-100 border-2 border-white shadow-lg flex items-center justify-center">
-                          {/* 内側のサークル */}
-                          <div className="absolute inset-[3px] rounded-full bg-gradient-to-br from-amber-100 via-amber-50 to-white border border-amber-200" />
-                          {/* アイコン */}
-                          <span className="relative text-base z-10 group-hover:scale-110 transition-transform">{b.icon}</span>
-                        </div>
-                        {/* バッジのリボン部分 */}
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-2 bg-gradient-to-b from-white/80 to-white/60 border-x border-white/50" style={{ clipPath: 'polygon(0 0, 100% 0, 90% 100%, 50% 70%, 10% 100%)' }} />
-                      </div>
-                    ))}
-                    {unlockedBadges.length > 5 && (
-                      <div className={`w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center`}>
-                        <span className="text-[10px] font-bold text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>+{unlockedBadges.length - 5}</span>
-                      </div>
-                    )}
-                  </div>
                 </div>
               </div>
 
@@ -346,15 +321,6 @@ export function PointsPage() {
             {isPreviewMode && (
               <span className="text-[9px] bg-amber-500 text-white px-2 py-0.5 rounded-full font-bold shadow-md">プレビュー</span>
             )}
-            {/* 設定ボタン */}
-            <button
-              onClick={() => navigate('/mypage/settings')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-medium transition-colors bg-black/40 hover:bg-black/50 text-white border border-white/40 ml-2`}
-              style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
-            >
-              <FiSettings className="w-3.5 h-3.5" />
-              設定
-            </button>
           </div>
           <div className="flex items-center gap-1">
             <button
