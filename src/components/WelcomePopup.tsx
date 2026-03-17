@@ -102,12 +102,10 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            そして今、私たちは<strong className="text-blue-600">「第二の創業」</strong>とも呼べる、過去最大級のアップデートを計画しています。<br />
-            次の10年を見据え、IRBANKをさらに進化させるための、全く新しい挑戦です。
+            そして今、私たちは<strong className="text-blue-600">「第二の創業」</strong>とも呼べる、過去最大級のアップデートを計画しています。
           </p>
-          <h2 className="text-2xl font-bold text-gray-800 pt-4">今後のIRBANKが目指す先</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            新しいIRBANKは、ただの投資ツールではありません。
+            次の10年を見据え、IRBANKをさらに進化させるための、全く新しい挑戦です。
           </p>
         </div>
       ),
@@ -117,15 +115,40 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            あなたと一緒に成長し、学び、挑戦する場所。
+            現在、目まぐるしく変化する投資環境への適応。
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            投資を通じて、より多くの人が自分らしい未来を実現できる世界を目指します。
+            12年間淡々と積み上げてきたIRBANKだからこそ提供できる新機能。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            初心と同じく本当の意味で株式投資家の役に立つ情報の提供。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            IRBANKが提供する情報を通じて、より多くの人が自分らしい未来を実現できる世界を目指します。
           </p>
         </div>
       ),
     },
     // Page 9
+    {
+      content: (
+        <div className="space-y-6">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            そして今後のIRBANKが目指す先は、ただの投資ツールではありません。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            IRBANK運営、ユーザーの境界を越えてプロダクトを愛し、育てていく。
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            そんな、本質的なユーザーとプロダクトの一体型である
+          </p>
+          <p className="text-lg font-semibold text-gray-800 leading-relaxed">
+            まるで1つの会社のようなプロダクトを、私たちは目指しています。
+          </p>
+        </div>
+      ),
+    },
+    // Page 10
     {
       content: (
         <div className="space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl">
@@ -139,21 +162,11 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         </div>
       ),
     },
-    // Page 10
-    {
-      content: (
-        <div className="space-y-6 text-center">
-          <p className="text-lg text-gray-700 leading-relaxed">
-            IRBANKは、ただの投資ツールの提供にとどまりません。
-          </p>
-        </div>
-      ),
-    },
     // Page 11
     {
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-blue-600 text-center">IRBANKで得られるもの</h2>
+          <h2 className="text-2xl font-bold text-blue-600 text-center">そんな新たなIRBANKで得られるもの</h2>
           <div className="space-y-4">
             <div className="bg-white border-2 border-blue-100 rounded-lg p-4">
               <div className="font-bold text-blue-600 mb-2">役職</div>
