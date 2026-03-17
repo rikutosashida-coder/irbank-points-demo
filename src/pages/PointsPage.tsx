@@ -550,6 +550,13 @@ export function PointsPage() {
         </div>
       </div>
 
+      {/* ─── 報酬 (Coming Soon) ─── */}
+      <div className="bg-white border border-gray-200 rounded-xl p-6 mb-5 text-center">
+        <div className="text-gray-300 text-4xl mb-2">🎁</div>
+        <div className="text-sm font-bold text-gray-500 mb-1">報酬</div>
+        <div className="text-xs text-gray-400">Coming Soon...</div>
+      </div>
+
       {/* ─── 友達紹介プログラム ─── */}
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-5">
         <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100">
@@ -611,13 +618,6 @@ export function PointsPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* ─── 報酬 (Coming Soon) ─── */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6 mb-5 text-center">
-        <div className="text-gray-300 text-4xl mb-2">🎁</div>
-        <div className="text-sm font-bold text-gray-500 mb-1">報酬</div>
-        <div className="text-xs text-gray-400">Coming Soon...</div>
       </div>
 
       {/* テンプレートギャラリー */}
