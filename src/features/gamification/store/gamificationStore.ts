@@ -110,9 +110,7 @@ const MOCK_TASKS: GamificationTask[] = [
   { id: 't2', title: 'β版参加登録', description: 'IRBANK β版の参加登録を完了する', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 20 },
   // Coming Soon タスク
   { id: 't3', title: '今日もログインする', description: 'ログインするだけで1pt！毎日続けよう', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 1 },
-  { id: 't4', title: 'Xをシェアする', description: 'IRBANKを拡散してポイント獲得（任意）', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
   { id: 't5', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 20, pointsReward: 10 },
-  { id: 't6', title: 'Discord参加＆認証', description: 'Discordコミュニティに参加して認証を完了', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
   { id: 't7', title: '5人の仲間を招待する', description: '招待コードで5人を招待して賞状を獲得！', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 5, pointsReward: 5 },
   { id: 't8', title: '10人の仲間を招待する', description: '招待コードで10人を招待して上位賞状を獲得！', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 10, pointsReward: 10 },
 ];
