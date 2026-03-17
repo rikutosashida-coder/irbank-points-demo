@@ -4,6 +4,7 @@ import { BadgesPage } from './pages/BadgesPage'
 import { ComingSoonPage } from './pages/ComingSoonPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { SignupPage } from './pages/SignupPage'
+import { NotificationsPage } from './pages/NotificationsPage'
 import { BasicAuth } from './components/BasicAuth'
 import { Layout } from './components/Layout'
 
@@ -43,7 +44,7 @@ function AppContent() {
           <Route path="/dashboard2" element={<ComingSoonPage />} />
           <Route path="/portfolio" element={<ComingSoonPage />} />
           <Route path="/timeline" element={<ComingSoonPage />} />
-          <Route path="/notifications" element={<ComingSoonPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/learning" element={<ComingSoonPage />} />
           <Route path="/community" element={<ComingSoonPage />} />
 

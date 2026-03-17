@@ -96,19 +96,16 @@ const TIER_DESK: Record<string, {
 // ─── お知らせモックデータ ────────────────────
 interface NotificationItem {
   id: string;
-  type: 'badge' | 'tier' | 'referral' | 'season' | 'system';
+  type: 'badge' | 'tier' | 'referral' | 'season' | 'system' | 'welcome';
   title: string;
   body: string;
   date: string;
   isRead: boolean;
-  icon: string;
 }
 
 const MOCK_NOTIFICATIONS: NotificationItem[] = [
-  { id: 'n1', type: 'badge', title: '賞状を授与されました', body: '「仲間創出功労賞」を授与されました！5人の仲間をIRBANKに招待した功績が認められました。', date: '2026-02-13', isRead: false, icon: '🤝' },
-  { id: 'n2', type: 'tier', title: '役職が昇格しました', body: '賞状ポイントが15ptを超え、「課長」に昇格しました。おめでとうございます！', date: '2026-02-13', isRead: false, icon: '🎉' },
-  { id: 'n3', type: 'referral', title: '招待した仲間がチュートリアルを完了しました', body: 'UID: UID-00391 さんがチュートリアルを完了しました。招待ポイント +25pt が付与されました。', date: '2026-02-13', isRead: false, icon: '👤' },
-  { id: 'n4', type: 'system', title: 'IRBANKからのお知らせ', body: 'Beta版の先行体験が2026年8月3日より開始されます。群Aの皆様はお楽しみに！', date: '2026-02-10', isRead: true, icon: '📢' },
+  { id: 'n1', type: 'welcome', title: 'Welcomeメッセージ', body: 'IRBANKへようこそ！創業メンバーとして一緒に未来を創りましょう。', date: '2026-04-15', isRead: false },
+  { id: 'n2', type: 'badge', title: '賞状を授与されました', body: '「創業参加功労賞」を授与されました！IRBANKのWaiting Listに登録した創業メンバーへ贈られる賞状です。', date: '2026-04-15', isRead: false },
 ];
 
 const TYPE_COLOR: Record<NotificationItem['type'], string> = {
@@ -117,6 +114,7 @@ const TYPE_COLOR: Record<NotificationItem['type'], string> = {
   referral: 'bg-emerald-50 border-emerald-200',
   season: 'bg-violet-50 border-violet-200',
   system: 'bg-gray-50 border-gray-200',
+  welcome: 'bg-blue-50 border-blue-200',
 };
 
 export function PointsPage() {
@@ -359,7 +357,7 @@ export function PointsPage() {
             )}
           </div>
           <button
-            onClick={() => navigate('/mypage/notifications')}
+            onClick={() => navigate('/notifications')}
             className="flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 font-medium"
           >
             すべて見る <FiChevronRight className="w-3 h-3" />
@@ -369,14 +367,17 @@ export function PointsPage() {
           {MOCK_NOTIFICATIONS.map((n) => (
             <button
               key={n.id}
-              onClick={() => navigate('/mypage/notifications')}
+              onClick={() => {
+                if (n.type === 'welcome') {
+                  setShowWelcomePopup(true);
+                } else {
+                  navigate('/notifications');
+                }
+              }}
               className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3"
             >
               <div className="flex-shrink-0 mt-1.5">
                 {n.isRead ? <div className="w-2 h-2 rounded-full" /> : <div className="w-2 h-2 rounded-full bg-blue-500" />}
-              </div>
-              <div className={`flex-shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center text-base ${TYPE_COLOR[n.type]}`}>
-                {n.icon}
               </div>
               <div className="flex-1 min-w-0">
                 <div className={`text-xs font-semibold leading-tight mb-0.5 ${n.isRead ? 'text-gray-500' : 'text-gray-900'}`}>{n.title}</div>
