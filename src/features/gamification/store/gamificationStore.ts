@@ -131,14 +131,11 @@ const MOCK_TASKS: GamificationTask[] = [
 ];
 
 const MOCK_REFERRAL: ReferralStats = {
-  referredCount: 2,
-  availableInvites: 8, // 群A: 10件発行、2件使用済み
-  referralPoints: 50,
-  referralCode: 'IRBANK-ALPHA-X7K2',
-  referralHistory: [
-    { id: 'r1', uid: 'UID-00247', userName: 'ユーザーB', date: '2026-05-28', pointsEarned: 25, status: 'active' },
-    { id: 'r2', uid: 'UID-00391', userName: 'ユーザーC', date: '2026-06-13', pointsEarned: 25, status: 'active' },
-  ],
+  referredCount: 0,
+  availableInvites: 10,
+  referralPoints: 0,
+  referralCode: 'Coming Soon',
+  referralHistory: [],
 };
 
 // ─── シーズン定義 ─────────────────────────────────────
