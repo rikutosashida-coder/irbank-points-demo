@@ -128,10 +128,6 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
             <FiLock className="w-3.5 h-3.5" />
             <span className="font-medium">{b.requirement}</span>
           </div>
-
-          <div className="text-[10px] text-gray-400 mt-3">
-            達成し次第解禁
-          </div>
         </div>
       </div>
     );
