@@ -5,9 +5,11 @@ import { WelcomePopup } from '../components/WelcomePopup';
 
 export function SignupPage() {
   const navigate = useNavigate();
+  const [step, setStep] = useState<'input' | 'verification'>('input');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -28,9 +30,19 @@ export function SignupPage() {
       return;
     }
 
-    // 登録処理（デモ）
-    // 実際はここでAPIコールを行う
-    setShowWelcome(true);
+    // 認証コード入力画面へ遷移
+    setStep('verification');
+  };
+
+  const handleVerification = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // 認証コードチェック（モック: 111111）
+    if (verificationCode === '111111') {
+      setShowWelcome(true);
+    } else {
+      alert('認証コードが正しくありません');
+    }
   };
 
   const handleWelcomeClose = () => {
@@ -108,18 +120,20 @@ export function SignupPage() {
           </div>
         </div>
 
-        {/* 右側：新規登録フォーム */}
+        {/* 右側：新規登録フォーム / 認証コード入力 */}
         <div className="w-full">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 lg:p-10">
-            <div className="mb-8">
-              <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
-                クラウドファンディング参加者専用
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">新規登録</h2>
-              <p className="text-gray-600">メールアドレスとパスワードで登録</p>
-            </div>
+            {step === 'input' ? (
+              <>
+                <div className="mb-8">
+                  <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                    クラウドファンディング参加者専用
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">新規登録</h2>
+                  <p className="text-gray-600">メールアドレスとパスワードで登録</p>
+                </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
               {/* メールアドレス */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -218,18 +232,72 @@ export function SignupPage() {
               </button>
             </form>
 
-            {/* ログインリンク */}
-            <div className="mt-6 text-center">
-              <p className="text-gray-600 text-sm">
-                すでにアカウントをお持ちの方は{' '}
-                <button
-                  onClick={() => navigate('/login')}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
-                >
-                  ログイン
-                </button>
-              </p>
-            </div>
+                {/* ログインリンク */}
+                <div className="mt-6 text-center">
+                  <p className="text-gray-600 text-sm">
+                    すでにアカウントをお持ちの方は{' '}
+                    <button
+                      onClick={() => navigate('/login')}
+                      className="text-blue-600 hover:text-blue-700 font-semibold"
+                    >
+                      ログイン
+                    </button>
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* 認証コード入力画面 */}
+                <div className="mb-8">
+                  <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                    メール認証
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">認証コード入力</h2>
+                  <p className="text-gray-600">
+                    {formData.email} に送信された6桁の認証コードを入力してください
+                  </p>
+                </div>
+
+                <form onSubmit={handleVerification} className="space-y-5">
+                  {/* 認証コード入力 */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      認証コード
+                    </label>
+                    <input
+                      type="text"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-center text-2xl tracking-widest font-mono"
+                      placeholder="000000"
+                      maxLength={6}
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-2 text-center">
+                      デモ用コード: 111111
+                    </p>
+                  </div>
+
+                  {/* 認証ボタン */}
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
+                  >
+                    認証して登録完了
+                  </button>
+                </form>
+
+                {/* 戻るリンク */}
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={() => setStep('input')}
+                    className="text-gray-600 hover:text-gray-800 text-sm font-medium"
+                  >
+                    ← 入力画面に戻る
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
