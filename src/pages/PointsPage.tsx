@@ -212,18 +212,18 @@ export function PointsPage() {
               </div>
 
               {/* 役職進捗バー - スマホ版のみここに表示 */}
-              <div className="lg:hidden">
-                <div className="bg-black/60 backdrop-blur-sm rounded-lg p-2 border border-white/10">
-                  <div className="flex items-center justify-between text-[8px] mb-1">
-                    <div className={`flex items-center gap-1 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
-                      <FiAward className="w-2.5 h-2.5" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
+              <div className="lg:hidden max-w-[45%]">
+                <div className="bg-black/60 backdrop-blur-sm rounded-lg p-1.5 border border-white/10">
+                  <div className="flex items-center gap-0.5 text-[7px] mb-1">
+                    <div className={`flex items-center gap-0.5 text-white`} style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.8)' }}>
+                      <FiAward className="w-2 h-2" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
                       <span>貢献度</span>
-                      <span className="font-bold ml-1 text-white">
+                      <span className="font-bold ml-0.5 text-white">
                         {profile.badgePoints}
                       </span>
                     </div>
                   </div>
-                  <div className="relative h-1.5 rounded-full overflow-hidden mb-1.5 bg-black/40 border border-white/30" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
+                  <div className="relative h-1 rounded-full overflow-hidden mb-1 bg-black/40 border border-white/30" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }}>
                     <div
                       className={`absolute inset-y-0 left-0 rounded-full transition-all duration-700 ${desk.progressBar}`}
                       style={{ width: `${Math.min(tierProgress, 100)}%` }}
@@ -237,14 +237,14 @@ export function PointsPage() {
                       const isCurrent = t === profile.tier;
                       return (
                         <div key={t} className="flex flex-col items-center gap-0.5" title={`${cfg.label}（貢献度 ${cfg.minBadgePoints}〜）`}>
-                          <div className={`w-1.5 h-1.5 rounded-full border-2 transition-all ${
+                          <div className={`w-1 h-1 rounded-full border transition-all ${
                             isCurrent
                               ? 'border-white bg-white scale-125'
                               : isActive
                                 ? 'border-white/70 bg-white/50'
                                 : 'border-white/40 bg-white/20'
                           }`} style={{ boxShadow: isCurrent ? '0 0 8px rgba(255,255,255,0.8)' : '0 2px 4px rgba(0,0,0,0.5)' }} />
-                          <span className={`text-[6px] font-medium leading-tight text-center transition-all ${
+                          <span className={`text-[5px] font-medium leading-tight text-center transition-all ${
                             isCurrent ? 'text-white font-bold' : isActive ? 'text-white' : 'text-white/70'
                           }`} style={{ textShadow: '0 2px 6px rgba(0,0,0,1), 0 0 12px rgba(0,0,0,0.8)' }}>
                             {cfg.label === '代表取締役社長' ? '社長' : cfg.label === '会長（幻）' ? '会長' : cfg.label}
