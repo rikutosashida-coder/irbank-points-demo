@@ -3,6 +3,7 @@ import {
   FiHome, FiZap, FiFileText, FiLayout, FiGrid, FiPieChart,
   FiClock, FiBell, FiBookOpen, FiUsers, FiCpu, FiSettings,
   FiList, FiFilter, FiBarChart2, FiSearch, FiMap, FiGlobe, FiTrendingUp, FiPlus,
+  FiLogOut,
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -57,6 +58,11 @@ const menuSections: MenuSection[] = [
 export function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('basicAuth');
+    window.location.reload();
+  };
 
   return (
     <div className="w-64 bg-white border-r border-gray-200 h-screen overflow-y-auto flex flex-col">
@@ -120,7 +126,7 @@ export function Sidebar() {
           ))}
 
           {/* 設定（独立項目） */}
-          <div>
+          <div className="space-y-1">
             <button
               onClick={() => navigate('/settings')}
               className={`
@@ -133,6 +139,15 @@ export function Sidebar() {
             >
               <FiSettings className="w-5 h-5" />
               <span>設定</span>
+            </button>
+
+            {/* ログアウト */}
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <FiLogOut className="w-5 h-5" />
+              <span>ログアウト</span>
             </button>
           </div>
         </div>
