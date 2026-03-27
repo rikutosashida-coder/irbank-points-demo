@@ -146,7 +146,7 @@ function CertificateCard({
             e.stopPropagation();
             onToggleFavorite();
           }}
-          className={`absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+          className={`absolute top-2 left-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
             isFavorite
               ? 'bg-amber-400 text-white shadow-lg scale-110'
               : 'bg-white/80 text-gray-400 hover:bg-white hover:text-amber-400'
