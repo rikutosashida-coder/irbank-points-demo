@@ -14,22 +14,22 @@ const MOCK_BADGES: Badge[] = [
   {
     id: 'b1',
     name: '創業参加功労賞',
-    description: 'クラウドファンディングに参加したメンバー（ランクS）',
+    description: 'クラウドファンディングに参加し新IRBANKの創業に貢献されたことを称え、ここに本賞を授与いたします。',
     category: 'participation',
     badgePoints: 10,
     icon: '🏛️',
-    unlockedAt: '2026-04-15',
+    unlockedAt: '2024-04-25',
     requirement: 'クラウドファンディングに参加する',
     distributionLimit: null,
   },
   {
     id: 'b2',
     name: '広報活動貢献賞',
-    description: '公式SNSを3つ以上フォロー（ランクC）',
+    description: '公式SNSのフォローを通じ新IRBANKの広報活動に貢献されたことを称えここに本賞を授与いたします。',
     category: 'pr',
     badgePoints: 3,
     icon: '📢',
-    unlockedAt: null,
+    unlockedAt: '2024-04-25',
     requirement: '公式SNSを3つ以上フォロー',
     distributionLimit: null,
   },
@@ -47,11 +47,11 @@ const MOCK_BADGES: Badge[] = [
   {
     id: 'b4',
     name: '組織拡大貢献賞',
-    description: '10人招待（ランクA）',
+    description: '10名の新規メンバーを招待し組織基盤の拡大に貢献されたことを称えここに本賞を授与いたします。',
     category: 'referral',
-    badgePoints: 10,
+    badgePoints: 5,
     icon: '🌱',
-    unlockedAt: null,
+    unlockedAt: '2024-04-25',
     requirement: '10人を招待する',
     distributionLimit: null,
   },
@@ -69,11 +69,11 @@ const MOCK_BADGES: Badge[] = [
   {
     id: 'b6',
     name: '初期参画貢献賞',
-    description: 'β版セカンドフェーズに登録したメンバー（ランクA）',
+    description: 'β版第二期より参画しサービスの発展に貢献されたことを称えここに本賞を授与いたします',
     category: 'season',
-    badgePoints: 5,
+    badgePoints: 7,
     icon: '⭐',
-    unlockedAt: null,
+    unlockedAt: '2024-04-25',
     requirement: 'β版セカンドフェーズに参加',
     distributionLimit: null,
   },
@@ -83,7 +83,7 @@ const MOCK_BADGES: Badge[] = [
 const totalBadgePoints = MOCK_BADGES
   .filter(b => b.unlockedAt !== null)
   .reduce((sum, b) => sum + b.badgePoints, 0);
-// 解除済み: b1(10) = 10pt → 一般社員
+// 解除済み: b1(10) + b2(3) + b4(5) + b6(7) = 25pt → 主任
 
 const MOCK_PROFILE: UserProfile = {
   displayName: 'ユーザー名',
