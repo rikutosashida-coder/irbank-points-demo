@@ -77,7 +77,7 @@ export function Sidebar({ onClose }: SidebarProps = {}) {
     <div className="w-64 bg-white border-r border-gray-200 h-screen overflow-y-auto flex flex-col shadow-xl lg:shadow-none">
       {/* ヘッダー */}
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-blue-600">新IRBANK</h1>
+        <img src="/irbank-logo.png" alt="IRBANK" className="h-6 object-contain" />
         {onClose && (
           <button
             onClick={onClose}
@@ -175,7 +175,7 @@ export function Sidebar({ onClose }: SidebarProps = {}) {
 
       {/* フッター */}
       <div className="p-4 border-t border-gray-200">
-        <p className="text-xs text-gray-500 text-center">新IRBANK v0.1.0</p>
+        <p className="text-xs text-gray-500 text-center">IRBANK v0.1.0</p>
       </div>
     </div>
   );

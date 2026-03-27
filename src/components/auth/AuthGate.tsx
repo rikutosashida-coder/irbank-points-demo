@@ -53,10 +53,9 @@ function AuthGateInner({ children }: AuthGateProps) {
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
           <div className="text-center mb-8">
-            <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-white text-xl font-bold">IR</span>
+            <div className="flex justify-center mb-4">
+              <img src="/irbank-logo.png" alt="IRBANK" className="h-10 object-contain" />
             </div>
-            <h1 className="text-xl font-bold text-gray-900">新IRBANK</h1>
             <p className="text-sm text-gray-500 mt-1">ログインしてください</p>
           </div>
 
