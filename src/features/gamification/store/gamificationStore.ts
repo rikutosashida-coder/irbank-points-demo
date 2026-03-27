@@ -16,7 +16,7 @@ const MOCK_BADGES: Badge[] = [
     name: '創業参加功労賞',
     description: 'クラウドファンディングに参加し新IRBANKの創業に貢献されたことを称え、ここに本賞を授与いたします。',
     category: 'participation',
-    badgePoints: 10,
+    badgePoints: 30,
     icon: '🏛️',
     unlockedAt: '2024-04-25',
     requirement: 'クラウドファンディングに参加する',
@@ -71,7 +71,7 @@ const MOCK_BADGES: Badge[] = [
     name: '初期参画貢献賞',
     description: 'β版第二期より参画しサービスの発展に貢献されたことを称えここに本賞を授与いたします',
     category: 'season',
-    badgePoints: 7,
+    badgePoints: 10,
     icon: '⭐',
     unlockedAt: '2024-04-25',
     requirement: 'β版セカンドフェーズに参加',
@@ -83,7 +83,7 @@ const MOCK_BADGES: Badge[] = [
 const totalBadgePoints = MOCK_BADGES
   .filter(b => b.unlockedAt !== null)
   .reduce((sum, b) => sum + b.badgePoints, 0);
-// 解除済み: b1(10) + b2(3) + b4(5) + b6(7) = 25pt → 主任
+// 解除済み: b1(30) + b2(3) + b4(5) + b6(10) = 48pt → 課長
 
 const MOCK_PROFILE: UserProfile = {
   displayName: 'ユーザー名',
