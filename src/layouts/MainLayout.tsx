@@ -209,7 +209,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         >
           {/* Logo + Toggle */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            {!collapsed && <h1 className="text-xl font-bold text-primary-600 whitespace-nowrap overflow-hidden">新IRBANK</h1>}
+            {!collapsed && <img src="/irbank-logo.png" alt="IRBANK" className="h-6 object-contain" />}
             <button
               onClick={toggleCollapse}
               className={`p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md transition-colors ${collapsed ? 'mx-auto' : ''}`}
