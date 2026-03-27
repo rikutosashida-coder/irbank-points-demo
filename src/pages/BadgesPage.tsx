@@ -111,36 +111,17 @@ function CertificateCard({
 
   if (locked) {
     return (
-      <div className="relative bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-gray-400 transition-all overflow-hidden group aspect-[3/4]">
-        {/* 背景パターン */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, gray 1px, transparent 0)',
-            backgroundSize: '20px 20px',
-          }}
-        />
-
-        {/* 内側の枠 */}
-        <div className="absolute inset-2 border border-dashed border-gray-200 rounded-md pointer-events-none" />
-
-        {/* コーナー装飾 */}
-        <div className="absolute top-2 left-2 text-gray-300 text-lg leading-none">✦</div>
-        <div className="absolute top-2 right-2 text-gray-300 text-lg leading-none">✦</div>
-        <div className="absolute bottom-2 left-2 text-gray-300 text-lg leading-none">✦</div>
-        <div className="absolute bottom-2 right-2 text-gray-300 text-lg leading-none">✦</div>
-
-        <div className="text-center relative h-full flex flex-col justify-center">
-          {/* ？マーク */}
-          <div className="text-6xl text-gray-400 my-4 font-bold">？</div>
-
-          {/* 賞状名を隠す */}
-          <div className="text-lg font-bold text-gray-400 mb-4 tracking-wider" style={{ fontFamily: "'Noto Serif JP', serif" }}>
-            ？？？
-          </div>
-
-          {/* 達成条件のみ表示 */}
-          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-600 mt-3 bg-white/70 rounded-lg px-3 py-2 border border-gray-300">
+      <div
+        className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group aspect-[3/4]"
+        style={{
+          backgroundImage: 'url(/certificates/certificate-locked.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="relative h-full flex flex-col justify-end p-4">
+          {/* 達成条件 */}
+          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-700 bg-white/90 rounded-lg px-3 py-2 border border-gray-300 shadow-sm">
             <FiLock className="w-3.5 h-3.5" />
             <span className="font-medium">{b.requirement}</span>
           </div>
