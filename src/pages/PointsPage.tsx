@@ -704,48 +704,7 @@ function CertificateCard({ badge: b, locked }: { badge: CertBadge; locked: boole
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-    >
-      <div className="relative px-4 py-4 h-full flex flex-col">
-
-        {/* アイコン */}
-        <div className="flex justify-center mb-3 mt-8">
-          <div className="text-5xl drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{b.icon}</div>
-        </div>
-
-        {/* 賞状名 */}
-        <div className="text-center mb-3">
-          <div className="text-base font-black text-gray-800 leading-tight" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
-            {b.name}
-          </div>
-        </div>
-
-        {/* 説明文 */}
-        <div className="text-[10px] text-gray-700 text-center leading-relaxed mb-auto px-1" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 2px rgba(255,255,255,0.6)' }}>
-          {b.description}
-        </div>
-
-        {/* フッター：日付 + ポイント */}
-        <div className="flex items-end justify-between mt-3">
-          <div className="text-[9px] text-gray-700" style={{ fontFamily: "'Noto Serif JP', serif", textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
-            <div className="text-gray-600">授与日</div>
-            <div className="font-bold mt-0.5">{b.unlockedAt}</div>
-          </div>
-
-          <div className="text-right bg-white/50 backdrop-blur-sm rounded-md px-2 py-1 border border-gray-300/50">
-            <div className="text-[9px] font-bold text-gray-700">
-              貢献度
-            </div>
-            <div className="text-sm font-black text-gray-800">+{b.badgePoints}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* 底部の金色アクセント */}
-      <div className="h-1.5 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 shadow-inner" />
-
-      {/* ホバー時の光エフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-t from-amber-400/0 via-amber-200/0 to-amber-100/0 group-hover:from-amber-400/20 group-hover:via-amber-200/10 group-hover:to-amber-100/5 transition-all duration-300 pointer-events-none rounded-lg" />
-    </div>
+    />
   );
 }
 
