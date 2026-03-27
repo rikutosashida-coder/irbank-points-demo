@@ -540,7 +540,20 @@ export function PointsPage() {
               <div className="text-[10px] font-bold text-amber-700 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5">
                 <span>✦</span> 授与された賞状 <span>✦</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+              {/* スマホ版：スライダー表示 */}
+              <div className="sm:hidden overflow-x-auto -mx-4 px-4 pb-2">
+                <div className="flex gap-3" style={{ scrollSnapType: 'x mandatory' }}>
+                  {favoriteBadges.map((b) => (
+                    <div key={b.id} className="flex-shrink-0 w-40" style={{ scrollSnapAlign: 'start' }}>
+                      <CertificateCard badge={b} locked={false} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* デスクトップ版：グリッド表示 */}
+              <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {favoriteBadges.map((b) => (
                   <CertificateCard key={b.id} badge={b} locked={false} />
                 ))}
