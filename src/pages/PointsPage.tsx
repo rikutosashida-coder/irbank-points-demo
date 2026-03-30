@@ -11,7 +11,6 @@ import { useTemplateStore } from '../features/notes/store/templateStore';
 import { useGamificationStore, SEASONS } from '../features/gamification/store/gamificationStore';
 import { TemplateGallery } from '../components/templates/TemplateGallery';
 import { RankChangePopup } from '../components/RankChangePopup';
-import { WelcomePopup } from '../components/WelcomePopup';
 import { NoteTemplate } from '../features/notes/types/template.types';
 import { AnalysisDepth } from '../features/notes/types/note.types';
 import {
@@ -102,7 +101,6 @@ export function PointsPage() {
   const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getFavoriteBadges } = useGamificationStore();
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
-  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [pointSeasonTab, setPointSeasonTab] = useState(0); // 2026 2Q (現在のシーズン)
   const [taskStatusTab, setTaskStatusTab] = useState<'active' | 'completed' | 'upcoming'>('active');
   const [taskCategoryFilter, setTaskCategoryFilter] = useState<'all' | TaskCategory>('all');
@@ -370,7 +368,7 @@ export function PointsPage() {
               key={n.id}
               onClick={() => {
                 if (n.type === 'welcome') {
-                  setShowWelcomePopup(true);
+                  navigate('/old-irbank');
                 } else {
                   navigate('/notifications');
                 }
@@ -658,9 +656,6 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
-
-      {/* Welcomeポップアップ */}
-      <WelcomePopup isOpen={showWelcomePopup} onClose={() => setShowWelcomePopup(false)} />
     </div>
   );
 }
