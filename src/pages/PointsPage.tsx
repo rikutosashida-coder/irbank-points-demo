@@ -363,7 +363,7 @@ export function PointsPage() {
           </button>
         </div>
         <div className="divide-y divide-gray-50">
-          {MOCK_NOTIFICATIONS.slice(0, 5).map((n) => (
+          {MOCK_NOTIFICATIONS.filter(n => n.type !== 'pdf').slice(0, 5).map((n) => (
             <button
               key={n.id}
               onClick={() => {
