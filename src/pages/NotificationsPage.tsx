@@ -2,25 +2,22 @@ import { useState } from 'react';
 import { FiBell, FiArrowLeft, FiX } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { MOCK_NOTIFICATIONS, TYPE_COLOR, NotificationItem } from '../data/notifications';
-import { WelcomePopup } from '../components/WelcomePopup';
 
 export function NotificationsPage() {
   const navigate = useNavigate();
   const [selectedNotification, setSelectedNotification] = useState<NotificationItem | null>(null);
-  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
 
   const handleNotificationClick = (notification: NotificationItem) => {
     if (notification.type === 'welcome') {
-      setShowWelcomePopup(true);
+      navigate('/old-irbank');
+    } else if (notification.type === 'pdf' && notification.pdfUrl) {
+      window.open(notification.pdfUrl, '_blank');
     } else {
       setSelectedNotification(notification);
     }
   };
 
   return (
-    <>
-      <WelcomePopup isOpen={showWelcomePopup} onClose={() => setShowWelcomePopup(false)} />
-
       <div className="min-h-screen bg-gray-50">
         {/* ヘッダー */}
         <div className="bg-white border-b border-gray-200">
@@ -84,6 +81,7 @@ export function NotificationsPage() {
                   {selectedNotification.type === 'season' && 'シーズン'}
                   {selectedNotification.type === 'system' && 'システム'}
                   {selectedNotification.type === 'welcome' && 'ようこそ'}
+                  {selectedNotification.type === 'pdf' && 'お知らせ'}
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
                   {selectedNotification.title}
@@ -115,6 +113,5 @@ export function NotificationsPage() {
           </div>
         </div>
       )}
-    </>
   );
 }

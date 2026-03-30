@@ -369,6 +369,8 @@ export function PointsPage() {
               onClick={() => {
                 if (n.type === 'welcome') {
                   navigate('/old-irbank');
+                } else if (n.type === 'pdf' && n.pdfUrl) {
+                  window.open(n.pdfUrl, '_blank');
                 } else {
                   navigate('/notifications');
                 }
