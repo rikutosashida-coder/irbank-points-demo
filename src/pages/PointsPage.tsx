@@ -370,7 +370,7 @@ export function PointsPage() {
                 if (n.type === 'welcome') {
                   navigate('/old-irbank');
                 } else if (n.type === 'pdf' && n.pdfUrl) {
-                  window.open(n.pdfUrl, '_blank');
+                  window.location.href = n.pdfUrl;
                 } else {
                   navigate('/notifications');
                 }

@@ -11,7 +11,7 @@ export function NotificationsPage() {
     if (notification.type === 'welcome') {
       navigate('/old-irbank');
     } else if (notification.type === 'pdf' && notification.pdfUrl) {
-      window.open(notification.pdfUrl, '_blank');
+      window.location.href = notification.pdfUrl;
     } else {
       setSelectedNotification(notification);
     }
