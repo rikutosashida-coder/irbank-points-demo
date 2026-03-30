@@ -4,7 +4,7 @@ import { db } from '../../../services/storage/indexedDB';
 
 // 全サイドバー項目（デフォルト順序）
 export const ALL_SIDEBAR_ITEMS: SidebarItemKey[] = [
-  'top', 'companies', 'screening', 'compare', 'investors',
+  'top', 'companies', 'screening', 'compare', 'investors', 'oldIrbank',
   'newNote', 'mypage', 'points', 'notes', 'favorites', 'archived',
   'dashboard', 'timeline', 'vocabulary', 'badges', 'notifications',
   'settings',

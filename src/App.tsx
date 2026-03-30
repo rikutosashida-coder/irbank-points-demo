@@ -7,6 +7,7 @@ import { SignupPage } from './pages/SignupPage'
 import { NotificationsPage } from './pages/NotificationsPage'
 import { TermsPage } from './pages/TermsPage'
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
+import { OldIRBANKPage } from './pages/OldIRBANKPage'
 import { BasicAuth } from './components/BasicAuth'
 import { Layout } from './components/Layout'
 
@@ -30,6 +31,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<PointsPage />} />
           <Route path="/mypage/badges" element={<BadgesPage />} />
+          <Route path="/old-irbank" element={<OldIRBANKPage />} />
 
           {/* Coming Soon ページ - IRBANK情報 */}
           <Route path="/top" element={<ComingSoonPage />} />

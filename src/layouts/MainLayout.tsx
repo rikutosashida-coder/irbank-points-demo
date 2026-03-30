@@ -4,7 +4,7 @@ import {
   FiHome, FiStar, FiArchive, FiSearch, FiPlus,
   FiBarChart2, FiClock, FiSettings, FiBook,
   FiDatabase, FiFilter, FiColumns, FiFileText, FiUser, FiUsers,
-  FiChevronsLeft, FiChevronsRight, FiBell, FiAward, FiZap,
+  FiChevronsLeft, FiChevronsRight, FiBell, FiAward, FiZap, FiExternalLink,
 } from 'react-icons/fi';
 import { useNotesStore } from '../features/notes/store/notesStore';
 import { useTemplateStore } from '../features/notes/store/templateStore';
@@ -27,6 +27,7 @@ interface SidebarNavItem {
   label: string;
   icon: React.ReactNode;
   path?: string;        // navigate先
+  externalUrl?: string; // 外部リンク
   action?: 'newNote';   // 特殊アクション
   group: 'irbank' | 'mypage' | 'system';
   special?: boolean;    // 特殊スタイル（新しいノートボタン）
@@ -38,6 +39,7 @@ const NAV_ITEMS: SidebarNavItem[] = [
   { key: 'screening', label: 'スクリーニング', icon: <FiFilter className="w-4 h-4 flex-shrink-0" />, path: '/screening', group: 'irbank' },
   { key: 'compare', label: '競合比較', icon: <FiColumns className="w-4 h-4 flex-shrink-0" />, path: '/compare', group: 'irbank' },
   { key: 'investors', label: '投資家検索', icon: <FiUsers className="w-4 h-4 flex-shrink-0" />, path: '/investors', group: 'irbank' },
+  { key: 'oldIrbank', label: '旧IRBANK', icon: <FiExternalLink className="w-4 h-4 flex-shrink-0" />, path: '/old-irbank', group: 'irbank' },
   { key: 'newNote', label: '新しいノート', icon: <FiPlus className="w-4 h-4 flex-shrink-0" />, action: 'newNote', group: 'mypage', special: true },
   { key: 'mypage', label: 'マイページホーム', icon: <FiUser className="w-4 h-4 flex-shrink-0" />, path: '/mypage', group: 'mypage' },
   { key: 'points', label: 'ポイント', icon: <FiZap className="w-4 h-4 flex-shrink-0" />, path: '/mypage/points', group: 'mypage' },

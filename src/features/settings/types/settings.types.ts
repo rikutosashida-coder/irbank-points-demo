@@ -5,7 +5,7 @@ export type AnalysisDepth = 'quick' | 'standard' | 'deep';
 // サイドバーに表示可能な項目のキー
 export type SidebarItemKey =
   // IRBANK情報
-  | 'top' | 'companies' | 'screening' | 'compare' | 'investors'
+  | 'top' | 'companies' | 'screening' | 'compare' | 'investors' | 'oldIrbank'
   // マイページ
   | 'newNote' | 'mypage' | 'notes' | 'favorites' | 'archived'
   | 'dashboard' | 'timeline' | 'vocabulary' | 'badges' | 'notifications' | 'points'
