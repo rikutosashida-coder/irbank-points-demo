@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser, FiBarChart2, FiTrendingUp, FiFileText, FiCalendar, FiHome, FiTool } from 'react-icons/fi';
-import { WelcomePopup } from '../components/WelcomePopup';
 
 export function SignupPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState<'input' | 'verification'>('input');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [formData, setFormData] = useState({
     username: '',
@@ -40,20 +38,15 @@ export function SignupPage() {
 
     // 認証コードチェック（モック: 111111）
     if (verificationCode === '111111') {
-      setShowWelcome(true);
+      // ユーザー名を保存
+      localStorage.setItem('username', formData.username);
+      // ログインして旧IRBANKページへ遷移
+      sessionStorage.setItem('basicAuth', 'authenticated');
+      navigate('/old-irbank');
+      window.location.reload(); // BasicAuthの状態を更新するため
     } else {
       alert('認証コードが正しくありません');
     }
-  };
-
-  const handleWelcomeClose = () => {
-    setShowWelcome(false);
-    // ユーザー名を保存
-    localStorage.setItem('username', formData.username);
-    // Welcomeメッセージを閉じたら、ログインして自動的にメインページへ
-    sessionStorage.setItem('basicAuth', 'authenticated');
-    navigate('/');
-    window.location.reload(); // BasicAuthの状態を更新するため
   };
 
   const handleChange = (field: string, value: string) => {
@@ -61,9 +54,6 @@ export function SignupPage() {
   };
 
   return (
-    <>
-      <WelcomePopup isOpen={showWelcome} onClose={handleWelcomeClose} />
-
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
         {/* 左側：サービス概要 */}
@@ -330,6 +320,5 @@ export function SignupPage() {
         </div>
       </div>
       </div>
-    </>
   );
 }
