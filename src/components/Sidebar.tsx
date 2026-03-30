@@ -20,7 +20,6 @@ interface MenuSection {
 
 const irbankInfoItems: MenuItem[] = [
   { id: 'top', label: 'トップ', icon: <FiHome className="w-5 h-5" />, path: '/top' },
-  { id: 'old-irbank', label: '旧IRBANK', icon: <FiGlobe className="w-5 h-5" />, path: '/old-irbank' },
   { id: 'stocks', label: '銘柄一覧', icon: <FiList className="w-5 h-5" />, path: '/stocks' },
   { id: 'screening', label: 'スクリーニング', icon: <FiFilter className="w-5 h-5" />, path: '/screening' },
   { id: 'screening2', label: 'スクリーニング2', icon: <FiFilter className="w-5 h-5" />, path: '/screening2' },
