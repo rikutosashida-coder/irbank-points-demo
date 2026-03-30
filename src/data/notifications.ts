@@ -12,7 +12,7 @@ export interface NotificationItem {
 
 export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   { id: 'n1', type: 'welcome', title: 'Welcomeメッセージ', body: 'IRBANKへようこそ！創業メンバーとして一緒に未来を創りましょう。', date: '2026-04-15', isRead: false },
-  { id: 'n3', type: 'pdf', title: 'IRBANK新機能リリース及びβ版参加クラウドファンディングに関するお知らせ', body: 'クラウドファンディングの詳細とβ版の新機能についてご案内します。', date: '9:30', isRead: false, pdfUrl: '/cf-announcement.pdf' },
+  { id: 'n3', type: 'pdf', title: 'IRBANKに入社する皆様への重大なお知らせ', body: 'IRBANKに入社する皆様へ、重要なお知らせがあります。詳細はこちらをご確認ください。', date: '19:00', isRead: false, pdfUrl: '/cf-announcement.pdf' },
   { id: 'n2', type: 'badge', title: '賞状を授与されました', body: '「創業参加功労賞」を授与されました！IRBANKのクラウドファンディングに参加した創業メンバーへ贈られる賞状です。', date: '2026-04-15', isRead: false },
 ];
 
