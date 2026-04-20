@@ -29,6 +29,8 @@ const irbankInfoItems: MenuItem[] = [
   { id: 'macro', label: 'マクロ経済', icon: <FiGlobe className="w-5 h-5" />, path: '/macro' },
   { id: 'sector-heatmap', label: 'セクターヒートマップ', icon: <FiGrid className="w-5 h-5" />, path: '/sector-heatmap' },
   { id: 'factor-model', label: 'ファクターモデル', icon: <FiTrendingUp className="w-5 h-5" />, path: '/factor-model' },
+  { id: 'polymarket', label: 'Polymarket', icon: <FiBarChart2 className="w-5 h-5" />, path: '/polymarket' },
+  { id: 'alphashare', label: 'AlphaShare', icon: <FiZap className="w-5 h-5" />, path: '/alphashare' },
 ];
 
 const mypageItems: MenuItem[] = [

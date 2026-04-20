@@ -8,6 +8,9 @@ import { NotificationsPage } from './pages/NotificationsPage'
 import { TermsPage } from './pages/TermsPage'
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
 import { OldIRBANKPage } from './pages/OldIRBANKPage'
+import { PolymarketPage } from './pages/PolymarketPage'
+import { AlphaSharePage } from './pages/AlphaSharePage'
+import { AlphaShareDetailPage } from './pages/AlphaShareDetailPage'
 import { BasicAuth } from './components/BasicAuth'
 import { Layout } from './components/Layout'
 
@@ -60,6 +63,11 @@ function AppContent() {
 
           {/* Coming Soon ページ - AI機能・その他 */}
           <Route path="/ai" element={<ComingSoonPage />} />
+
+          {/* Polymarket・AlphaShare */}
+          <Route path="/polymarket" element={<PolymarketPage />} />
+          <Route path="/alphashare" element={<AlphaSharePage />} />
+          <Route path="/alphashare/product/:id" element={<AlphaShareDetailPage />} />
 
           {/* 設定ページ */}
           <Route path="/settings" element={<SettingsPage />} />
