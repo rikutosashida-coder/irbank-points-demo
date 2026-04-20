@@ -298,7 +298,7 @@ export function PolymarketPage() {
         {/* マーケットカード */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map(m => (
-            <MarketCard key={m.id} market={m} japanRelated={isJapanRelated(m.question)} volumeSpike={isVolumeSpike(m)} />
+            <MarketCard key={m.id} market={m as any} japanRelated={isJapanRelated(m.question)} volumeSpike={isVolumeSpike(m)} />
           ))}
         </div>
 
