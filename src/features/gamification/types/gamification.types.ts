@@ -188,6 +188,8 @@ export interface GamificationTask {
   targetProgress: number;
   pointsReward: number;
   expiresAt?: string;
+  actionUrl?: string; // タスク実行用の外部リンク（X、YouTube等）
+  actionLabel?: string; // アクションボタンのラベル（例: "フォローする"、"登録する"）
 }
 
 // ─── 招待（リファラル）定義 ─────────────────────────────────────────────────

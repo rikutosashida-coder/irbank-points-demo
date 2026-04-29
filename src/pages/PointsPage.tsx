@@ -108,6 +108,7 @@ export function PointsPage() {
   const [showShareModal, setShowShareModal] = useState<'referral' | 'season' | 'total' | null>(null);
   const [previewTierIdx, setPreviewTierIdx] = useState<number | null>(null);
   const [showRankChangePopup, setShowRankChangePopup] = useState<'promotion' | 'demotion' | null>(null);
+  const [selectedTask, setSelectedTask] = useState<typeof tasks[0] | null>(null);
 
   const filteredPointHistory = useMemo(() => pointHistory.filter(p => p.season === pointSeasonTab), [pointHistory, pointSeasonTab]);
   const filteredTasks = useMemo(() => {
@@ -486,25 +487,37 @@ export function PointsPage() {
               filteredTasks.map((task) => {
                 const progress = Math.min((task.currentProgress / task.targetProgress) * 100, 100);
                 const isDone = task.status === 'completed';
+                const isUpcoming = task.status === 'upcoming';
                 return (
                   <div key={task.id} className={`px-4 py-3 ${isDone ? 'bg-gray-50' : ''}`}>
                     <div className="flex items-start justify-between mb-1.5">
-                      <div className="flex items-start gap-2">
+                      <div className="flex items-start gap-2 flex-1">
                         <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${isDone ? 'bg-emerald-500 border-emerald-500' : 'border-gray-300'}`}>
                           {isDone && <FiCheck className="w-2.5 h-2.5 text-white" />}
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <div className={`text-xs font-semibold ${isDone ? 'text-gray-400 line-through' : 'text-gray-800'}`}>{task.title}</div>
                           <div className="text-[10px] text-gray-400">{task.description}</div>
                         </div>
                       </div>
-                      {task.pointsReward > 0 && (
-                        <div className={`flex items-center gap-1 flex-shrink-0 px-2 py-0.5 rounded-full text-[10px] font-bold ${isDone ? 'bg-gray-100 text-gray-400' : 'bg-yellow-50 text-yellow-600 border border-yellow-200'}`}>
-                          <FiZap className="w-2.5 h-2.5" />{task.pointsReward} pt
-                        </div>
-                      )}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {task.pointsReward > 0 && (
+                          <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${isDone ? 'bg-gray-100 text-gray-400' : 'bg-yellow-50 text-yellow-600 border border-yellow-200'}`}>
+                            <FiZap className="w-2.5 h-2.5" />{task.pointsReward} pt
+                          </div>
+                        )}
+                        {isUpcoming && task.actionUrl && (
+                          <button
+                            onClick={() => setSelectedTask(task)}
+                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                          >
+                            {task.actionLabel || '実行する'}
+                            <FiChevronRight className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
                     </div>
-                    {!isDone && (
+                    {!isDone && !isUpcoming && (
                       <div className="flex items-center gap-2 ml-6">
                         <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                           <div className="h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all" style={{ width: `${progress}%` }} />
@@ -647,6 +660,14 @@ export function PointsPage() {
         <RankChangePopup type={showRankChangePopup} onClose={() => setShowRankChangePopup(null)} />
       )}
 
+      {/* タスク詳細モーダル */}
+      {selectedTask && (
+        <TaskDetailModal
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+        />
+      )}
+
       {/* シェアモーダル */}
       {showShareModal && (
         <ShareModal
@@ -658,6 +679,112 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
+    </div>
+  );
+}
+
+// ─── タスク詳細モーダル ───────────────────────────
+
+type TaskDetailModalProps = {
+  task: {
+    id: string;
+    title: string;
+    description: string;
+    pointsReward: number;
+    actionUrl?: string;
+    actionLabel?: string;
+  };
+  onClose: () => void;
+};
+
+function TaskDetailModal({ task, onClose }: TaskDetailModalProps) {
+  const handleAction = () => {
+    if (task.actionUrl) {
+      if (task.actionUrl.startsWith('#')) {
+        // 内部リンクの場合（招待など）は後で実装
+        alert('この機能は近日公開予定です');
+      } else {
+        // 外部リンクを新しいタブで開く
+        window.open(task.actionUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* ヘッダー */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <FiZap className="w-5 h-5" />
+              <h3 className="text-lg font-bold">タスク詳細</h3>
+            </div>
+            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
+          <h2 className="text-xl font-black mb-2">{task.title}</h2>
+          <p className="text-sm text-blue-50">{task.description}</p>
+        </div>
+
+        {/* ポイント報酬 */}
+        <div className="p-5 border-b border-gray-100">
+          <div className="flex items-center justify-between bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                <FiZap className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500">獲得ポイント</div>
+                <div className="text-2xl font-black text-yellow-700">{task.pointsReward} pt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 手順説明 */}
+        <div className="p-5 border-b border-gray-100">
+          <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
+          <ol className="space-y-2 text-xs text-gray-600">
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span>下のボタンをクリックして、外部ページに移動します</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span>タスクの指示に従って操作を完了してください</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span>完了後、自動的にポイントが付与されます</span>
+            </li>
+          </ol>
+          <div className="mt-3 p-3 bg-blue-50 rounded-lg">
+            <p className="text-[10px] text-blue-700">
+              ⚠️ 現在はデモ版のため、実際のポイント付与機能は実装されていません
+            </p>
+          </div>
+        </div>
+
+        {/* アクションボタン */}
+        <div className="p-5 flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            キャンセル
+          </button>
+          <button
+            onClick={handleAction}
+            className="flex-1 px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            {task.actionLabel || '実行する'}
+            <FiChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

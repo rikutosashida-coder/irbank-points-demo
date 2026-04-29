@@ -114,20 +114,20 @@ const MOCK_TASKS: GamificationTask[] = [
   { id: 't4', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 20, pointsReward: 10 },
 
   // Coming Soon タスク - X関連
-  { id: 't5', title: 'X連携', description: 'Xアカウントを連携する', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
-  { id: 't6', title: 'X公式アカウントフォロー', description: 'IRBANK公式Xアカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
-  { id: 't7', title: '指田悠馬-株式会社IRBANK CEO-をフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't8', title: '『ぽん』-IRBANK公式広報-をフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't9', title: '適時開示速報-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't10', title: '適時開示速報(決算短信)-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't11', title: '臨時報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't12', title: '自己株買付情報-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't13', title: '有価証券報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
-  { id: 't14', title: '大量保有報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3 },
+  { id: 't5', title: 'X連携', description: 'Xアカウントを連携する', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10, actionUrl: '#', actionLabel: '連携する' },
+  { id: 't6', title: 'X公式アカウントフォロー', description: 'IRBANK公式Xアカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10, actionUrl: 'https://x.com/IRBANK_official', actionLabel: 'フォローする' },
+  { id: 't7', title: '指田悠馬-株式会社IRBANK CEO-をフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/yumasashida', actionLabel: 'フォローする' },
+  { id: 't8', title: '『ぽん』-IRBANK公式広報-をフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_pon', actionLabel: 'フォローする' },
+  { id: 't9', title: '適時開示速報-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_timely', actionLabel: 'フォローする' },
+  { id: 't10', title: '適時開示速報(決算短信)-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_kessan', actionLabel: 'フォローする' },
+  { id: 't11', title: '臨時報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_rinji', actionLabel: 'フォローする' },
+  { id: 't12', title: '自己株買付情報-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_jiko', actionLabel: 'フォローする' },
+  { id: 't13', title: '有価証券報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_yukasyo', actionLabel: 'フォローする' },
+  { id: 't14', title: '大量保有報告書-IRBANKをフォロー', description: 'X指定アカウントをフォローする', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 3, actionUrl: 'https://x.com/IRBANK_tairyo', actionLabel: 'フォローする' },
 
   // Coming Soon タスク - その他
-  { id: 't15', title: 'YouTubeチャンネル登録', description: 'IRBANK公式YouTubeチャンネルに登録する', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
-  { id: 't16', title: 'ユーザー招待', description: '招待コードで仲間を招待する（1人ごとに25pt）', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 25 },
+  { id: 't15', title: 'YouTubeチャンネル登録', description: 'IRBANK公式YouTubeチャンネルに登録する', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10, actionUrl: 'https://www.youtube.com/@IRBANK_official', actionLabel: '登録する' },
+  { id: 't16', title: 'ユーザー招待', description: '招待コードで仲間を招待する（1人ごとに25pt）', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 25, actionUrl: '#referral', actionLabel: '招待する' },
 ];
 
 const MOCK_REFERRAL: ReferralStats = {
