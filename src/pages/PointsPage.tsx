@@ -110,6 +110,7 @@ export function PointsPage() {
   const [previewTierIdx, setPreviewTierIdx] = useState<number | null>(null);
   const [showRankChangePopup, setShowRankChangePopup] = useState<'promotion' | 'demotion' | null>(null);
   const [completedTask, setCompletedTask] = useState<typeof tasks[0] | null>(null);
+  const [selectedTask, setSelectedTask] = useState<typeof tasks[0] | null>(null);
 
   const filteredPointHistory = useMemo(() => pointHistory.filter(p => p.season === pointSeasonTab), [pointHistory, pointSeasonTab]);
   const filteredTasks = useMemo(() => {
@@ -516,29 +517,19 @@ export function PointsPage() {
                         {isUpcoming && task.actionUrl && (
                           <button
                             onClick={() => {
-                              // X連携タスクの場合
+                              // X連携タスクの場合はモーダルを開く
                               if (task.id === 't5') {
-                                if (hasXId) {
-                                  // X ID設定済み → 完了報告
-                                  completeTask(task.id);
-                                  setCompletedTask(task);
-                                } else {
-                                  // X ID未設定 → 設定ページに遷移
-                                  navigate('/settings?openXId=true');
-                                }
+                                setSelectedTask(task);
                               } else {
+                                // その他のタスクは即座に完了
                                 completeTask(task.id);
                                 setCompletedTask(task);
                               }
                             }}
-                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white rounded-lg transition-colors ${
-                              task.id === 't5' && hasXId
-                                ? 'bg-emerald-600 hover:bg-emerald-700'
-                                : 'bg-blue-600 hover:bg-blue-700'
-                            }`}
+                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                           >
-                            {task.id === 't5' && hasXId ? '完了報告' : (task.actionLabel || '実行する')}
-                            {task.id === 't5' && hasXId ? <FiCheck className="w-3 h-3" /> : <FiZap className="w-3 h-3" />}
+                            {task.actionLabel || '実行する'}
+                            <FiZap className="w-3 h-3" />
                           </button>
                         )}
                       </div>
@@ -686,6 +677,24 @@ export function PointsPage() {
         <RankChangePopup type={showRankChangePopup} onClose={() => setShowRankChangePopup(null)} />
       )}
 
+      {/* X連携タスクモーダル */}
+      {selectedTask && selectedTask.id === 't5' && (
+        <XConnectTaskModal
+          task={selectedTask}
+          hasXId={hasXId}
+          onClose={() => setSelectedTask(null)}
+          onNavigateToSettings={() => {
+            setSelectedTask(null);
+            navigate('/settings?openXId=true');
+          }}
+          onComplete={() => {
+            completeTask(selectedTask.id);
+            setCompletedTask(selectedTask);
+            setSelectedTask(null);
+          }}
+        />
+      )}
+
       {/* タスク完了ポップアップ */}
       {completedTask && (
         <PointsRewardPopup
@@ -706,6 +715,105 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
+    </div>
+  );
+}
+
+// ─── X連携タスクモーダル ───────────────────────────
+
+type XConnectTaskModalProps = {
+  task: {
+    id: string;
+    title: string;
+    description: string;
+    pointsReward: number;
+  };
+  hasXId: boolean;
+  onClose: () => void;
+  onNavigateToSettings: () => void;
+  onComplete: () => void;
+};
+
+function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComplete }: XConnectTaskModalProps) {
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* ヘッダー */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <FiZap className="w-5 h-5" />
+              <h3 className="text-lg font-bold">タスク詳細</h3>
+            </div>
+            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
+          <h2 className="text-xl font-black mb-2">{task.title}</h2>
+          <p className="text-sm text-blue-50">{task.description}</p>
+        </div>
+
+        {/* ①獲得ポイント */}
+        <div className="p-5 border-b border-gray-100">
+          <div className="flex items-center justify-between bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                <FiZap className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500">獲得ポイント</div>
+                <div className="text-2xl font-black text-yellow-700">{task.pointsReward} pt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ②やるべきタスク */}
+        <div className="p-5 border-b border-gray-100">
+          <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
+          <ol className="space-y-2 text-xs text-gray-600">
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span>下の「X IDを入力」ボタンをクリックして設定ページに移動</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span>X ID（例：@your_account）を入力して保存</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span>このページに戻って「ポイントを申請」ボタンをクリック</span>
+            </li>
+          </ol>
+        </div>
+
+        {/* ③④ ボタン */}
+        <div className="p-5 flex flex-col gap-3">
+          {/* ③連携ボタン */}
+          <button
+            onClick={onNavigateToSettings}
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            <FiSettings className="w-4 h-4" />
+            X IDを入力
+          </button>
+
+          {/* ④ポイント申請ボタン */}
+          <button
+            onClick={onComplete}
+            disabled={!hasXId}
+            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+              hasXId
+                ? 'text-white bg-emerald-600 hover:bg-emerald-700'
+                : 'text-gray-400 bg-gray-100 cursor-not-allowed'
+            }`}
+          >
+            <FiCheck className="w-4 h-4" />
+            ポイントを申請
+            {!hasXId && <span className="text-[10px] ml-2">（X ID入力後に有効）</span>}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
