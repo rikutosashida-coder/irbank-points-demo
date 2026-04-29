@@ -15,7 +15,7 @@ import { PointsRewardPopup } from '../components/PointsRewardPopup';
 import { NoteTemplate } from '../features/notes/types/template.types';
 import { AnalysisDepth } from '../features/notes/types/note.types';
 import {
-  TIER_CONFIG, TIER_ORDER, type TaskCategory,
+  TIER_CONFIG, TIER_ORDER, type TaskCategory, type ReferralStats,
 } from '../features/gamification/types/gamification.types';
 import { MOCK_NOTIFICATIONS } from '../data/notifications';
 
