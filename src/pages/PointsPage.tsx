@@ -517,11 +517,11 @@ export function PointsPage() {
                         {isUpcoming && task.actionUrl && (
                           <button
                             onClick={() => {
-                              // X連携タスクの場合はモーダルを開く
-                              if (task.id === 't5') {
+                              // X連携タスク以外もモーダルを開く
+                              if (task.id === 't5' || task.actionUrl.startsWith('http')) {
                                 setSelectedTask(task);
                               } else {
-                                // その他のタスクは即座に完了
+                                // ログインタスクなどは即座に完了
                                 completeTask(task.id);
                                 setCompletedTask(task);
                               }
@@ -677,22 +677,34 @@ export function PointsPage() {
         <RankChangePopup type={showRankChangePopup} onClose={() => setShowRankChangePopup(null)} />
       )}
 
-      {/* X連携タスクモーダル */}
-      {selectedTask && selectedTask.id === 't5' && (
-        <XConnectTaskModal
-          task={selectedTask}
-          hasXId={hasXId}
-          onClose={() => setSelectedTask(null)}
-          onNavigateToSettings={() => {
-            setSelectedTask(null);
-            navigate('/settings?openXId=true');
-          }}
-          onComplete={() => {
-            completeTask(selectedTask.id);
-            setCompletedTask(selectedTask);
-            setSelectedTask(null);
-          }}
-        />
+      {/* タスクモーダル */}
+      {selectedTask && (
+        selectedTask.id === 't5' ? (
+          <XConnectTaskModal
+            task={selectedTask}
+            hasXId={hasXId}
+            onClose={() => setSelectedTask(null)}
+            onNavigateToSettings={() => {
+              setSelectedTask(null);
+              navigate('/settings?openXId=true');
+            }}
+            onComplete={() => {
+              completeTask(selectedTask.id);
+              setCompletedTask(selectedTask);
+              setSelectedTask(null);
+            }}
+          />
+        ) : (
+          <GeneralTaskModal
+            task={selectedTask}
+            onClose={() => setSelectedTask(null)}
+            onComplete={() => {
+              completeTask(selectedTask.id);
+              setCompletedTask(selectedTask);
+              setSelectedTask(null);
+            }}
+          />
+        )
       )}
 
       {/* タスク完了ポップアップ */}
@@ -715,6 +727,114 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
+    </div>
+  );
+}
+
+// ─── 汎用タスクモーダル（XフォローやYouTubeなど） ───────────────────────────
+
+type GeneralTaskModalProps = {
+  task: {
+    id: string;
+    title: string;
+    description: string;
+    pointsReward: number;
+    actionUrl?: string;
+    actionLabel?: string;
+  };
+  onClose: () => void;
+  onComplete: () => void;
+};
+
+function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) {
+  const [hasOpened, setHasOpened] = useState(false);
+
+  const handleOpenLink = () => {
+    if (task.actionUrl) {
+      window.open(task.actionUrl, '_blank', 'noopener,noreferrer');
+      setHasOpened(true);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* ヘッダー */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <FiZap className="w-5 h-5" />
+              <h3 className="text-lg font-bold">タスク詳細</h3>
+            </div>
+            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
+          <h2 className="text-xl font-black mb-2">{task.title}</h2>
+          <p className="text-sm text-blue-50">{task.description}</p>
+        </div>
+
+        {/* ①獲得ポイント */}
+        <div className="p-5 border-b border-gray-100">
+          <div className="flex items-center justify-between bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                <FiZap className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500">獲得ポイント</div>
+                <div className="text-2xl font-black text-yellow-700">{task.pointsReward} pt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ②やるべきタスク */}
+        <div className="p-5 border-b border-gray-100">
+          <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
+          <ol className="space-y-2 text-xs text-gray-600">
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span>下の「{task.actionLabel || '実行する'}」ボタンをクリックして外部ページに移動</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span>タスクの指示に従って操作を完了してください</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span>完了したら「完了報告」ボタンをクリック</span>
+            </li>
+          </ol>
+        </div>
+
+        {/* ③④ ボタン */}
+        <div className="p-5 flex flex-col gap-3">
+          {/* ③外部リンクボタン */}
+          <button
+            onClick={handleOpenLink}
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            <FiChevronRight className="w-4 h-4" />
+            {task.actionLabel || '実行する'}
+          </button>
+
+          {/* ④完了報告ボタン */}
+          <button
+            onClick={onComplete}
+            disabled={!hasOpened}
+            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+              hasOpened
+                ? 'text-white bg-emerald-600 hover:bg-emerald-700'
+                : 'text-gray-400 bg-gray-100 cursor-not-allowed'
+            }`}
+          >
+            <FiCheck className="w-4 h-4" />
+            完了報告
+            {!hasOpened && <span className="text-[10px] ml-2">（リンクを開いた後に有効）</span>}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
