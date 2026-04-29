@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FiUser, FiShield, FiEdit2, FiX, FiEye, FiEyeOff, FiUpload, FiImage } from 'react-icons/fi';
 import { useGamificationStore } from '../features/gamification/store/gamificationStore';
 import { PointsRewardPopup } from '../components/PointsRewardPopup';
@@ -12,6 +13,7 @@ const PRESET_AVATARS: string[] = [
 
 export function SettingsPage() {
   const completeTask = useGamificationStore(state => state.completeTask);
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<Tab>('account');
 
   // ユーザーデータ
@@ -48,7 +50,12 @@ export function SettingsPage() {
     if (savedProfileImage) {
       setProfileImage(savedProfileImage);
     }
-  }, []);
+
+    // URLパラメータでX IDモーダルを開く
+    if (searchParams.get('openXId') === 'true') {
+      setShowXIdModal(true);
+    }
+  }, [searchParams]);
 
   // ユーザーネーム変更
   const handleUsernameChange = () => {

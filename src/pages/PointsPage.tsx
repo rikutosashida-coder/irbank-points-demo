@@ -154,6 +154,12 @@ export function PointsPage() {
   const currentSeason = SEASONS.find(s => s.id === pointSeasonTab);
   const unreadCount = useMemo(() => MOCK_NOTIFICATIONS.filter(n => !n.isRead).length, []);
 
+  // X IDが保存されているかチェック
+  const hasXId = useMemo(() => {
+    const savedXId = localStorage.getItem('xId');
+    return savedXId && savedXId !== '@horis_crypto';
+  }, []);
+
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-6 py-3 sm:py-5">
       {/* ─── 役職デスクヒーローカード ─── */}
@@ -510,13 +516,29 @@ export function PointsPage() {
                         {isUpcoming && task.actionUrl && (
                           <button
                             onClick={() => {
-                              completeTask(task.id);
-                              setCompletedTask(task);
+                              // X連携タスクの場合
+                              if (task.id === 't5') {
+                                if (hasXId) {
+                                  // X ID設定済み → 完了報告
+                                  completeTask(task.id);
+                                  setCompletedTask(task);
+                                } else {
+                                  // X ID未設定 → 設定ページに遷移
+                                  navigate('/settings?openXId=true');
+                                }
+                              } else {
+                                completeTask(task.id);
+                                setCompletedTask(task);
+                              }
                             }}
-                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white rounded-lg transition-colors ${
+                              task.id === 't5' && hasXId
+                                ? 'bg-emerald-600 hover:bg-emerald-700'
+                                : 'bg-blue-600 hover:bg-blue-700'
+                            }`}
                           >
-                            {task.actionLabel || '実行する'}
-                            <FiZap className="w-3 h-3" />
+                            {task.id === 't5' && hasXId ? '完了報告' : (task.actionLabel || '実行する')}
+                            {task.id === 't5' && hasXId ? <FiCheck className="w-3 h-3" /> : <FiZap className="w-3 h-3" />}
                           </button>
                         )}
                       </div>
