@@ -128,7 +128,7 @@ const MOCK_TASKS: GamificationTask[] = [
 
   // Coming Soon タスク - その他
   { id: 't15', title: 'YouTubeチャンネル登録', description: 'IRBANK公式YouTubeチャンネルに登録する', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10, actionUrl: 'https://www.youtube.com/@IRBANK_official', actionLabel: '登録する' },
-  { id: 't16', title: 'ユーザー招待', description: '招待コードで仲間を招待する（1人ごとに25pt）', category: 'referral', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 25, actionUrl: '#referral', actionLabel: '招待する' },
+  { id: 't16', title: 'ユーザー招待', description: '招待コードで仲間を招待する（1人ごとに25pt）', category: 'referral', status: 'active', currentProgress: 0, targetProgress: 999, pointsReward: 25, actionUrl: '#referral', actionLabel: '招待する' },
 ];
 
 const MOCK_REFERRAL: ReferralStats = {

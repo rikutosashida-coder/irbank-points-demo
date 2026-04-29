@@ -496,6 +496,8 @@ export function PointsPage() {
                 const progress = Math.min((task.currentProgress / task.targetProgress) * 100, 100);
                 const isDone = task.status === 'completed';
                 const isUpcoming = task.status === 'upcoming';
+                const isActive = task.status === 'active';
+                const showButton = (isUpcoming || (isActive && task.id === 't16')) && task.actionUrl;
                 return (
                   <div key={task.id} className={`px-4 py-3 ${isDone ? 'bg-gray-50' : ''}`}>
                     <div className="flex items-start justify-between mb-1.5">
@@ -514,11 +516,11 @@ export function PointsPage() {
                             <FiZap className="w-2.5 h-2.5" />{task.pointsReward} pt
                           </div>
                         )}
-                        {isUpcoming && task.actionUrl && (
+                        {showButton && (
                           <button
                             onClick={() => {
                               // X連携タスク以外もモーダルを開く
-                              if (task.id === 't5' || task.actionUrl.startsWith('http')) {
+                              if (task.id === 't5' || task.id === 't16' || task.actionUrl.startsWith('http')) {
                                 setSelectedTask(task);
                               } else {
                                 // ログインタスクなどは即座に完了
