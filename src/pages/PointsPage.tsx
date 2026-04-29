@@ -99,7 +99,7 @@ export function PointsPage() {
   const navigate = useNavigate();
   const { createNote } = useNotesStore();
   const incrementUsageCount = useTemplateStore(state => state.incrementUsageCount);
-  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getFavoriteBadges } = useGamificationStore();
+  const { profile, badges, pointHistory, tasks, referral, getUnlockedBadges, getFavoriteBadges, completeTask } = useGamificationStore();
 
   const [showTemplateGallery, setShowTemplateGallery] = useState(false);
   const [pointSeasonTab, setPointSeasonTab] = useState(0); // 2026 2Q (現在のシーズン)
@@ -109,7 +109,7 @@ export function PointsPage() {
   const [showShareModal, setShowShareModal] = useState<'referral' | 'season' | 'total' | null>(null);
   const [previewTierIdx, setPreviewTierIdx] = useState<number | null>(null);
   const [showRankChangePopup, setShowRankChangePopup] = useState<'promotion' | 'demotion' | null>(null);
-  const [selectedTask, setSelectedTask] = useState<typeof tasks[0] | null>(null);
+  const [completedTask, setCompletedTask] = useState<typeof tasks[0] | null>(null);
 
   const filteredPointHistory = useMemo(() => pointHistory.filter(p => p.season === pointSeasonTab), [pointHistory, pointSeasonTab]);
   const filteredTasks = useMemo(() => {
@@ -509,11 +509,14 @@ export function PointsPage() {
                         )}
                         {isUpcoming && task.actionUrl && (
                           <button
-                            onClick={() => setSelectedTask(task)}
+                            onClick={() => {
+                              completeTask(task.id);
+                              setCompletedTask(task);
+                            }}
                             className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                           >
                             {task.actionLabel || '実行する'}
-                            <FiChevronRight className="w-3 h-3" />
+                            <FiZap className="w-3 h-3" />
                           </button>
                         )}
                       </div>
@@ -661,11 +664,12 @@ export function PointsPage() {
         <RankChangePopup type={showRankChangePopup} onClose={() => setShowRankChangePopup(null)} />
       )}
 
-      {/* タスク詳細モーダル */}
-      {selectedTask && (
-        <TaskDetailModal
-          task={selectedTask}
-          onClose={() => setSelectedTask(null)}
+      {/* タスク完了ポップアップ */}
+      {completedTask && (
+        <PointsRewardPopup
+          taskTitle={completedTask.title}
+          points={completedTask.pointsReward}
+          onClose={() => setCompletedTask(null)}
         />
       )}
 
