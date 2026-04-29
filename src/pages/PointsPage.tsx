@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FiChevronRight, FiChevronUp, FiChevronDown, FiCopy, FiCheck,
@@ -528,7 +528,10 @@ export function PointsPage() {
                                 setCompletedTask(task);
                               }
                             }}
-                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97]"
+                            style={{
+                              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                            }}
                           >
                             {task.actionLabel || '実行する'}
                             <FiZap className="w-3 h-3" />
@@ -754,6 +757,11 @@ type ReferralTaskModalProps = {
 
 function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) {
   const [copied, setCopied] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(referral.referralCode);
@@ -769,8 +777,25 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+    <div
+      className={`fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-[250ms] ${
+        show ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{
+        transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      }}
+      onClick={onClose}
+    >
+      <div
+        className={`bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all duration-[250ms] ${
+          show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+          transformOrigin: 'center center',
+        }}
+        onClick={e => e.stopPropagation()}
+      >
         {/* ヘッダー */}
         <div className="bg-gradient-to-r from-purple-500 to-pink-600 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
@@ -778,7 +803,13 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
               <FiUsers className="w-5 h-5" />
               <h3 className="text-lg font-bold">招待プログラム</h3>
             </div>
-            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+            <button
+              onClick={onClose}
+              className="text-white/80 hover:text-white transition-all duration-[160ms] active:scale-[0.97]"
+              style={{
+                transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+              }}
+            >
               <FiX className="w-5 h-5" />
             </button>
           </div>
@@ -812,9 +843,12 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
               </div>
               <button
                 onClick={handleCopyCode}
-                className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold transition-all duration-[160ms] active:scale-[0.97] ${
                   copied ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
+                style={{
+                  transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                }}
               >
                 {copied ? <FiCheck className="w-3.5 h-3.5" /> : <FiCopy className="w-3.5 h-3.5" />}
                 {copied ? 'コピー済' : 'Copy'}
@@ -856,14 +890,20 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
         <div className="p-5">
           <button
             onClick={handleCopyLink}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg transition-colors flex items-center justify-center gap-2 mb-3"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2 mb-3"
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             <FiShare2 className="w-4 h-4" />
             招待リンクをコピー
           </button>
           <button
             onClick={onClose}
-            className="w-full px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            className="w-full px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-[160ms] active:scale-[0.97]"
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             閉じる
           </button>
@@ -890,6 +930,11 @@ type GeneralTaskModalProps = {
 
 function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) {
   const [hasOpened, setHasOpened] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
 
   const handleOpenLink = () => {
     if (task.actionUrl) {
@@ -899,8 +944,25 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+    <div
+      className={`fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-[250ms] ${
+        show ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{
+        transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      }}
+      onClick={onClose}
+    >
+      <div
+        className={`bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all duration-[250ms] ${
+          show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+          transformOrigin: 'center center',
+        }}
+        onClick={e => e.stopPropagation()}
+      >
         {/* ヘッダー */}
         <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
@@ -908,7 +970,13 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
               <FiZap className="w-5 h-5" />
               <h3 className="text-lg font-bold">タスク詳細</h3>
             </div>
-            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+            <button
+              onClick={onClose}
+              className="text-white/80 hover:text-white transition-all duration-[160ms] active:scale-[0.97]"
+              style={{
+                transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+              }}
+            >
               <FiX className="w-5 h-5" />
             </button>
           </div>
@@ -955,7 +1023,10 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           {/* ③外部リンクボタン */}
           <button
             onClick={handleOpenLink}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2"
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             <FiChevronRight className="w-4 h-4" />
             {task.actionLabel || '実行する'}
@@ -965,11 +1036,14 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           <button
             onClick={onComplete}
             disabled={!hasOpened}
-            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-all duration-[160ms] flex items-center justify-center gap-2 ${
               hasOpened
-                ? 'text-white bg-emerald-600 hover:bg-emerald-700'
+                ? 'text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97]'
                 : 'text-gray-400 bg-gray-100 cursor-not-allowed'
             }`}
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             <FiCheck className="w-4 h-4" />
             完了報告
@@ -997,9 +1071,32 @@ type XConnectTaskModalProps = {
 };
 
 function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComplete }: XConnectTaskModalProps) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+    <div
+      className={`fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-[250ms] ${
+        show ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{
+        transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      }}
+      onClick={onClose}
+    >
+      <div
+        className={`bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all duration-[250ms] ${
+          show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+          transformOrigin: 'center center',
+        }}
+        onClick={e => e.stopPropagation()}
+      >
         {/* ヘッダー */}
         <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
@@ -1007,7 +1104,13 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
               <FiZap className="w-5 h-5" />
               <h3 className="text-lg font-bold">タスク詳細</h3>
             </div>
-            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+            <button
+              onClick={onClose}
+              className="text-white/80 hover:text-white transition-all duration-[160ms] active:scale-[0.97]"
+              style={{
+                transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+              }}
+            >
               <FiX className="w-5 h-5" />
             </button>
           </div>
@@ -1054,7 +1157,10 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
           {/* ③連携ボタン */}
           <button
             onClick={onNavigateToSettings}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2"
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             <FiSettings className="w-4 h-4" />
             X IDを入力
@@ -1064,11 +1170,14 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
           <button
             onClick={onComplete}
             disabled={!hasXId}
-            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+            className={`w-full px-4 py-3 text-sm font-bold rounded-lg transition-all duration-[160ms] flex items-center justify-center gap-2 ${
               hasXId
-                ? 'text-white bg-emerald-600 hover:bg-emerald-700'
+                ? 'text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97]'
                 : 'text-gray-400 bg-gray-100 cursor-not-allowed'
             }`}
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+            }}
           >
             <FiCheck className="w-4 h-4" />
             ポイントを申請
