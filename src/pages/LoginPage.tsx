@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiX, FiBarChart2, FiTrendingUp, FiFileText, FiCalendar, FiHome, FiTool } from 'react-icons/fi';
+import { useGamificationStore } from '../features/gamification/store/gamificationStore';
+import { PointsRewardPopup } from '../components/PointsRewardPopup';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -8,10 +10,12 @@ interface LoginPageProps {
 
 export function LoginPage({ onLogin }: LoginPageProps) {
   const navigate = useNavigate();
+  const completeTask = useGamificationStore(state => state.completeTask);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showRewardPopup, setShowRewardPopup] = useState(false);
 
   // パスワードリセット用の状態
   const [showResetModal, setShowResetModal] = useState(false);
@@ -27,7 +31,21 @@ export function LoginPage({ onLogin }: LoginPageProps) {
     e.preventDefault();
     if (email === 'demo@irbank.com' && password === 'demo2026') {
       sessionStorage.setItem('basicAuth', 'authenticated');
-      onLogin();
+
+      // ログインボーナスタスクを完了
+      const isFirstLogin = !sessionStorage.getItem('hasLoggedInBefore');
+      if (isFirstLogin) {
+        sessionStorage.setItem('hasLoggedInBefore', 'true');
+        completeTask('t0'); // ログインボーナスタスク
+        setShowRewardPopup(true);
+
+        // ポップアップを閉じた後にページ遷移
+        setTimeout(() => {
+          onLogin();
+        }, 3500);
+      } else {
+        onLogin();
+      }
     } else {
       setError('メールアドレスまたはパスワードが正しくありません');
     }
@@ -418,6 +436,15 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             )}
           </div>
         </div>
+      )}
+
+      {/* ログインボーナスポップアップ */}
+      {showRewardPopup && (
+        <PointsRewardPopup
+          taskTitle="ログインボーナス"
+          points={10}
+          onClose={() => setShowRewardPopup(false)}
+        />
       )}
     </div>
   );

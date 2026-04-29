@@ -11,6 +11,7 @@ import { useTemplateStore } from '../features/notes/store/templateStore';
 import { useGamificationStore, SEASONS } from '../features/gamification/store/gamificationStore';
 import { TemplateGallery } from '../components/templates/TemplateGallery';
 import { RankChangePopup } from '../components/RankChangePopup';
+import { PointsRewardPopup } from '../components/PointsRewardPopup';
 import { NoteTemplate } from '../features/notes/types/template.types';
 import { AnalysisDepth } from '../features/notes/types/note.types';
 import {
@@ -698,17 +699,27 @@ type TaskDetailModalProps = {
 };
 
 function TaskDetailModal({ task, onClose }: TaskDetailModalProps) {
+  const completeTask = useGamificationStore(state => state.completeTask);
+  const [hasOpened, setHasOpened] = useState(false);
+  const [showReward, setShowReward] = useState(false);
+
   const handleAction = () => {
     if (task.actionUrl) {
       if (task.actionUrl.startsWith('#')) {
         // 内部リンクの場合（招待など）は後で実装
         alert('この機能は近日公開予定です');
+        onClose();
       } else {
         // 外部リンクを新しいタブで開く
         window.open(task.actionUrl, '_blank', 'noopener,noreferrer');
+        setHasOpened(true);
       }
     }
-    onClose();
+  };
+
+  const handleComplete = () => {
+    completeTask(task.id);
+    setShowReward(true);
   };
 
   return (
@@ -770,21 +781,53 @@ function TaskDetailModal({ task, onClose }: TaskDetailModalProps) {
 
         {/* アクションボタン */}
         <div className="p-5 flex gap-3">
-          <button
-            onClick={onClose}
-            className="flex-1 px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            キャンセル
-          </button>
-          <button
-            onClick={handleAction}
-            className="flex-1 px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
-          >
-            {task.actionLabel || '実行する'}
-            <FiChevronRight className="w-4 h-4" />
-          </button>
+          {!hasOpened ? (
+            <>
+              <button
+                onClick={onClose}
+                className="flex-1 px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                キャンセル
+              </button>
+              <button
+                onClick={handleAction}
+                className="flex-1 px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                {task.actionLabel || '実行する'}
+                <FiChevronRight className="w-4 h-4" />
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={onClose}
+                className="flex-1 px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                後で
+              </button>
+              <button
+                onClick={handleComplete}
+                className="flex-1 px-4 py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                完了報告
+                <FiCheck className="w-4 h-4" />
+              </button>
+            </>
+          )}
         </div>
       </div>
+
+      {/* ポイント獲得ポップアップ */}
+      {showReward && (
+        <PointsRewardPopup
+          taskTitle={task.title}
+          points={task.pointsReward}
+          onClose={() => {
+            setShowReward(false);
+            onClose();
+          }}
+        />
+      )}
     </div>
   );
 }

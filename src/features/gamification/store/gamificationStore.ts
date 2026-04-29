@@ -110,6 +110,7 @@ const MOCK_TASKS: GamificationTask[] = [
   { id: 't2', title: 'β版参加登録', description: 'IRBANK β版の参加登録を完了する', category: 'subscription', status: 'completed', currentProgress: 1, targetProgress: 1, pointsReward: 20 },
 
   // Coming Soon タスク - 基本
+  { id: 't0', title: 'ログインボーナス', description: '初回ログインで10pt獲得', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 10 },
   { id: 't3', title: '今日もログインする', description: 'ログインするだけで0.2pt！毎日続けよう', category: 'daily', status: 'upcoming', currentProgress: 0, targetProgress: 1, pointsReward: 0.2 },
   { id: 't4', title: '今月20日ログイン', description: '1ヶ月に20日ログインで継続ボーナス', category: 'subscription', status: 'upcoming', currentProgress: 0, targetProgress: 20, pointsReward: 10 },
 
@@ -165,6 +166,7 @@ interface GamificationStore {
   getLockedBadges: () => Badge[];
   getFavoriteBadges: () => Badge[];
   toggleFavoriteBadge: (badgeId: string) => void;
+  completeTask: (taskId: string) => void;
 }
 
 export const useGamificationStore = create<GamificationStore>((set, get) => ({
@@ -233,5 +235,43 @@ export const useGamificationStore = create<GamificationStore>((set, get) => ({
 
     set({ favoriteBadgeIds: newFavorites });
     localStorage.setItem('favoriteBadgeIds', JSON.stringify(newFavorites));
+  },
+
+  completeTask: (taskId: string) => {
+    const { tasks, profile, pointHistory } = get();
+    const task = tasks.find(t => t.id === taskId);
+
+    if (!task || task.status === 'completed') return;
+
+    // タスクを完了状態に更新
+    const updatedTasks = tasks.map(t =>
+      t.id === taskId
+        ? { ...t, status: 'completed' as const, currentProgress: t.targetProgress }
+        : t
+    );
+
+    // ポイントを付与
+    const newTotalPoints = profile.totalPoints + task.pointsReward;
+    const newSeasonPoints = profile.currentSeasonPoints + task.pointsReward;
+
+    // ポイント履歴に追加
+    const newHistoryItem: PointHistoryItem = {
+      id: `p${Date.now()}`,
+      category: task.title,
+      description: task.description,
+      points: task.pointsReward,
+      date: new Date().toLocaleDateString('ja-JP'),
+      season: 0, // 現在のシーズン
+    };
+
+    set({
+      tasks: updatedTasks,
+      profile: {
+        ...profile,
+        totalPoints: newTotalPoints,
+        currentSeasonPoints: newSeasonPoints,
+      },
+      pointHistory: [newHistoryItem, ...pointHistory],
+    });
   },
 }));

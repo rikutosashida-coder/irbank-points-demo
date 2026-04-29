@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiUser, FiShield, FiEdit2, FiX, FiEye, FiEyeOff, FiUpload, FiImage } from 'react-icons/fi';
+import { useGamificationStore } from '../features/gamification/store/gamificationStore';
+import { PointsRewardPopup } from '../components/PointsRewardPopup';
 
 type Tab = 'account' | 'security';
 
@@ -9,12 +11,14 @@ const PRESET_AVATARS: string[] = [
 ];
 
 export function SettingsPage() {
+  const completeTask = useGamificationStore(state => state.completeTask);
   const [activeTab, setActiveTab] = useState<Tab>('account');
 
   // ユーザーデータ
   const [username, setUsername] = useState('');
   const [xId, setXId] = useState('');
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [showRewardPopup, setShowRewardPopup] = useState(false);
 
   // モーダル状態
   const [showUsernameModal, setShowUsernameModal] = useState(false);
@@ -60,10 +64,18 @@ export function SettingsPage() {
   const handleXIdChange = () => {
     if (newXId.trim()) {
       const formattedXId = newXId.startsWith('@') ? newXId : `@${newXId}`;
+      const isFirstTime = !localStorage.getItem('xId') || localStorage.getItem('xId') === '@horis_crypto';
+
       setXId(formattedXId);
       localStorage.setItem('xId', formattedXId);
       setShowXIdModal(false);
       setNewXId('');
+
+      // 初回のX連携でタスク完了
+      if (isFirstTime) {
+        completeTask('t5'); // X連携タスク
+        setShowRewardPopup(true);
+      }
     }
   };
 
@@ -608,6 +620,15 @@ export function SettingsPage() {
             )}
           </div>
         </div>
+      )}
+
+      {/* X連携ボーナスポップアップ */}
+      {showRewardPopup && (
+        <PointsRewardPopup
+          taskTitle="X連携"
+          points={10}
+          onClose={() => setShowRewardPopup(false)}
+        />
       )}
     </div>
   );
