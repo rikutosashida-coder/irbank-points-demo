@@ -694,6 +694,12 @@ export function PointsPage() {
               setSelectedTask(null);
             }}
           />
+        ) : selectedTask.id === 't16' ? (
+          <ReferralTaskModal
+            task={selectedTask}
+            referral={referral}
+            onClose={() => setSelectedTask(null)}
+          />
         ) : (
           <GeneralTaskModal
             task={selectedTask}
@@ -727,6 +733,140 @@ export function PointsPage() {
           onClose={() => setShowShareModal(null)}
         />
       )}
+    </div>
+  );
+}
+
+// ─── 招待タスクモーダル ───────────────────────────
+
+type ReferralTaskModalProps = {
+  task: {
+    id: string;
+    title: string;
+    description: string;
+    pointsReward: number;
+  };
+  referral: ReferralStats;
+  onClose: () => void;
+};
+
+function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(referral.referralCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyLink = () => {
+    const link = `https://irbank.jp/signup?code=${referral.referralCode}`;
+    navigator.clipboard.writeText(link);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* ヘッダー */}
+        <div className="bg-gradient-to-r from-purple-500 to-pink-600 p-5 text-white">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <FiUsers className="w-5 h-5" />
+              <h3 className="text-lg font-bold">招待プログラム</h3>
+            </div>
+            <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+              <FiX className="w-5 h-5" />
+            </button>
+          </div>
+          <h2 className="text-xl font-black mb-2">{task.title}</h2>
+          <p className="text-sm text-purple-50">1人招待するごとに{task.pointsReward}pt獲得！</p>
+        </div>
+
+        {/* 招待統計 */}
+        <div className="p-5 border-b border-gray-100">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-purple-50 rounded-xl p-4 text-center">
+              <div className="text-xs text-purple-600 mb-1">招待人数</div>
+              <div className="text-3xl font-black text-purple-700">{referral.referredCount}</div>
+              <div className="text-[10px] text-purple-500">人</div>
+            </div>
+            <div className="bg-yellow-50 rounded-xl p-4 text-center">
+              <div className="text-xs text-yellow-600 mb-1">獲得ポイント</div>
+              <div className="text-3xl font-black text-yellow-700">{referral.referralPoints}</div>
+              <div className="text-[10px] text-yellow-500">pt</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 招待コード */}
+        <div className="p-5 border-b border-gray-100">
+          <h4 className="text-sm font-bold text-gray-800 mb-3">あなたの招待コード</h4>
+          <div className="mb-3">
+            <div className="flex items-center gap-2">
+              <div className="flex-1 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm font-mono text-gray-700 tracking-wider text-center">
+                {referral.referralCode}
+              </div>
+              <button
+                onClick={handleCopyCode}
+                className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold transition-colors ${
+                  copied ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                {copied ? <FiCheck className="w-3.5 h-3.5" /> : <FiCopy className="w-3.5 h-3.5" />}
+                {copied ? 'コピー済' : 'Copy'}
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 rounded-lg p-3">
+            <p className="text-[10px] text-blue-700 leading-relaxed">
+              招待コードをコピーして友達に共有しましょう！登録時にこのコードを入力してもらうと、あなたと友達の両方にポイントが付与されます。
+            </p>
+          </div>
+        </div>
+
+        {/* 招待履歴 */}
+        {referral.referralHistory.length > 0 && (
+          <div className="p-5 border-b border-gray-100">
+            <h4 className="text-sm font-bold text-gray-800 mb-3">招待履歴</h4>
+            <div className="space-y-2 max-h-40 overflow-y-auto">
+              {referral.referralHistory.map((r) => (
+                <div key={r.id} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-600">
+                      {r.userName.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-gray-700">{r.userName}</div>
+                      <div className="text-[9px] text-gray-400">{r.date}</div>
+                    </div>
+                  </div>
+                  <div className="text-xs font-bold text-emerald-600">+{r.pointsEarned} pt</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 閉じるボタン */}
+        <div className="p-5">
+          <button
+            onClick={handleCopyLink}
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg transition-colors flex items-center justify-center gap-2 mb-3"
+          >
+            <FiShare2 className="w-4 h-4" />
+            招待リンクをコピー
+          </button>
+          <button
+            onClick={onClose}
+            className="w-full px-4 py-3 text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            閉じる
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
