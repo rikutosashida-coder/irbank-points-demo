@@ -31,21 +31,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
     e.preventDefault();
     if (email === 'demo@irbank.com' && password === 'demo2026') {
       sessionStorage.setItem('basicAuth', 'authenticated');
-
-      // ログインボーナスタスクを完了
-      const isFirstLogin = !sessionStorage.getItem('hasLoggedInBefore');
-      if (isFirstLogin) {
-        sessionStorage.setItem('hasLoggedInBefore', 'true');
-        completeTask('t0'); // ログインボーナスタスク
-        setShowRewardPopup(true);
-
-        // ポップアップを閉じた後にページ遷移
-        setTimeout(() => {
-          onLogin();
-        }, 3500);
-      } else {
-        onLogin();
-      }
+      onLogin();
     } else {
       setError('メールアドレスまたはパスワードが正しくありません');
     }
