@@ -34,7 +34,7 @@ export function PointsRewardPopup({ taskTitle, points, onClose }: PointsRewardPo
       onClick={onClose}
     >
       <div
-        className={`bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all duration-[250ms] ${
+        className={`bg-gradient-to-br from-blue-900 to-blue-950 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all duration-[250ms] ${
           show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
         style={{
@@ -43,65 +43,79 @@ export function PointsRewardPopup({ taskTitle, points, onClose }: PointsRewardPo
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ヘッダー */}
-        <div className="bg-gradient-to-r from-emerald-500 to-green-600 p-6 text-white relative overflow-hidden">
-          {/* 背景アニメーション（控えめに） */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse" />
+        {/* 背景装飾 */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute right-0 top-0 w-64 h-64 opacity-10">
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="reward-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5" opacity="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#reward-grid)" />
+            </svg>
+          </div>
+          <div className="absolute top-1/4 left-0 w-48 h-48 bg-yellow-400/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-amber-400/5 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* メインコンテンツ */}
+        <div className="relative z-10 p-8 pt-10">
+          {/* チェックアイコン */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/30">
+              <FiCheck className="w-11 h-11 text-white" strokeWidth={4} />
+            </div>
           </div>
 
+          {/* タイトル */}
+          <h2 className="text-3xl font-black text-center mb-2 text-white">タスク達成！</h2>
+          <p className="text-sm text-blue-100/80 text-center mb-8">{taskTitle}</p>
+
+          {/* ポイントカード */}
+          <div className="relative bg-white rounded-2xl p-5 mb-6 overflow-hidden shadow-xl border-2 border-yellow-400">
+            {/* カード内装飾 */}
+            <div className="absolute right-0 top-0 bottom-0 w-24 opacity-5">
+              <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="card-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                    <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#card-dots)" />
+              </svg>
+            </div>
+
+            <div className="relative z-10">
+              <div className="text-xs text-gray-600 font-semibold mb-2 text-center">獲得ポイント</div>
+              <div className="flex items-center justify-center gap-2">
+                <FiZap className="w-7 h-7 text-amber-500" />
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
+                    +{points}
+                  </span>
+                  <span className="text-2xl font-bold text-amber-600">pt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* お祝いメッセージ */}
+          <div className="text-center mb-6">
+            <p className="text-sm text-white font-semibold mb-1">おめでとうございます！</p>
+            <p className="text-xs text-blue-100/70">ポイントがアカウントに追加されました</p>
+          </div>
+
+          {/* 閉じるボタン */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/70 hover:text-white active:scale-[0.97] transition-all duration-[160ms] z-10"
+            className="w-full px-6 py-3.5 bg-blue-900 hover:bg-blue-950 text-white font-bold rounded-xl active:scale-[0.97] transition-all duration-[160ms] border border-blue-700/50 shadow-lg"
             style={{
               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
             }}
           >
-            <FiX className="w-5 h-5" />
+            閉じる
           </button>
-
-          <div className="relative z-10">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <FiCheck className="w-10 h-10 text-white" strokeWidth={3} />
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-black text-center mb-2">タスク達成！</h2>
-            <p className="text-sm text-emerald-50 text-center">{taskTitle}</p>
-          </div>
-        </div>
-
-        {/* ポイント表示 */}
-        <div className="p-8">
-          <div className="bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 rounded-2xl p-6 mb-6">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <FiZap className="w-8 h-8 text-yellow-600" />
-              <div className="text-center">
-                <div className="text-sm text-gray-600 mb-1">獲得ポイント</div>
-                <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-amber-600">
-                  +{points}
-                </div>
-                <div className="text-xl font-bold text-yellow-700">pt</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <p className="text-sm text-gray-600 mb-4">
-              おめでとうございます！<br />
-              ポイントがアカウントに追加されました
-            </p>
-            <button
-              onClick={onClose}
-              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold rounded-lg hover:from-emerald-600 hover:to-green-700 active:scale-[0.97] transition-all duration-[160ms]"
-              style={{
-                transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
-              }}
-            >
-              閉じる
-            </button>
-          </div>
         </div>
       </div>
     </div>
