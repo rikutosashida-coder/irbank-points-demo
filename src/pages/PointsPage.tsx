@@ -68,10 +68,10 @@ const TIER_DESK: Record<string, {
   tier4: {
     deskImage: '/desks/desk-tier4.png',
     deskLabel: '取締役のデスク',
-    progressBar: 'bg-gradient-to-r from-violet-300 to-pink-400',
+    progressBar: 'bg-gradient-to-r from-blue-300 to-blue-500',
     badgeBg: 'bg-white/10 border-white/20',
     settingsBtnClass: 'bg-white/10 hover:bg-white/20 text-white border border-white/20',
-    newNoteBtnClass: 'bg-white text-violet-800 hover:bg-violet-50',
+    newNoteBtnClass: 'bg-white text-blue-900 hover:bg-blue-50',
     shareChipClass: 'bg-white/10 border-white/20 text-white hover:bg-white/20',
   },
   tier5: {
@@ -86,7 +86,7 @@ const TIER_DESK: Record<string, {
   tierX: {
     deskImage: '/desks/desk-tierX.png',
     deskLabel: '会長の間',
-    progressBar: 'bg-gradient-to-r from-rose-400 via-amber-400 to-violet-400',
+    progressBar: 'bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800',
     badgeBg: 'bg-white/10 border-white/20',
     settingsBtnClass: 'bg-white/10 hover:bg-white/20 text-white border border-white/20',
     newNoteBtnClass: 'bg-white text-rose-800 hover:bg-rose-50',
@@ -366,7 +366,7 @@ export function PointsPage() {
           </div>
           <button
             onClick={() => navigate('/notifications')}
-            className="flex items-center gap-1 text-[10px] sm:text-[11px] text-blue-600 hover:text-blue-700 font-medium"
+            className="flex items-center gap-1 text-[10px] sm:text-[11px] text-blue-900 hover:text-blue-950 font-medium"
           >
             すべて見る <FiChevronRight className="w-3 h-3" />
           </button>
@@ -473,16 +473,36 @@ export function PointsPage() {
             </div>
             <div className="flex gap-1 mb-2">
               {([{ key: 'active', label: '進行中' }, { key: 'completed', label: '完了' }, { key: 'upcoming', label: '今後' }] as const).map(({ key, label }) => (
-                <button key={key} onClick={() => setTaskStatusTab(key)}
-                  className={`text-[10px] px-2.5 py-1 rounded-full font-medium transition-colors ${taskStatusTab === key ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}>
+                <button
+                  key={key}
+                  onClick={() => setTaskStatusTab(key)}
+                  className={`text-[10px] px-2.5 py-1 rounded-full font-medium transition-all duration-[160ms] active:scale-[0.97] ${
+                    taskStatusTab === key
+                      ? 'bg-gradient-to-r from-blue-900 to-blue-950 text-white shadow-sm'
+                      : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  }`}
+                  style={{
+                    transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                  }}
+                >
                   {label}
                 </button>
               ))}
             </div>
             <div className="flex gap-1">
               {([{ key: 'all', label: 'All' }, { key: 'daily', label: 'Daily' }, { key: 'subscription', label: 'Weekly' }, { key: 'referral', label: 'Referral' }, { key: 'season', label: 'Season' }] as const).map(({ key, label }) => (
-                <button key={key} onClick={() => setTaskCategoryFilter(key)}
-                  className={`text-[10px] px-2 py-0.5 rounded font-medium transition-colors ${taskCategoryFilter === key ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-gray-700'}`}>
+                <button
+                  key={key}
+                  onClick={() => setTaskCategoryFilter(key)}
+                  className={`text-[10px] px-2 py-0.5 rounded font-medium transition-all duration-[160ms] active:scale-[0.97] ${
+                    taskCategoryFilter === key
+                      ? 'bg-gray-800 text-white shadow-sm'
+                      : 'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                  }`}
+                  style={{
+                    transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                  }}
+                >
                   {label}
                 </button>
               ))}
@@ -499,20 +519,46 @@ export function PointsPage() {
                 const isActive = task.status === 'active';
                 const showButton = (isUpcoming || (isActive && task.id === 't16')) && task.actionUrl;
                 return (
-                  <div key={task.id} className={`px-4 py-3 ${isDone ? 'bg-gray-50' : ''}`}>
+                  <div
+                    key={task.id}
+                    className={`px-4 py-3 transition-all duration-[200ms] ${
+                      isDone
+                        ? 'bg-gray-50/50'
+                        : 'hover:bg-gradient-to-r hover:from-blue-50/40 hover:to-blue-100/30'
+                    }`}
+                    style={{
+                      transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                    }}
+                  >
                     <div className="flex items-start justify-between mb-1.5">
                       <div className="flex items-start gap-2 flex-1">
-                        <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${isDone ? 'bg-emerald-500 border-emerald-500' : 'border-gray-300'}`}>
-                          {isDone && <FiCheck className="w-2.5 h-2.5 text-white" />}
+                        <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-[200ms] ${
+                          isDone
+                            ? 'bg-gradient-to-br from-emerald-500 to-green-600 border-emerald-500 shadow-sm'
+                            : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                        style={{
+                          transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                        }}
+                        >
+                          {isDone && <FiCheck className="w-2.5 h-2.5 text-white" strokeWidth={3} />}
                         </div>
                         <div className="flex-1">
-                          <div className={`text-xs font-semibold ${isDone ? 'text-gray-400 line-through' : 'text-gray-800'}`}>{task.title}</div>
+                          <div className={`text-xs font-semibold transition-colors duration-[160ms] ${isDone ? 'text-gray-400 line-through' : 'text-gray-800'}`}>{task.title}</div>
                           <div className="text-[10px] text-gray-400">{task.description}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         {task.pointsReward > 0 && (
-                          <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${isDone ? 'bg-gray-100 text-gray-400' : 'bg-yellow-50 text-yellow-600 border border-yellow-200'}`}>
+                          <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold transition-all duration-[160ms] ${
+                            isDone
+                              ? 'bg-gray-100 text-gray-400'
+                              : 'bg-gradient-to-r from-yellow-50 to-amber-50 text-yellow-600 border border-yellow-200/80 shadow-sm'
+                          }`}
+                          style={{
+                            transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                          }}
+                          >
                             <FiZap className="w-2.5 h-2.5" />{task.pointsReward} pt
                           </div>
                         )}
@@ -528,7 +574,7 @@ export function PointsPage() {
                                 setCompletedTask(task);
                               }
                             }}
-                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97]"
+                            className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold text-white bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-950 hover:to-blue-900 rounded-lg transition-all duration-[160ms] active:scale-[0.97] shadow-sm"
                             style={{
                               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
                             }}
@@ -541,8 +587,14 @@ export function PointsPage() {
                     </div>
                     {!isDone && !isUpcoming && (
                       <div className="flex items-center gap-2 ml-6">
-                        <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all" style={{ width: `${progress}%` }} />
+                        <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                          <div
+                            className="h-full rounded-full bg-gradient-to-r from-blue-800 to-blue-950 transition-all duration-[400ms] shadow-sm"
+                            style={{
+                              width: `${progress}%`,
+                              transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                            }}
+                          />
                         </div>
                         <span className="text-[10px] text-gray-500 whitespace-nowrap font-medium">{task.currentProgress}/{task.targetProgress}</span>
                       </div>
@@ -563,7 +615,7 @@ export function PointsPage() {
             <h2 className="text-sm font-bold text-gray-800">賞状コレクション</h2>
             <span className="text-[10px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">{unlockedBadges.length}/{badges.length} 取得</span>
           </div>
-          <button onClick={() => navigate('/mypage/badges')} className="flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 font-medium">
+          <button onClick={() => navigate('/mypage/badges')} className="flex items-center gap-1 text-[11px] text-blue-900 hover:text-blue-950 font-medium">
             すべて見る <FiChevronRight className="w-3 h-3" />
           </button>
         </div>
@@ -652,7 +704,7 @@ export function PointsPage() {
               {referral.referralHistory.map((r) => (
                 <div key={r.id} className="flex items-center justify-between py-1.5 px-3 bg-gray-50 rounded-lg">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600">{r.userName.charAt(r.userName.length - 1)}</div>
+                    <div className="w-6 h-6 rounded-full bg-blue-900/10 flex items-center justify-center text-[10px] font-bold text-blue-900">{r.userName.charAt(r.userName.length - 1)}</div>
                     <div>
                       <span className="text-xs text-gray-700 font-medium">{r.userName}</span>
                       <div className="text-[9px] text-gray-400">UID: {r.uid}</div>
@@ -797,7 +849,7 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
         onClick={e => e.stopPropagation()}
       >
         {/* ヘッダー */}
-        <div className="bg-gradient-to-r from-purple-500 to-pink-600 p-5 text-white">
+        <div className="bg-gradient-to-r from-blue-900 to-blue-950 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-2">
               <FiUsers className="w-5 h-5" />
@@ -814,16 +866,16 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
             </button>
           </div>
           <h2 className="text-xl font-black mb-2">{task.title}</h2>
-          <p className="text-sm text-purple-50">1人招待するごとに{task.pointsReward}pt獲得！</p>
+          <p className="text-sm text-blue-100">1人招待するごとに{task.pointsReward}pt獲得！</p>
         </div>
 
         {/* 招待統計 */}
         <div className="p-5 border-b border-gray-100">
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-purple-50 rounded-xl p-4 text-center">
-              <div className="text-xs text-purple-600 mb-1">招待人数</div>
-              <div className="text-3xl font-black text-purple-700">{referral.referredCount}</div>
-              <div className="text-[10px] text-purple-500">人</div>
+            <div className="bg-blue-50 rounded-xl p-4 text-center">
+              <div className="text-xs text-blue-900 mb-1">招待人数</div>
+              <div className="text-3xl font-black text-blue-900">{referral.referredCount}</div>
+              <div className="text-[10px] text-blue-800">人</div>
             </div>
             <div className="bg-yellow-50 rounded-xl p-4 text-center">
               <div className="text-xs text-yellow-600 mb-1">獲得ポイント</div>
@@ -871,7 +923,7 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
               {referral.referralHistory.map((r) => (
                 <div key={r.id} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-600">
+                    <div className="w-6 h-6 rounded-full bg-blue-900/10 flex items-center justify-center text-[10px] font-bold text-blue-900">
                       {r.userName.charAt(0)}
                     </div>
                     <div>
@@ -890,7 +942,7 @@ function ReferralTaskModal({ task, referral, onClose }: ReferralTaskModalProps) 
         <div className="p-5">
           <button
             onClick={handleCopyLink}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2 mb-3"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-950 hover:to-blue-900 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2 mb-3 shadow-sm"
             style={{
               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
             }}
@@ -964,7 +1016,7 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
         onClick={e => e.stopPropagation()}
       >
         {/* ヘッダー */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
+        <div className="bg-gradient-to-r from-blue-900 to-blue-950 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-2">
               <FiZap className="w-5 h-5" />
@@ -981,7 +1033,7 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
             </button>
           </div>
           <h2 className="text-xl font-black mb-2">{task.title}</h2>
-          <p className="text-sm text-blue-50">{task.description}</p>
+          <p className="text-sm text-blue-100">{task.description}</p>
         </div>
 
         {/* ①獲得ポイント */}
@@ -1004,15 +1056,15 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
           <ol className="space-y-2 text-xs text-gray-600">
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">1</span>
               <span>下の「{task.actionLabel || '実行する'}」ボタンをクリックして外部ページに移動</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">2</span>
               <span>タスクの指示に従って操作を完了してください</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">3</span>
               <span>完了したら「完了報告」ボタンをクリック</span>
             </li>
           </ol>
@@ -1023,7 +1075,7 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           {/* ③外部リンクボタン */}
           <button
             onClick={handleOpenLink}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-950 hover:to-blue-900 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2 shadow-sm"
             style={{
               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
             }}
@@ -1098,7 +1150,7 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
         onClick={e => e.stopPropagation()}
       >
         {/* ヘッダー */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-5 text-white">
+        <div className="bg-gradient-to-r from-blue-900 to-blue-950 p-5 text-white">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-2">
               <FiZap className="w-5 h-5" />
@@ -1115,7 +1167,7 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
             </button>
           </div>
           <h2 className="text-xl font-black mb-2">{task.title}</h2>
-          <p className="text-sm text-blue-50">{task.description}</p>
+          <p className="text-sm text-blue-100">{task.description}</p>
         </div>
 
         {/* ①獲得ポイント */}
@@ -1138,15 +1190,15 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
           <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
           <ol className="space-y-2 text-xs text-gray-600">
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">1</span>
               <span>下の「X IDを入力」ボタンをクリックして設定ページに移動</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">2</span>
               <span>X ID（例：@your_account）を入力して保存</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">3</span>
               <span>このページに戻って「ポイントを申請」ボタンをクリック</span>
             </li>
           </ol>
@@ -1157,7 +1209,7 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
           {/* ③連携ボタン */}
           <button
             onClick={onNavigateToSettings}
-            className="w-full px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2"
+            className="w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-950 hover:to-blue-900 rounded-lg transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-2 shadow-sm"
             style={{
               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
             }}
@@ -1265,15 +1317,15 @@ function TaskDetailModal({ task, onClose }: TaskDetailModalProps) {
           <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
           <ol className="space-y-2 text-xs text-gray-600">
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">1</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">1</span>
               <span>下のボタンをクリックして、外部ページに移動します</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">2</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">2</span>
               <span>タスクの指示に従って操作を完了してください</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">3</span>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-900/10 text-blue-900 flex items-center justify-center text-[10px] font-bold">3</span>
               <span>完了後、自動的にポイントが付与されます</span>
             </li>
           </ol>
@@ -1447,7 +1499,7 @@ function ShareModal({ type, profile, referral, unlockedBadges, onClose }: ShareM
                 profile.tier === 'tier1' ? 'bg-blue-100 text-blue-700' :
                 profile.tier === 'tier2' ? 'bg-cyan-100 text-cyan-700' :
                 profile.tier === 'tier3' ? 'bg-emerald-100 text-emerald-700' :
-                profile.tier === 'tier4' ? 'bg-violet-100 text-violet-700' :
+                profile.tier === 'tier4' ? 'bg-blue-100 text-blue-900' :
                 profile.tier === 'tier5' ? 'bg-amber-100 text-amber-700' :
                 'bg-rose-100 text-rose-700'
               }`}>{tierLabel}</span>

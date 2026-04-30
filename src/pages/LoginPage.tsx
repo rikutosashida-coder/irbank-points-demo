@@ -97,7 +97,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         <div className="hidden lg:block">
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h1 className="text-5xl font-bold text-blue-600 mb-4">
+              <h1 className="text-5xl font-bold text-blue-900 mb-4">
                 Service<br />Overview
               </h1>
               <p className="text-xl text-gray-800 font-bold mb-3">
@@ -110,44 +110,44 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             </div>
 
             <div className="space-y-3">
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiBarChart2 className="w-6 h-6 text-blue-600" />
+                  <FiBarChart2 className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">企業分析</span>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiTrendingUp className="w-6 h-6 text-blue-600" />
+                  <FiTrendingUp className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">マーケット情報</span>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiFileText className="w-6 h-6 text-blue-600" />
+                  <FiFileText className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">適時開示情報</span>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiCalendar className="w-6 h-6 text-blue-600" />
+                  <FiCalendar className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">決算スケジュール</span>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiHome className="w-6 h-6 text-blue-600" />
+                  <FiHome className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">法人情報</span>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-600 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/80 backdrop-blur-sm border-l-4 border-blue-900 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <FiTool className="w-6 h-6 text-blue-600" />
+                  <FiTool className="w-6 h-6 text-blue-900" />
                   <span className="font-semibold text-gray-800">便利ツール</span>
                 </div>
               </div>
@@ -213,7 +213,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                   <button
                     type="button"
                     onClick={handleOpenResetModal}
-                    className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
+                    className="text-sm text-blue-900 hover:text-blue-950 hover:underline"
                   >
                     パスワードを忘れた方はこちら
                   </button>
@@ -242,7 +242,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                 アカウントをお持ちでない方は{' '}
                 <button
                   onClick={() => navigate('/signup')}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
+                  className="text-blue-900 hover:text-blue-950 font-semibold"
                 >
                   新規登録
                 </button>

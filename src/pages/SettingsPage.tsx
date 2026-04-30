@@ -161,14 +161,14 @@ export function SettingsPage() {
               onClick={() => setActiveTab('account')}
               className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
                 activeTab === 'account'
-                  ? 'text-blue-600'
+                  ? 'text-blue-900'
                   : 'text-gray-600 hover:text-gray-800'
               }`}
             >
               <FiUser className="w-4 h-4" />
               <span>アカウント</span>
               {activeTab === 'account' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-900" />
               )}
             </button>
 
@@ -176,14 +176,14 @@ export function SettingsPage() {
               onClick={() => setActiveTab('security')}
               className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
                 activeTab === 'security'
-                  ? 'text-blue-600'
+                  ? 'text-blue-900'
                   : 'text-gray-600 hover:text-gray-800'
               }`}
             >
               <FiShield className="w-4 h-4" />
               <span>セキュリティ</span>
               {activeTab === 'security' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-900" />
               )}
             </button>
           </div>
@@ -275,7 +275,7 @@ export function SettingsPage() {
                   <label className="text-sm font-medium text-gray-700">パスワード</label>
                   <button
                     onClick={() => setShowPasswordModal(true)}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                    className="text-sm text-blue-900 hover:text-blue-950 font-medium transition-colors"
                   >
                     変更する
                   </button>
@@ -516,14 +516,14 @@ export function SettingsPage() {
                 onClick={() => setImageSelectionTab('preset')}
                 className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
                   imageSelectionTab === 'preset'
-                    ? 'text-blue-600'
+                    ? 'text-blue-900'
                     : 'text-gray-600 hover:text-gray-800'
                 }`}
               >
                 <FiImage className="w-4 h-4" />
                 <span>プリセット</span>
                 {imageSelectionTab === 'preset' && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-900" />
                 )}
               </button>
 
@@ -531,14 +531,14 @@ export function SettingsPage() {
                 onClick={() => setImageSelectionTab('upload')}
                 className={`pb-3 px-1 flex items-center gap-2 font-medium transition-colors relative ${
                   imageSelectionTab === 'upload'
-                    ? 'text-blue-600'
+                    ? 'text-blue-900'
                     : 'text-gray-600 hover:text-gray-800'
                 }`}
               >
                 <FiUpload className="w-4 h-4" />
                 <span>アップロード</span>
                 {imageSelectionTab === 'upload' && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-900" />
                 )}
               </button>
             </div>
