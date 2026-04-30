@@ -1060,50 +1060,53 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
 
         {/* ①獲得ポイント */}
         <div className="p-5 border-b border-gray-100">
-          <div className="relative flex items-center justify-between bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200/80 rounded-xl p-4 overflow-hidden shadow-sm">
+          <div className="relative bg-white rounded-2xl p-4 overflow-hidden border border-gray-100">
             {/* ドットパターン装飾 */}
-            <div className="absolute right-0 top-0 w-32 h-full opacity-20">
+            <div className="absolute right-0 top-0 w-32 h-full opacity-[0.15]">
               <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <pattern id="dots" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1.5" fill="#F59E0B" opacity="0.4"/>
+                    <circle cx="2" cy="2" r="1.5" fill="#F59E0B" opacity="0.5"/>
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#dots)" />
               </svg>
             </div>
 
-            <div className="relative z-10 flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100 to-amber-100 flex items-center justify-center shadow-sm">
-                <FiZap className="w-6 h-6 text-amber-600" />
+            <div className="relative z-10 flex items-center gap-3 mb-3">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center">
+                <FiZap className="w-7 h-7 text-amber-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 mb-0.5">獲得ポイント</div>
-                <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-amber-600">{task.pointsReward} pt</div>
+                <div className="text-xs text-gray-500 mb-1">獲得ポイント</div>
+                <div className="text-4xl font-black text-amber-600">{task.pointsReward} pt</div>
               </div>
             </div>
+
+            {/* 黄色のアンダーライン */}
+            <div className="w-full h-1 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full"></div>
           </div>
         </div>
 
         {/* ②やるべきタスク */}
-        <div className="p-5 border-b border-gray-100">
-          <div className="flex gap-3">
+        <div className="px-5 py-4 border-b border-gray-100">
+          <div className="flex gap-2.5">
             {/* 青い縦線 */}
-            <div className="w-1 bg-blue-900 rounded-full flex-shrink-0"></div>
+            <div className="w-0.5 bg-blue-900 rounded-full flex-shrink-0"></div>
             <div className="flex-1">
               <h4 className="text-sm font-bold text-gray-800 mb-3">実行手順</h4>
-              <ol className="space-y-3 text-sm text-gray-700">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold">1</span>
-                  <span className="pt-0.5">下の「{task.actionLabel || '実行する'}」ボタンをクリックして外部ページに移動</span>
+              <ol className="space-y-2.5 text-sm text-gray-700">
+                <li className="flex items-center gap-3 bg-gray-50/50 rounded-lg px-3 py-2.5">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-bold">1</span>
+                  <span>下の「{task.actionLabel || '実行する'}」ボタンをクリックして外部ページに移動</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold">2</span>
-                  <span className="pt-0.5">タスクの指示に従って操作を完了してください</span>
+                <li className="flex items-center gap-3 bg-gray-50/50 rounded-lg px-3 py-2.5">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-bold">2</span>
+                  <span>タスクの指示に従って操作を完了してください</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold">3</span>
-                  <span className="pt-0.5">完了したら「完了報告」ボタンをクリック</span>
+                <li className="flex items-center gap-3 bg-gray-50/50 rounded-lg px-3 py-2.5">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-bold">3</span>
+                  <span>完了したら「完了報告」ボタンをクリック</span>
                 </li>
               </ol>
             </div>
@@ -1115,25 +1118,27 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           {/* ③外部リンクボタン */}
           <button
             onClick={handleOpenLink}
-            className="w-full px-5 py-4 text-base font-bold text-white bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-950 hover:to-blue-900 rounded-xl transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-3 shadow-lg"
+            className="w-full px-4 py-3.5 text-base font-bold text-white bg-blue-900 hover:bg-blue-950 rounded-xl transition-all duration-[160ms] active:scale-[0.97] flex items-center justify-center gap-4 shadow-md"
             style={{
               transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
             }}
           >
-            <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded">
-              <span className="text-xs font-black leading-tight">IR<br/>BANK</span>
+            <div className="flex flex-col items-center justify-center px-2.5 py-1.5 bg-white/90 rounded text-blue-900 leading-none">
+              <span className="text-xs font-black">IR</span>
+              <span className="text-xs font-black">BANK</span>
             </div>
+            <div className="h-6 w-px bg-white/30"></div>
             <FiChevronRight className="w-5 h-5" />
-            <span>{task.actionLabel || '実行する'}</span>
+            <span className="flex-1 text-left">{task.actionLabel || '実行する'}</span>
           </button>
 
           {/* ④完了報告ボタン */}
           <button
             onClick={onComplete}
             disabled={!hasOpened}
-            className={`w-full px-5 py-4 text-base font-bold rounded-xl transition-all duration-[160ms] flex items-center justify-center gap-2 ${
+            className={`w-full px-5 py-3.5 text-base font-medium rounded-xl transition-all duration-[160ms] flex items-center justify-center gap-2 ${
               hasOpened
-                ? 'text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97] shadow-lg'
+                ? 'text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97] shadow-md'
                 : 'text-gray-400 bg-gray-100 cursor-not-allowed'
             }`}
             style={{
@@ -1142,7 +1147,7 @@ function GeneralTaskModal({ task, onClose, onComplete }: GeneralTaskModalProps) 
           >
             <FiCheck className="w-5 h-5" />
             <span>完了報告</span>
-            {!hasOpened && <span className="text-xs ml-1">（リンクを開いた後に有効）</span>}
+            {!hasOpened && <span className="text-xs text-gray-400 ml-1">（リンクを開いた後に有効）</span>}
           </button>
         </div>
       </div>
@@ -1237,28 +1242,31 @@ function XConnectTaskModal({ task, hasXId, onClose, onNavigateToSettings, onComp
 
         {/* ①獲得ポイント */}
         <div className="p-5 border-b border-gray-100">
-          <div className="relative flex items-center justify-between bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200/80 rounded-xl p-4 overflow-hidden shadow-sm">
+          <div className="relative bg-white rounded-2xl p-4 overflow-hidden border border-gray-100">
             {/* ドットパターン装飾 */}
-            <div className="absolute right-0 top-0 w-32 h-full opacity-20">
+            <div className="absolute right-0 top-0 w-32 h-full opacity-[0.15]">
               <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <pattern id="dots" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1.5" fill="#F59E0B" opacity="0.4"/>
+                    <circle cx="2" cy="2" r="1.5" fill="#F59E0B" opacity="0.5"/>
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#dots)" />
               </svg>
             </div>
 
-            <div className="relative z-10 flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100 to-amber-100 flex items-center justify-center shadow-sm">
-                <FiZap className="w-6 h-6 text-amber-600" />
+            <div className="relative z-10 flex items-center gap-3 mb-3">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center">
+                <FiZap className="w-7 h-7 text-amber-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 mb-0.5">獲得ポイント</div>
-                <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-amber-600">{task.pointsReward} pt</div>
+                <div className="text-xs text-gray-500 mb-1">獲得ポイント</div>
+                <div className="text-4xl font-black text-amber-600">{task.pointsReward} pt</div>
               </div>
             </div>
+
+            {/* 黄色のアンダーライン */}
+            <div className="w-full h-1 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full"></div>
           </div>
         </div>
 
